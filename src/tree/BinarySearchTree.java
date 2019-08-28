@@ -2,6 +2,7 @@ package tree;
 
 /**
  * 二叉搜索树(BST)
+ * 这里只模拟int类型实现，如果需要其他类型，请将int类型修改为泛型，并实现extends Comparable<T>接口，方便比较
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/BST.html
  * CSDN博客地址：https://blog.csdn.net/qq_34988304/article/details/100102853
  * GitHub地址：https://github.com/hack-feng/algorithm
