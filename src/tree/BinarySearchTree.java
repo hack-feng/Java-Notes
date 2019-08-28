@@ -3,6 +3,9 @@ package tree;
 /**
  * 二叉搜索树(BST)
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/BST.html
+ * CSDN博客地址：https://blog.csdn.net/qq_34988304/article/details/100102853
+ * GitHub地址：https://github.com/hack-feng/algorithm
+ * 联系作者：1150640979@qq.com
  */
 public class BinarySearchTree {
 
@@ -27,6 +30,14 @@ public class BinarySearchTree {
         this.data = tree.data;
         this.right = tree.right;
         this.left = tree.left;
+    }
+
+    private String toString(BinarySearchTree tree){
+        if(tree != null){
+            return "{data=" + tree.data + "; left = " + toString(tree.left) + ";right=" +toString(tree.right) + "}";
+        }else{
+            return "null";
+        }
     }
 
     // 数据插入
@@ -65,22 +76,24 @@ public class BinarySearchTree {
     }
 
     // 查询数据
-    synchronized private static void search(BinarySearchTree root, int data){
+    private static BinarySearchTree search(BinarySearchTree root, int data){
         // 查询次数加1
         searchCount ++;
         if(root != null){
 
             // 如果当前节点数据大于查询数据，递归遍历左节点
             if(root.data > data){
-                search(root.left, data);
+                root = search(root.left, data);
             }else if(root.data < data){
                 // 如果当前节点数据小于查询数据，递归遍历右节点
-                search(root.right, data);
+                root = search(root.right, data);
             }else{
                 System.out.println("经历" + searchCount + "次，查询到数据" + data);
             }
+            return root;
         }else{
             System.out.println("数据不存在");
+            return null;
         }
     }
 
@@ -186,7 +199,10 @@ public class BinarySearchTree {
         print(node);
 
         // 查询数据 3
-        search(node, 3);
+        BinarySearchTree searchNode = search(node, 3);
+        if(searchNode != null){
+            System.out.println("查询出的数据为" + searchNode.toString(searchNode));
+        }
 
         // 删除节点 6
         delete(node, 6);
