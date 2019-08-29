@@ -6,11 +6,13 @@ package tree;
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
  * GitHub地址：https://github.com/hack-feng/algorithm
  * CSDN博客地址：https://blog.csdn.net/qq_34988304/article/details/100130571
+ * 联系作者：1150640979@qq.com
  */
 public class AVLTree{
 
     private Node root;
 
+    // 定义树的节点
     static class Node{
         int data;
 
@@ -18,13 +20,14 @@ public class AVLTree{
 
         Node right;
 
+        // 树的高度
         int height;
 
         Node(Node left, Node right, int data) {
             this.left = left;
             this.right = right;
             this.data = data;
-            this.height = 0;
+            this.height = 1;
         }
     }
 
