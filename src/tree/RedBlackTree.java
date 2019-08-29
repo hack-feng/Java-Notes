@@ -89,7 +89,9 @@ public class RedBlackTree {
      *  3.1:父节点是祖父节点的左节点
      *      3.1.1:如果叔叔节点为黑的时候
      *          3.1.1.1:如果插入的节点是父节点的左节点
+     *
      *          3.1.1.2:如果插入的节点是父节点的右节点
+     *
      *      3.1.2:如果叔叔节点为红的时候
      *          直接将父节点和叔叔节点涂黑，祖父节点涂红就可以了
      *  3.2:父节点是祖父节点的右节点
@@ -102,36 +104,55 @@ public class RedBlackTree {
     private void insertFixUp(RBNode node) {
         RBNode pNode, gNode;
 
-        pNode = node.parent;
-
         // 如果父节点不为空，并且父节点的颜色是红色，则会触发树旋转
-        while(pNode != null && isRed(pNode.color)){
+        while((pNode = node.parent) != null && isRed(pNode.color)){
             gNode = pNode.parent;
 
             // 父节点为祖父节点的左节点时
             if(gNode != null && gNode.left == pNode){
-                RBNode uNode = gNode.right;
-                //叔叔节点为黑色
-                if(uNode.color){
 
-                }else{
+                RBNode uNode = gNode.right;
+                //叔叔节点为红色
+                if(uNode != null && isRed(uNode.color)){
                     pNode.color = BLACK;
                     uNode.color = BLACK;
                     gNode.color = RED;
                     node = gNode;
-                    continue;
+                }else{
+                    // 如果当前节点时右节点
+                    if(pNode.right == node){
+                        // 先把父节点左旋
+                        pNode = leftRotate(pNode);
+                        // 自身与父节点交换，为下面右旋左准备
+                        RBNode tempNode = pNode;
+                        pNode = node;
+                        node = tempNode;
+                    }
+                    pNode.color = BLACK;
+                    gNode.color = RED;
+                    node = rightRotate(gNode);
                 }
             }else{
-                RBNode uNode = gNode.left;
-                //叔叔节点为黑色
-                if(uNode.color){
 
-                }else{
+                RBNode uNode = gNode.left;
+                //叔叔节点为红色
+                if(uNode != null && isRed(uNode.color)){
                     pNode.color = BLACK;
                     uNode.color = BLACK;
                     gNode.color = RED;
                     node = gNode;
-                    continue;
+                }else{
+                    if(pNode.left == node){
+                        // 先把父节点左旋
+                        pNode = rightRotate(pNode);
+                        // 自身与父节点交换，为下面右旋左准备
+                        RBNode tempNode = pNode;
+                        pNode = node;
+                        node = tempNode;
+                    }
+                    pNode.color = BLACK;
+                    gNode.color = RED;
+                    node = leftRotate(gNode);
                 }
             }
 
@@ -141,16 +162,33 @@ public class RedBlackTree {
         this.root.color = BLACK;
     }
 
+    // 右旋
+    public RBNode rightRotate(RBNode node){
+        RBNode rbNode = node.left;
+        node.left = rbNode.right;
+        rbNode.right = node;
+        return rbNode;
+    }
+
+    // 左旋
+    public RBNode leftRotate(RBNode node){
+        RBNode rbNode = node.right;
+        node.right = rbNode.left;
+        rbNode.left = node;
+        return rbNode;
+    }
+
     public boolean isRed(boolean color){
         return !color;
     }
 
     public static void main(String[] args){
         RedBlackTree rbTree = new RedBlackTree();
-        int[] dataArray = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] dataArray = new int[]{1, 2, 3};
         for (int i : dataArray) {
             rbTree.insert(i);
         }
+        System.out.printf("123");
     }
 
 }
