@@ -2,7 +2,7 @@ package tree;
 
 /**
  * 红黑树（R-B Tree）
- * 递归方式空间复杂度为O(log n),且受栈内存
+ * 递归方式空间复杂度为O(log n),且受栈内存限制，故能使用循环的尽量使用循环，本例子使用while循环
  * 这里只模拟int类型实现，如果需要其他类型，请将int类型修改为泛型，并实现extends Comparable<T>接口，方便比较compareTo
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
  * GitHub地址：https://github.com/hack-feng/algorithm
