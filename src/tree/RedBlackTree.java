@@ -2,6 +2,7 @@ package tree;
 
 /**
  * 红黑树（R-B Tree）
+ * 递归方式空间复杂度为O(log n),且受栈内存
  * 这里只模拟int类型实现，如果需要其他类型，请将int类型修改为泛型，并实现extends Comparable<T>接口，方便比较compareTo
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
  * GitHub地址：https://github.com/hack-feng/algorithm
@@ -53,9 +54,9 @@ public class RedBlackTree {
         while(tempNode != null){
             pNode = tempNode;
             if(tempNode.data > node.data){
-                tempNode = node.left;
+                tempNode = tempNode.left;
             }else{
-                tempNode = node.right;
+                tempNode = tempNode.right;
             }
         }
 
@@ -89,15 +90,17 @@ public class RedBlackTree {
      *  3.1:父节点是祖父节点的左节点
      *      3.1.1:如果叔叔节点为黑的时候
      *          3.1.1.1:如果插入的节点是父节点的左节点
-     *
+     *              父节点变色，祖父节点变色，祖父节点右旋
      *          3.1.1.2:如果插入的节点是父节点的右节点
-     *
+     *              父节点左旋，然后父节点变色，祖父节点变色，祖父节点右旋
      *      3.1.2:如果叔叔节点为红的时候
      *          直接将父节点和叔叔节点涂黑，祖父节点涂红就可以了
      *  3.2:父节点是祖父节点的右节点
      *      3.2.1:如果叔叔节点为黑的时候
      *          3.2.1.1:如果插入的节点是父节点的左节点
+     *              父节点变色，祖父节点变色，祖父节点左旋
      *          3.2.1.2:如果插入的节点是父节点的右节点
+     *              父节点右旋，然后父节点变色，祖父节点变色，祖父节点左旋
      *      3.2.2:如果叔叔节点为红的时候
      *          直接将父节点和叔叔节点涂黑，祖父节点涂红就可以了
      */
@@ -109,7 +112,7 @@ public class RedBlackTree {
             gNode = pNode.parent;
 
             // 父节点为祖父节点的左节点时
-            if(gNode != null && gNode.left == pNode){
+            if(gNode.left == pNode){
 
                 RBNode uNode = gNode.right;
                 //叔叔节点为红色
@@ -119,18 +122,16 @@ public class RedBlackTree {
                     gNode.color = RED;
                     node = gNode;
                 }else{
-                    // 如果当前节点时右节点
+                    // 叔叔节点为黑色，当前节点在父节点的右节点
                     if(pNode.right == node){
                         // 先把父节点左旋
-                        pNode = leftRotate(pNode);
-                        // 自身与父节点交换，为下面右旋左准备
-                        RBNode tempNode = pNode;
-                        pNode = node;
-                        node = tempNode;
+                        leftRotate(pNode);
                     }
+
+                    // 叔叔节点为黑色，当前节点在父节点的左节点
                     pNode.color = BLACK;
                     gNode.color = RED;
-                    node = rightRotate(gNode);
+                    rightRotate(gNode);
                 }
             }else{
 
@@ -142,17 +143,15 @@ public class RedBlackTree {
                     gNode.color = RED;
                     node = gNode;
                 }else{
+                    // 叔叔节点为黑色，当前节点在父节点的左节点
                     if(pNode.left == node){
-                        // 先把父节点左旋
-                        pNode = rightRotate(pNode);
-                        // 自身与父节点交换，为下面右旋左准备
-                        RBNode tempNode = pNode;
-                        pNode = node;
-                        node = tempNode;
+                        // 先把父节点右旋
+                        rightRotate(pNode);
                     }
+                    // 叔叔节点为黑色，当前节点在父节点的右节点
                     pNode.color = BLACK;
                     gNode.color = RED;
-                    node = leftRotate(gNode);
+                    leftRotate(gNode);
                 }
             }
 
@@ -163,32 +162,76 @@ public class RedBlackTree {
     }
 
     // 右旋
-    public RBNode rightRotate(RBNode node){
-        RBNode rbNode = node.left;
-        node.left = rbNode.right;
-        rbNode.right = node;
-        return rbNode;
+    private void rightRotate(RBNode node){
+        // 取出当前节点的左节点始终，赋值给leftNode
+        RBNode leftNode = node.left;
+        // 将leftNode的右节点赋值给node的左节点
+        node.left = leftNode.right;
+
+        // 因为下面leftNode.right = node, 所以如果leftNode.right != null，修改leftNode.right.parent = node
+        if(leftNode.right != null){
+            leftNode.right.parent = node;
+        }
+
+        // 设置leftNode.parent
+        leftNode.parent = node.parent;
+        if(node.parent == null){
+            // 如果node.parent为null,说明node原来为根节点，则将leftNode设为新的根节点
+            this.root = leftNode;
+        }else{
+            // 将指向node的父节点更改为leftNode
+            if(node.parent.right == node){
+                node.parent.right = leftNode;
+            }else{
+                node.parent.left = leftNode;
+            }
+        }
+        // 设置leftNode.right
+        leftNode.right = node;
+        // 设置node.parent
+        node.parent = leftNode;
     }
 
-    // 左旋
-    public RBNode leftRotate(RBNode node){
-        RBNode rbNode = node.right;
-        node.right = rbNode.left;
-        rbNode.left = node;
-        return rbNode;
+    // 左旋，解释同右旋
+    private void leftRotate(RBNode node){
+
+        RBNode rightNode = node.right;
+        node.right = rightNode.left;
+
+        if(rightNode.left != null){
+            rightNode.left.parent = node;
+        }
+
+        rightNode.parent = node.parent;
+
+        if(node.parent == null){
+            this.root = rightNode;
+        }else{
+            if(node.parent.left == node){
+                node.parent.left = rightNode;
+            }else{
+                node.parent.right = rightNode;
+            }
+        }
+
+        rightNode.left = node;
+        node.parent = rightNode;
     }
 
-    public boolean isRed(boolean color){
+    private boolean isRed(boolean color){
         return !color;
     }
 
     public static void main(String[] args){
         RedBlackTree rbTree = new RedBlackTree();
-        int[] dataArray = new int[]{1, 2, 3};
+//        int[] dataArray = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
+//        int[] dataArray = new int[]{8, 7, 6, 5, 4, 3, 2, 1};
+        // 测试
+        int[] dataArray = new int[]{3, 5, 8, 4, 7, 1, 6, 2};
         for (int i : dataArray) {
             rbTree.insert(i);
         }
-        System.out.printf("123");
+        System.out.println(123);
     }
 
 }
