@@ -7,7 +7,7 @@ package tree;
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
  * GitHub地址：https://github.com/hack-feng/algorithm
  * 理论知识：https://blog.csdn.net/qq_34988304/article/details/100135759
- * CSDN博客地址：
+ * CSDN博客地址：https://blog.csdn.net/qq_34988304/article/details/100158911
  * 联系作者：1150640979@qq.com
  *
  * 红黑树的特性:
@@ -36,6 +36,18 @@ public class RedBlackTree {
             this.data = data;
             this.left = left;
             this.right = right;
+        }
+
+        private String toString(RBNode tree){
+            if(tree != null){
+                return "{" +
+                        "data=" + tree.data + "; " +
+                        "left = " + toString(tree.left) + ";" +
+                        "right=" + toString(tree.right) + ";" +
+                        "color=" + (tree.color ? "black": "true") +"}";
+            }else{
+                return "null";
+            }
         }
     }
 
@@ -218,6 +230,29 @@ public class RedBlackTree {
         node.parent = rightNode;
     }
 
+    /**
+     * 查找节点
+     * @param data 查找的数据
+     * @return RBNode
+     */
+    private RBNode find(int data){
+        RBNode searchNode = this.root;
+
+        while(searchNode != null){
+            if(searchNode.data == data){
+                return searchNode;
+            }
+            if(searchNode.data > data){
+                searchNode = searchNode.left;
+            }else{
+                searchNode = searchNode.right;
+            }
+        }
+
+        System.out.println("the tree is null");
+        return null;
+    }
+
     private boolean isRed(boolean color){
         return !color;
     }
@@ -231,7 +266,15 @@ public class RedBlackTree {
         for (int i : dataArray) {
             rbTree.insert(i);
         }
-        System.out.println(123);
+        RBNode node = rbTree.find(3);
+        if(node != null){
+            System.out.println(node.toString(node));
+        }
+
+        RBNode node2 = rbTree.find(4);
+        if(node2 != null){
+            System.out.println(node2.toString(node2));
+        }
     }
 
 }
