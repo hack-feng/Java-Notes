@@ -1,5 +1,10 @@
 package search;
-
+/**
+ * 二分查找、折半查找
+ * GitHub地址：https://github.com/hack-feng/algorithm
+ * CSDN博客地址：
+ * 联系作者：1150640979@qq.com
+ */
 public class BinarySearch {
 
     /**
@@ -8,10 +13,12 @@ public class BinarySearch {
      * @param data 待查询的数据
      * @return data存在，返回其下标，不存在则返回-1
      */
-    public static int search(int[] array, int data){
+    private static int search(int[] array, int data){
         int mid, start = 0, end = array.length - 1;
         while (end > start){
+            // 取中间值的下标
             mid = (end - start)/2 + start;
+            // 如果当前值 == data,则返回下标
             if(array[mid] == data){
                 return mid;
             }
@@ -35,7 +42,7 @@ public class BinarySearch {
      * @param end 结束位置
      * @return data存在，返回其下标，不存在则返回-1
      */
-    public static int search(int[] array, int data, int start, int end){
+    private static int search(int[] array, int data, int start, int end){
 
         // 取中间值的下标
         int mid = (end - start)/2 + start;
