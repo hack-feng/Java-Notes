@@ -18,3 +18,5 @@
 冒泡排序：[/src/sort/BubbleSort.java](./src/sort/BubbleSort.java)
 
 选择排序：[/src/sort/SelectionSort.java](./src/sort/SelectionSort.java)
+
+插入排序：[/src/sort/InsertionSort.java](./src/sort/InsertionSort.java)
