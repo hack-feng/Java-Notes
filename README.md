@@ -16,3 +16,5 @@
 ## 排序算法
 
 冒泡排序：[/src/sort/BubbleSort.java](./src/sort/BubbleSort.java)
+
+选择排序：[/src/sort/SelectionSort.java](./src/sort/SelectionSort.java)
