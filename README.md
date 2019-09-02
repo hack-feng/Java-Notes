@@ -1,5 +1,5 @@
 # algorithm
-一天一个算法实现
+一天一个算法实现，长期更新
 ## 树型结构
 
 二叉搜索树：[/src/tree/BinarySearchTree.java](./src/tree/BinarySearchTree.java)
