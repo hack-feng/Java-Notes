@@ -6,6 +6,7 @@ import java.util.Arrays;
  * 选择排序
  * GitHub地址：https://github.com/hack-feng/algorithm
  * 动态模拟实现：https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html
+ * CSDN博客(理论)：https://blog.csdn.net/qq_34988304/article/details/100269152
  * 联系作者：1150640979@qq.com
  */
 public class SelectionSort {
