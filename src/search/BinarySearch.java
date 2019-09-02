@@ -2,7 +2,6 @@ package search;
 /**
  * 二分查找、折半查找
  * GitHub地址：https://github.com/hack-feng/algorithm
- * CSDN博客地址：
  * 联系作者：1150640979@qq.com
  */
 public class BinarySearch {
