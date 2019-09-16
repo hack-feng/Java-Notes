@@ -1,26 +1,26 @@
-package lamda;
+package Lambda;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Lamda {
+public class Lambda {
     public static void main(String[] args) throws InterruptedException {
 
-        System.out.println("-----------------------1、Lamda的多线程写法--------------------------");
+        System.out.println("-----------------------1、Lambda的多线程写法--------------------------");
         // 普通
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("非Lamda的多线程写法");
+                System.out.println("非Lambda的多线程写法");
             }
         }).start();
 
-        // Lamda
-        new Thread(() -> System.out.println("Lamda的多线程写法")).start();
+        // Lambda
+        new Thread(() -> System.out.println("Lambda的多线程写法")).start();
 
         Thread.sleep(100);
 
-        System.out.println("-----------------------2、Lamda的for循环写法--------------------------");
+        System.out.println("-----------------------2、Lambda的for循环写法--------------------------");
         List<String> forTestList = new ArrayList<>();
         forTestList.add("a");
         forTestList.add("b");
@@ -34,9 +34,9 @@ public class Lamda {
             System.out.println("forEach循环" + flag);
         }
 
-        forTestList.forEach(list -> System.out.println("Lamda的写法" + list));
+        forTestList.forEach(list -> System.out.println("Lambda的写法" + list));
 
-        System.out.println("-----------------------3、Lamda集合常用的操作--------------------------");
+        System.out.println("-----------------------3、Lambda集合常用的操作--------------------------");
         System.out.println("初始化数据：");
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -61,7 +61,7 @@ public class Lamda {
 
         System.out.println("list转为map---------------------------------------------------------------");
         Map<Integer, User> map = userList.stream().collect(Collectors.toMap(User :: getId, list -> list));
-        
+
 
 
         System.out.println("取数据的最大值和最小值-------------------------------------------------------");
