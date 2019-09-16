@@ -1,4 +1,10 @@
 package thread.create;
 
-public class ThreadCallable {
+import java.util.concurrent.Callable;
+
+public class ThreadCallable<T> implements Callable<T> {
+    @Override
+    public T call() throws Exception {
+        return null;
+    }
 }
