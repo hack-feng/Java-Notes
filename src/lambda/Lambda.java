@@ -78,6 +78,7 @@ public class Lambda {
         System.out.println("最小id值为：" + minId);
     }
 
+    // 定义User类，用作测试使用
     static class User{
         private Integer id;
         private String name;
