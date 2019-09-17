@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lambda {
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public static void main(String[] args) throws InterruptedException {
 
         System.out.println("-----------------------1、Lambda的多线程写法--------------------------");
@@ -61,8 +62,14 @@ public class Lambda {
 
         System.out.println("list转为map---------------------------------------------------------------");
         Map<Integer, User> map = userList.stream().collect(Collectors.toMap(User :: getId, list -> list));
+        map.forEach((k, v) -> System.out.println("id:" + k + "            value:" + v.toString()));
 
-
+        System.out.println("打印map中value的值age为3的id-----------------------------------------------");
+        map.forEach((k, v) -> {
+            if(v.getAge() == 3){
+                System.out.println("age的值为3的id是：" + k);
+            }
+        });
 
         System.out.println("取数据的最大值和最小值-------------------------------------------------------");
         Integer maxId = userList.stream().map(User::getId).max(Integer::compareTo).get();
@@ -81,15 +88,11 @@ public class Lambda {
             this.name = name;
             this.age = age;
         }
-        public Integer getId() {
+        Integer getId() {
             return id;
         }
 
-        public String getName() {
-            return name;
-        }
-
-        public Integer getAge() {
+        Integer getAge() {
             return age;
         }
 
