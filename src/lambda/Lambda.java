@@ -3,6 +3,12 @@ package lambda;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * JAVA8 Lambda表达式基础使用
+ * GitHub地址：https://github.com/hack-feng/algorithm
+ * CSDN地址：https://blog.csdn.net/qq_34988304/article/details/100920460
+ * 联系作者：1150640979@qq.com
+ */
 public class Lambda {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public static void main(String[] args) throws InterruptedException {
