@@ -4,7 +4,7 @@ url: jdbc:mysql://localhost:3306/cloud-ida?useUnicode=true&characterEncoding=UTF
 ~~~
 
 mysql5.7:
-~~~
+~~~xml
 <!-- pom -->
 <dependency>
     <groupId>mysql</groupId>
@@ -12,12 +12,11 @@ mysql5.7:
     <version>5.1.41</version>
 </dependency>
 
-<!-- properties -->
-driverClassName: com.mysql.jdbc.Driver
+<!-- properties   driverClassName: com.mysql.jdbc.Driver-->
 ~~~
 
 mysql8.0:
-~~~
+~~~xml
 <!-- pom -->
 <dependency>
     <groupId>mysql</groupId>
@@ -25,6 +24,5 @@ mysql8.0:
     <version>8.0.16</version>
 </dependency>
 
-<!-- properties -->
-driverClassName: com.mysql.cj.jdbc.Driver
+<!-- properties   driverClassName: com.mysql.cj.jdbc.Driver -->
 ~~~
