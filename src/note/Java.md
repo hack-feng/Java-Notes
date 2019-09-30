@@ -63,6 +63,6 @@ BeanUtils提供对Java反射和自省API的包装。其主要目的是利用反�
 BeanUtils.copyProperties(A,B); <br>
 是A中的值付给B
 
-2、package org.apache.commons.beanutils;（常用） <br>
+2、package org.apache.commons.beanutils; <br>
 BeanUtils.copyProperties(A,B); <br>
 是B中的值付给A
