@@ -53,3 +53,16 @@ public class DemoControllerTest {
     }
 }
 ~~~
+
+###BeanUtils.copyProperties使用
+BeanUtils提供对Java反射和自省API的包装。其主要目的是利用反射机制对JavaBean的属性进行处理。
+我们知道，一个JavaBean通常包含了大量的属性，很多情况下，对JavaBean的处理导致大量get/set代码堆积，增加了代码长度和阅读代码的难度。
+
+注意：属性复制，不同jar中的方法，用法不一样。 <br>
+1、package org.springframework.beans;  <br>
+BeanUtils.copyProperties(A,B); <br>
+是A中的值付给B
+
+2、package org.apache.commons.beanutils;（常用） <br>
+BeanUtils.copyProperties(A,B); <br>
+是B中的值付给A
