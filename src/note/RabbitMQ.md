@@ -4,7 +4,7 @@
 ### 启动
 前端页面：http://localhost:15672
 程序连接：
-~~~
+~~~yml
 spring:
   rabbitmq:
       host: localhost
