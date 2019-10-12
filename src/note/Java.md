@@ -66,3 +66,38 @@ BeanUtils.copyProperties(A,B); <br>
 2、package org.apache.commons.beanutils; <br>
 BeanUtils.copyProperties(A,B); <br>
 是B中的值付给A
+
+
+### 反射遍历实体类信息
+
+~~~java
+public class DemoControllerTest {
+    public void reflect(Object a){
+        // 获取所有列信息
+        Field[] field = a.getClass().getDeclaredFields();
+        
+        for (Field field1 : field) {
+            // 获取属性的名字
+            String name = field1.getName();    
+            // 获取属性的类型
+            String type = field1.getGenericType().toString();    
+            // 将属性的首字符大写，方便构造get，set方法
+            name = name.substring(0, 1).toUpperCase() + name.substring(1); 
+            field1.setAccessible(true);
+            
+            // 如果type是类类型，则前面包含"class "，后面跟类名
+            if (type.equals("class java.lang.Double")) {
+                // 调用getter方法获取属性值
+                Method m = a.getClass().getMethod("get" + name);
+                Double v = (Double) m.invoke(a);
+                if (v != null) {
+                    System.out.println(v);
+                }
+                // 调用setter方法赋属性值
+                Method m2 = a.getClass().getMethod("set" + name, Double.class);
+                m2.invoke(a, 20d);
+            }
+        }
+    }
+}
+~~~
