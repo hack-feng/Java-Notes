@@ -1,4 +1,4 @@
-# algorithm
+# JAVA NOTES
 一天一个算法实现，长期更新
 ## 树型结构
 
