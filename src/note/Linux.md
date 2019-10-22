@@ -214,3 +214,13 @@ ln -s /net/maple/ /data/test/
 ~~~
 umount /net/maple/
 ~~~
+
+* 正确的删除方式（删除软链接，但不删除实际数据）
+~~~
+rm -rf  ./test_chk_ln
+~~~
+
+* 错误的删除方式
+~~~
+rm -rf ./test_chk_ln/ (这样就会把原来test_chk下的内容删除)
+~~~
