@@ -26,3 +26,7 @@ mysql8.0:
 
 <!-- properties   driverClassName: com.mysql.cj.jdbc.Driver -->
 ~~~
+
+### 执行sql文件报`Data too long for column`错误
+在sql文件的头上添加`/*!40101 SET NAMES utf8 */;
+
