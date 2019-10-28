@@ -150,7 +150,7 @@ systemctl stop firewalld.service ###停止firewall
 systemctl disable firewalld.service ###禁止firewall开机启动
 ~~~
 
-### 建立软连接(NFS)
+### 建立服务挂载(NFS)
 #### 服务器端配置
 
 * 查看是否安装nfs
