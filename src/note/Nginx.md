@@ -176,3 +176,16 @@ break: 停止执行当前虚拟主机的后续rewrite指令集
 redirect: 返回302临时重定向，地址栏会显示跳转后的地址
 permanent: 返回301永久重定向，地址栏会显示跳转后的地址
 ~~~
+
+### nginx启动重启
+~~~
+命令: nginx -c /usr/local/nginx/conf/nginx.conf
+
+重启服务： service nginx restart
+
+2. 快速停止或关闭Nginx：nginx -s stop
+
+3. 正常停止或关闭Nginx：nginx -s quit
+
+4. 配置文件修改重装载命令：nginx -s reload
+~~~
