@@ -139,3 +139,9 @@ request获取请求信息
 
 17、request.getRemotePort()；获取发送请求的客户端端口
 ~~~
+
+### 没法使用Spring自动注入时，手动注入Service
+~~~
+BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+RedisService redisService = (RedisService) factory.getBean("redisService");
+~~~
