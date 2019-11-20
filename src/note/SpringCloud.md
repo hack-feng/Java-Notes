@@ -22,7 +22,8 @@ ribbon:
 
 ### 抽取config的通用配置，例如：eureka注册中心配置，zipkin，database等配置信息
 在bootstrap.yml添加以下配置，主要是name，后面的你要获取的配置目录，以","分隔。<br>
-以下例子将请求application-dev.yml,eureka-server-dev.yml两个配置文件的内容。
+以下例子将请求application-dev.yml,eureka-server-dev.yml,base-dev.yml三个配置文件的内容。<br>
+默认会加载application-dev.yml，故也可以在name后面不加application。
 ~~~
 spring:
   cloud:
@@ -30,5 +31,5 @@ spring:
       label: master
       profile: dev
       uri: http://localhost:8888/
-      name: application,eureka-server
+      name: application,eureka-server,base
 ~~~
