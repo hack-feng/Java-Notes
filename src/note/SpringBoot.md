@@ -79,7 +79,7 @@ public class EmailUtil {
                 helper.setCc(cc);
             }
 
-            // 如果存在模板，定义邮件模板中的内容
+            // 如果存在模板，定义邮件模板中的内容，context的内容对应email.html的${project}占位的内容
             if(context != null && StringUtils.isNotBlank(templateName)){
                 String emailContent = templateEngine.process(templateName, context);
                 helper.setText(emailContent, true);
