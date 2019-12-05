@@ -54,7 +54,7 @@ git --version
 ### 卸载git
 yum remove git
 
-Docker 命令
+# Docker 命令
 
 ### 查看所有的镜像
 docker images
