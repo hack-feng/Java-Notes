@@ -1,3 +1,6 @@
+### 本地生成ssh keys命令：```ssh-keygen -t rsa```
+
+
 ### 常用
 ~~~
 $ git remote add origin git@github.com:yeszao/dofiler.git         # 配置远程git版本库
