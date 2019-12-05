@@ -54,6 +54,14 @@ systemctl enable docker.service
 [root@k8s-n1 /]# docker run -p 3308:3306 --name trade_mysql -v /mnt/mysql/conf:/etc/mysql/conf.d -v /mnt/mysql/logs:/logs -v /mnt/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
 
+参数说明：<br>
+-v 挂载宿主机目录和 docker容器中的目录<br>
+-d 后台运行<br>
+-p 映射容器端口号和宿主机端口号<br>
+-e 环境参数<br>
+7bb2586065cd 镜像id（ IMAGE ID ）
+
+
 此时启动已完成，在docker启动镜像时密码加密使用的是caching_sha2_password，
 在服务器端启动默认使用mysql_native_password 加密的，
 如需要使用外部工具连接，需要进入docker容器重置root密码。
@@ -101,6 +109,10 @@ Navicat连接：<br>
 ~~~
 [root@k8s-n1 /]# docker run -itd --name trade_redis -p 6380:6379 8280a2c45ce5
 ~~~
+
+参数说明：<br>
+-p 6380:6379：映射容器服务的 6379 端口到宿主机的 6380 端口。外部可以直接通过宿主机ip:6380 访问到 Redis 的服务。<br>
+8280a2c45ce5 镜像id（ IMAGE ID ）
 
 #### 5、安装成功
 ~~~
@@ -156,6 +168,14 @@ OK
 ~~~
 [root@k8s-n1 /]# docker run -d --name rabbitmq3.7.7 -p 5672:5672 -p 15672:15672 -v /mnt/rabbitMQ/data:/var/lib/rabbitmq --hostname myRabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost  -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin 2888deb59dfc
 ~~~
+
+参数说明：<br>
+-d 后台运行容器；<br>
+--name 指定容器名；<br>
+-p 指定服务运行的端口（5672：应用访问端口；15672：控制台Web端口号）；<br>
+-v 映射目录或文件；<br>
+--hostname  主机名（RabbitMQ的一个重要注意事项是它根据所谓的 “节点名称” 存储数据，默认为主机名）；<br>
+-e 指定环境变量；（RABBITMQ_DEFAULT_VHOST：默认虚拟机名；RABBITMQ_DEFAULT_USER：默认的用户名；RABBITMQ_DEFAULT_PASS：默认用户名的密码）
 
 #### 5、启动成功
 ~~~
