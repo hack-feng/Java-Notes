@@ -42,7 +42,7 @@ systemctl enable docker.service
 [root@k8s-n1 ~]# docker images
 ~~~
 如下图：
-![docker查看mysql镜像](https://github.com/hack-feng/Java-Notes/blob/master/src/images/dockerimage.png)
+![docker查看mysql镜像](https://github.com/hack-feng/Java-Notes/blob/master/src/images/msyql-dockerimage.png)
 
 #### 3、创建目录
 ~~~
@@ -59,7 +59,7 @@ systemctl enable docker.service
 如需要使用外部工具连接，需要进入docker容器重置root密码。
 详细操作如下：
 
-#### 5、查看docker进入docker容器
+#### 5、进入docker容器修改Mysql
 ~~~
 [root@k8s-n1 mysql]# docker exec -it trade_mysql /bin/sh
 
@@ -73,6 +73,51 @@ mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 [root@k8s-n1 /]# docker ps -a
 ~~~
 查看docker容器：
-![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/dockerimage.png)
+![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/mysql-dockerps-a.png)
 Navicat连接：
-![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/success.png)
+![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/mysql-success.png)
+
+
+### docker安装Redis
+
+#### 1、使用docker查看Redis版本信息
+~~~
+[root@k8s-n1 /]# docker search redis
+~~~
+
+#### 2、下载redis镜像
+~~~
+[root@k8s-n1 /]# docker pull redis:4.0
+~~~
+如下图：
+![redis镜像下载成功图片事例](https://github.com/hack-feng/Java-Notes/blob/master/src/images/dockerpullredis.png)
+
+#### 3、启动docker里的redis镜像
+~~~
+[root@k8s-n1 /]# docker run -itd --name trade_redis -p 6380:6379 redis
+~~~
+
+#### 4、测试Redis
+* 进入docker容器测试
+~~~
+$ docker exec -it redis-test /bin/bash
+
+root@1d71ab146d19:/data# redis-cli
+
+127.0.0.1:6379> set name test
+OK
+127.0.0.1:6379> get name
+"test"
+127.0.0.1:6379> 
+~~~
+
+#### 5、安装成功
+
+* 查看docker容器：
+![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/redis-dockerps-a.png)
+* 容器内部测试：
+![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/redis-test.png)
+* RedisDesktopManager连接：
+![docker查看](https://github.com/hack-feng/Java-Notes/blob/master/src/images/redis-success.png)
+
+
