@@ -35,14 +35,14 @@ systemctl enable docker.service
 [root@k8s-n1 ~]# docker pull mysql:8.0.15
 ~~~
 如下图：<br>
-![mysql镜像下载成功图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/dockerpullmysql8.png)
+![mysql镜像下载成功图片](../images/dockerpullmysql8.png)
 
 #### 2、查看下载的mysql镜像
 ~~~
 [root@k8s-n1 ~]# docker images
 ~~~
 如下图：<br>
-![docker查看mysql镜像图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/msyql-dockerimage.png)
+![docker查看mysql镜像图片](../images/msyql-dockerimage.png)
 
 #### 3、创建目录
 ~~~
@@ -81,9 +81,9 @@ mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 [root@k8s-n1 /]# docker ps
 ~~~
 查看docker容器：<br>
-![docker查看图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/mysql-dockerps-a.jpg)
+![docker查看图片](../images/mysql-dockerps-a.jpg)
 Navicat连接：<br>
-![Navicat连接图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/mysql-success.jpg)
+![Navicat连接图片](../images/mysql-success.jpg)
 
 
 ### docker安装Redis
@@ -98,7 +98,7 @@ Navicat连接：<br>
 [root@k8s-n1 /]# docker pull redis:4.0
 ~~~
 如下图：<br>
-![redis镜像下载成功图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/dockerpullredis.jpg)
+![redis镜像下载成功图片](../images/dockerpullredis.jpg)
 
 #### 3、查看下载镜像的镜像id
 ~~~
@@ -119,10 +119,10 @@ Navicat连接：<br>
 [root@k8s-n1 /]# docker ps
 ~~~
 * 查看docker容器：<br>
-![docker查看图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/redis-dockerps-a.jpg)
+![docker查看图片](../images/redis-dockerps-a.jpg)
 
 * RedisDesktopManager连接：<br>
-![docker查看图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/redis-success.jpg)
+![docker查看图片](../images/redis-success.jpg)
 
 
 #### 6、测试Redis
@@ -139,7 +139,7 @@ OK
 127.0.0.1:6379> 
 ~~~
 * 容器内部测试：<br>
-![docker查看图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/redis-test.jpg)
+![docker查看图片](../images/redis-test.jpg)
 
 
 ### docker下安装RabbitMQ
@@ -149,7 +149,7 @@ OK
 [root@k8s-n1 /]# docker pull rabbitmq:3.7.7-management
 ~~~
 如下图：<br>
-![rabbitmq镜像下载成功图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/rabbitMQ-pull.jpg)
+![rabbitmq镜像下载成功图片](../images/rabbitMQ-pull.jpg)
 
 
 #### 2、创建挂载目录
@@ -162,7 +162,7 @@ OK
 [root@k8s-n1 /]# docker images
 ~~~
 
-![查看镜像图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/rabbitMQ-dockerimages.jpg)
+![查看镜像图片](../images/rabbitMQ-dockerimages.jpg)
 
 #### 4、启动docker里的RabbitMQ镜像
 ~~~
@@ -182,7 +182,7 @@ OK
 [root@k8s-n1 /]# docker ps
 ~~~
 * 查看docker容器：<br>
-![docker查看图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/rabbitMQdockerps-a.jpg)
+![docker查看图片](../images/rabbitMQdockerps-a.jpg)
 * 浏览器访问<br>
 用浏览器访问``http://192.168.2.21:15672`` 访问成功，表示RabbitMQ安装成功。
-![浏览器访问图片](https://github.com/hack-feng/Java-Notes/blob/master/src/images/rabbitMQ-success.jpg)
+![浏览器访问图片](../images/rabbitMQ-success.jpg)
