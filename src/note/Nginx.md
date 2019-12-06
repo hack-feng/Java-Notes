@@ -105,7 +105,7 @@ http {
 		 #优先级：
 		#= > location 完整路径 > ^~ > ~ > ~* > location 起始路径 > location /       
         location  ~*^.+$ {       #请求的url过滤，正则匹配，~为区分大小写，~*为不区分大小写。
-           #root path;  #根目录
+           #root path;  #根目录    
            #index vv.txt;  #设置默认页
            proxy_pass  http://mysvr;  #请求转向mysvr 定义的服务器列表
            deny 127.0.0.1;  #拒绝的ip
