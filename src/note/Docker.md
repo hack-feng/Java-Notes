@@ -9,7 +9,6 @@ CentOS 系统的内核版本高于 3.10 ，先验证你的CentOS 版本是否支
 
 #### 2、安装docker
 ~~~
-yum update -y
 yum -y install docker
 ~~~
 
@@ -60,6 +59,25 @@ systemctl enable docker.service
 -p 映射容器端口号和宿主机端口号<br>
 -e 环境参数<br>
 7bb2586065cd 镜像id（ IMAGE ID ）
+
+查看容器启动情况
+~~~
+docker ps
+~~~
+
+如果mysql启动没有成功，查看mysql启动日志
+~~~
+[root@k8s-n1 mysql/]#  docker logs -f trade_mysql
+ERROR: mysqld failed while attempting to check config
+command was: "mysqld --verbose --help"
+mysqld: Can't read dir of '/etc/mysql/conf.d/' (OS errno 13 - Permission denied)
+mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
+~~~
+如果出现上图错误：
+~~~
+[root@k8s-n1 /]# docker run --privileged=true -p 3308:3306 --name trade_mysql -v /mnt/mysql/conf:/etc/mysql/conf.d -v /mnt/mysql/logs:/logs -v /mnt/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
+~~~
+添加 **--privileged=true** 增加权限命令，启动成功。
 
 
 此时启动已完成，在docker启动镜像时密码加密使用的是caching_sha2_password，
