@@ -5,6 +5,9 @@ ps -ef|grep java
 ### 杀掉某个进程
 kill -9 xxx(进程id)
 
+### 批量杀掉进程
+ps -ef |grep xxx  |awk '{print $2}'|xargs kill -9
+
 ### 启动服务
 systemctl start xxx
 
