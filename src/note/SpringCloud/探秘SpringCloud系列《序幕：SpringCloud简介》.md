@@ -1,7 +1,6 @@
-### 本系列持续更新中
+### 本系列持续更新中...
 
-> 文章中设计到的项目源码，会逐步整理到GitHub上。GitHub除了本系列文章设计到的源码信息，还有Spring Cloud整合的项目框架。有同样正在学习Spring Cloud的小伙伴可以加我一起学习交流。<Br>
-  GitHub地址：https://github.com/hack-feng/Spring-Cloud-Edgware.git
+> 文章中设计到的项目源码，会逐步整理到GitHub上。GitHub除了本系列文章设计到的源码信息，还有Spring Cloud整合的项目框架。有同样正在学习Spring Cloud的小伙伴可以加我一起学习交流。
 
 # 1、什么是微服务（Microservice）
 > 微服务架构模式是将整个Web项目应用根据业务拆分为一系列的小的Web服务。这些小的Web服务可以独立的编译及部署，并各自暴露API接口相互通讯。它们之间相互协作，作为一个整体为用户提供功能，而且可以独立进行扩展。
@@ -85,7 +84,8 @@ Ribbon中还包括以下功能：
   
 ![Config架构图](./images/0-Config.png)
 
-> 本文到此结束了，后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。
-> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html
-> Github文档：
-> GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git
+
+> 本文到此结束了，后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
+> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
+> GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git <br>
