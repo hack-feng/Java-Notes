@@ -1,4 +1,4 @@
-package tree;
+package algorithm.tree;
 
 /**
  * 平衡二叉树（AVL树）

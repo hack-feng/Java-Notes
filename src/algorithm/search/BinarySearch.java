@@ -1,4 +1,4 @@
-package search;
+package algorithm.search;
 /**
  * 二分查找、折半查找
  * GitHub地址：https://github.com/hack-feng/algorithm

@@ -1,4 +1,4 @@
-package tree;
+package algorithm.tree;
 
 /**
  * 二叉搜索树(BST)

@@ -1,4 +1,4 @@
-package tree;
+package algorithm.tree;
 
 /**
  * 红黑树（R-B Tree）
