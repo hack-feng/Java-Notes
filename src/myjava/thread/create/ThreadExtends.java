@@ -1,4 +1,4 @@
-package java.thread.create;
+package myjava.thread.create;
 
 /**
  * 通过继承Thread方式实现多线程

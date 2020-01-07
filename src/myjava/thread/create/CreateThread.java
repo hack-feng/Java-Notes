@@ -1,4 +1,4 @@
-package java.thread.create;
+package myjava.thread.create;
 
 public class CreateThread {
 

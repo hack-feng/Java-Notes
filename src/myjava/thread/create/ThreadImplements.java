@@ -1,4 +1,4 @@
-package java.thread.create;
+package myjava.thread.create;
 
 /**
  * 通过实现Runnable接口实现多线程

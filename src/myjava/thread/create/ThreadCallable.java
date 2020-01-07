@@ -1,4 +1,4 @@
-package java.thread.create;
+package myjava.thread.create;
 
 import java.util.concurrent.Callable;
 
