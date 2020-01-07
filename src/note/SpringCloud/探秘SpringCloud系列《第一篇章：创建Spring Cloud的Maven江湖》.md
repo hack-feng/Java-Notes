@@ -1,4 +1,5 @@
-    欢迎来到SpringCloud的江湖，在本章中，我们将向大家传授如何创建SpringCloud的父子项目架构。知识无止境，故事有好坏，文章纯属虚构，欢迎大家吐槽。
+    欢迎来到SpringCloud的江湖，在本章中，我们将向大家传授如何创建SpringCloud的父子项目架构。
+    知识无止境，故事有好坏，文章纯属虚构，欢迎大家吐槽。
     行走江湖，没点伎俩傍身怎么能行。本章牵扯到的技术以及工具如下：
     Intellij Idea 2018.1
     JDK 8
@@ -50,7 +51,7 @@
 
 ### 添加Maven依赖
 
-这样一个父子Maven项目就基本成型了。接下来，我们引入SpringBoot和SpringCloud的需要的一些依赖。
+3. 这样一个父子Maven项目就基本成型了。接下来，我们引入SpringBoot和SpringCloud的需要的一些依赖。
 
 修改Spring-Cloud-Edgware的pom.xml文件：
 ~~~xml
@@ -119,7 +120,7 @@
 
 ### 创建一个简单的user服务
 
-接下来创建一个简单的user-service服务。
+4. 接下来创建一个简单的user-service服务。
 
 在cloud-service项目上右击，New->Module，选择Spring Initializr，点击Next。
 
@@ -182,7 +183,7 @@
 </project>
 ~~~
 
-这样user-service的服务就创建完成了。下面我们验证一下user-service服务。
+5. 这样user-service的服务就创建完成了。下面我们验证一下user-service服务。
 
 修改UserServiceApplication.java文件：
 ~~~java
