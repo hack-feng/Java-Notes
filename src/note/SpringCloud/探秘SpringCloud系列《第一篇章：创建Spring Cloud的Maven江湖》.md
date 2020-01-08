@@ -5,7 +5,7 @@
     JDK 8
     MAVEN 3.2.2
     SpringBoot 1.5.13.RELEASE
-    Spring-Cloud-Edgware
+    Spring-Cloud Edgware.SR3
 
 ### 创建Maven顶级项目
 

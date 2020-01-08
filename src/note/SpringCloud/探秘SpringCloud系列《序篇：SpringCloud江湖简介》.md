@@ -1,7 +1,8 @@
 > 悠悠岁月，漫漫红尘，欢迎来到SpringCloud江湖。在这里我们将揭开到SpringCloud的神秘面纱，来一场潇洒的爱恨情仇的学习。
 ### 本系列持续更新中...
 
-    本文将以一个江湖的形式，更加形象的将SpringCloud拆分成江湖的对应的场所，帮助同学们更生动形象的学习SpringCloud。
+> 本文将以一个江湖的形式，更加形象的将SpringCloud拆分成江湖的对应的场所，帮助同学们更生动形象的学习SpringCloud。
+
 > 文章中设计到的项目源码，会逐步整理到GitHub上。GitHub除了本系列文章设计到的源码信息，还有Spring Cloud整合的项目框架。有同样正在学习Spring Cloud的小伙伴可以加我一起学习交流。
 
 # 1、什么是微服务（Microservice）
