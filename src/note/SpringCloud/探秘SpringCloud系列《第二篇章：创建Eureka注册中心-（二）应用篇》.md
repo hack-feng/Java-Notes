@@ -5,12 +5,12 @@
 > * artifactId: cloud-eureka
 > * version: 1.0.0
 
-![SpringCloud 江湖](./images/02/1-cloud-eureka.png)
+![SpringCloud 江湖](./images/02/1-cloud-eureka.jpg)
 
 ### 创建Eureka Server服务
 然后在cloud-eureka项目上右击，New->Module，选择Spring Initializr，点击Next。
 
-![SpringCloud 江湖](./images/02/1-maven-create-eureka.png)
+![SpringCloud 江湖](./images/02/1-maven-create-eureka.jpg)
 
 > * groupId: com.maple
 > * artifactId: eureka-server
@@ -18,7 +18,7 @@
 
 注意以下目录
 
-![SpringCloud 江湖](./images/02/1-maven-path.png)
+![SpringCloud 江湖](./images/02/1-maven-path.jpg)
 
 1. 创建完成之后，修改pom.xml文件
 ~~~xml
@@ -97,10 +97,81 @@ public class EurekaServerApplication {
 
 这样Eureka Server就搭建完成了，启动一下项目，访问http://127.0.0.1:8761/，让我们一起感受一下。
 
-![SpringCloud 江湖](./images/02/1-eureka-success.png)
+![SpringCloud 江湖](./images/02/1-eureka-success.jpg)
 
 ### 创建Eureka Click服务
 
-### 测试创建的服务
+1. 接下来，我们创建一个Eureka Click，然后让他注册到Eureka Server上。
 
+> 在cloud-eureka项目上右击，New->Module，选择Spring Initializr，点击Next。
 
+> * groupId: com.maple
+> * artifactId: test-eureka-click
+> * version: 1.0.0
+
+2. 修改pom.xml文件
+~~~xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>Spring-Cloud-Edgware</artifactId>
+        <groupId>com.maple</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>test-eureka-click</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>test-eureka-click</name>
+    <description>Eureka click test service.</description>
+
+    <dependencies>
+        <!-- 添加Eureka Click的依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+~~~
+
+3. 将application.properties修改为application.yml。并添加以下内容：
+~~~yml
+server:
+  port: 8762
+spring:
+  application:
+    name: test-eureka-client
+
+#注册服务到eureka-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+~~~
+
+4. 修改TestEurekaClickApplication.java，添加`@EnableDiscoveryClient`注解
+~~~java
+@EnableDiscoveryClient
+@SpringBootApplication
+public class TestEurekaClickApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(TestEurekaClickApplication.class, args);
+    }
+}
+~~~
+
+这样Eureka Click就搭建完成了，启动一下项目，访问http://127.0.0.1:8761/，让我们一起感受一下。
+> 记得Eureka Server不要关闭呦， Eureka Click是需要向Eureka Server注册的。
+
+![SpringCloud 江湖](./images/02/1-eureka-click-success.jpg)

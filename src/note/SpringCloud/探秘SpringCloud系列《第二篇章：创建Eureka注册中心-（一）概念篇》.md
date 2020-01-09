@@ -21,3 +21,56 @@ Eureka Client是一个Java客户端，用于和服务端进行交互，同时客
 > * 于是你开心的拿着网管退回的五角钱，蹦蹦跳跳去找女朋友了，这就是Eureka的基础流程。
 
 ### Eureka的常见问题
+
+#### 多网卡环境下的IP选择
+
+对于多网卡的服务器，各个微服务注册到Eureka Server上的IP要如何指定？
+指定IP在某些场景很有用，例如某台服务器有eth0、eth1、eth2三块网卡，但是只有eth1可以被其他服务器访问；如果eureka click将eth0或eth2注册到eureka server上，其他微服务就将无法通过这个IP调用该微服务的接口。
+Spring Cloud提供了按需选择IP的能力。
+
+* 忽略指定名称的网卡，例如
+~~~
+spring:
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - docker0
+        - veth.*
+eureka:
+  instance:
+    prefer-ip-address: ture
+~~~
+这样就可以忽略docker0网卡以及以veth开头的网卡
+
+* 使用正则表达式，指定使用的网络地址，例如
+~~~
+spring:
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168
+        - 10.0
+eureka:
+  instance:
+    prefer-ip-address: ture
+~~~
+
+* 只使用站点本地地址，例如
+~~~
+spring:
+  cloud:
+    inetutils:
+      useOnlySiteLocalInterfaces： true
+eureka:
+  instance:
+    prefer-ip-address: ture
+~~~
+这样就可以强制使用站点本地地址
+
+* 手动指定IP地址。在某些极端的场景下，可以手动指定注册到Eureka Server的微服务IP，例如
+~~~
+eureka:
+  instance:
+    prefer-ip-address: ture
+    ip-address: 127.0.0.1
+~~~
