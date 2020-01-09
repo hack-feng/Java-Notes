@@ -1,7 +1,7 @@
 > 上一回说到如何使用Maven创建一个SpringCloud江湖，这一回我们便聊一聊如何创建户部这个部门，让它来对我们服务的生老病死进行管理。需求出来了，那就欢迎我们的Eureka闪亮登场。
 
 ### 什么是Eureka
-> EurekaEureka是Netflix出品的用于实现服务注册和发现的工具。Spring Cloud集成了Eureka，并提供了开箱即用的支持。Netflix在设计Eureka时遵循着A（可用性）P（分区容错性）原则，它是基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移。
+> Eureka是Netflix出品的用于实现服务注册和发现的工具。Spring Cloud集成了Eureka，并提供了开箱即用的支持。Netflix在设计Eureka时遵循着A（可用性）P（分区容错性）原则，它是基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移。
 
 Eureka采用C-S的设计架构，即包括了Eureka Server(服务端)，Eureka Client(客户端)。
 
