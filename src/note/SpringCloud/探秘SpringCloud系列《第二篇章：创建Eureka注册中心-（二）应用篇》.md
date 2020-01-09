@@ -175,3 +175,8 @@ public class TestEurekaClickApplication {
 > 记得Eureka Server不要关闭呦， Eureka Click是需要向Eureka Server注册的。
 
 ![SpringCloud 江湖](./images/02/1-eureka-click-success.jpg)
+
+> 本文到此结束了，后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
+> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
+> GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git <br>

@@ -94,3 +94,8 @@ eureka:
 eureka.client.service-url.defaultZone=http://127.0.0.1:8061/eureka/,http://127.0.0.1:8060/eureka/,http://127.0.0.1:8059/eureka/
 
 这样eureka的高可用服务就搭建好了。
+
+> 本文到此结束了，后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
+> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
+> GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git <br>
