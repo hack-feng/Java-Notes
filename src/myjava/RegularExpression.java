@@ -1,5 +1,7 @@
 package myjava;
 
+import java.util.Random;
+
 /**
  * 正则表达式
  */
@@ -25,9 +27,8 @@ public class RegularExpression {
 //            System.out.println(m1.group());
 //        }
 
-        Object a = null;
-
-        System.out.println(String.valueOf("123"));
+        int coin=new Random().nextInt(2);
+        System.out.println(coin);
 
     }
 }
