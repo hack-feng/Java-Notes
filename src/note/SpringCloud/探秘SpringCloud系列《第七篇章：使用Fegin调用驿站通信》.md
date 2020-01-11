@@ -19,3 +19,13 @@ Feign是一个声明式的Web Service客户端，它的目的就是让Web Servic
 
 首先我们先要创建用户和酒馆两个服务。先来回顾一下这两个服务如何创建。
 
+[探秘SpringCloud系列《第一篇章：创建Spring Cloud的Maven江湖》](https://blog.csdn.net/qq_34988304/article/details/103886568)
+
+准备好pub-service和user-service两个服务。然后把它们注册到Eureka Server里面。因为我们新创建的服务都需要引用Eureka Click的依赖，因为pom文件支持继承的特性，所以我们便把它放在顶级的pom.xml中引用。既然要使用fegin，我们需要在pom.xml添加Fegin的依赖。同样也可以放在顶级pom.xml中。
+
+修改Spring-Cloud-Edgware的pom.xml文件，添加Eureka Click和Fegin的依赖，修改后如下：
+~~~
+
+~~~
+
+
