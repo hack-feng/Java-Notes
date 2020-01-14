@@ -14,7 +14,7 @@ Feign是一个声明式的Web Service客户端，它的目的就是让Web Servic
 * 支持Ribbon的负载均衡;
 * 支持HTTP请求和响应的压缩。
 
-### 怎么使用Fegin?
+### 使用Fegin引用依赖及基础配置
 接下来，我们便以张三去酒馆喝酒的例子来介绍Fegin的使用。
 
 首先我们先要创建用户和酒馆两个服务。先来回顾一下这两个服务如何创建。
@@ -23,10 +23,101 @@ Feign是一个声明式的Web Service客户端，它的目的就是让Web Servic
 
 准备好pub-service和user-service两个服务。然后把它们注册到Eureka Server里面。因为我们新创建的服务都需要引用Eureka Click的依赖，因为pom文件支持继承的特性，所以我们便把它放在顶级的pom.xml中引用。既然要使用fegin，我们需要在pom.xml添加Fegin的依赖。同样也可以放在顶级pom.xml中。
 
-修改Spring-Cloud-Edgware的pom.xml文件，添加Eureka Click和Fegin的依赖，修改后如下：
+1. 修改Spring-Cloud-Edgware的pom.xml文件，添加Eureka Click和Fegin的依赖，修改后如下：
+~~~
+    <!-- 添加Eureka Click的依赖 -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-eureka</artifactId>
+    </dependency>
+    
+    <!-- 添加Fegin服务调用依赖 -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-feign</artifactId>
+    </dependency>
 ~~~
 
+2. 修改user-service的application.yml文件，如下：
+~~~yml
+server:
+  port: 8000
+spring:
+  application:
+    name: user-service
+
+#注册服务到eureka-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
 ~~~
+
+3. 修改user-service的UserServiceApplication.java，添加Eureka Click的注解@EnableDiscoveryClient和Fegin服务调用的注解@EnableFeignClients
+~~~java
+package com.maple.user;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Hack-Feng
+ */
+@RestController
+@EnableFeignClients
+@EnableDiscoveryClient
+@SpringBootApplication
+public class UserServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(UserServiceApplication.class, args);
+        System.out.println("项目启动成功了...");
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "欢迎进入到SpringCloud江湖！";
+    }
+}
+~~~
+
+4. 同样，修改pub-service的application.yml文件和PubServiceApplication.java
+~~~yml
+server:
+  port: 8001
+spring:
+  application:
+    name: pub-service
+
+#注册服务到eureka-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+~~~
+
+### 模拟Fegin之间的调用
+
+这样，我们的两个服务就创建好了，接下来让我们愉快的测试一下吧。
+测试用例：
+
+> 1. 用户服务消费酒馆服务，张三到酒馆去喝酒，然后吆喝小二点菜。
+> 2. 酒馆服务消费用户服务，小二给张三上菜。
+
+1. 创建用户服务用到的RestApi
+
+
+2. 创建酒馆服务用到的RestApi
+
+
+
+
+
 
 
 
