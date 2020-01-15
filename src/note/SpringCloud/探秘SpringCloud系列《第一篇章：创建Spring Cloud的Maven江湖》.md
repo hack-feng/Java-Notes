@@ -140,7 +140,6 @@
         <groupId>com.maple</groupId>
         <artifactId>cloud-service</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>user-service</artifactId>
     <name>user-service</name>
