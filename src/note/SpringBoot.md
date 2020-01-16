@@ -12,6 +12,44 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 }
 ~~~
 
+### 配置RestTemplate
+~~~java
+/**
+ * 我的配置信息
+ */
+@Configuration
+public class RestTemplateConfig{
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
+        return new RestTemplate(factory);
+    }
+
+    @Bean
+    public ClientHttpRequestFactory factory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        // 单位为ms
+        factory.setReadTimeout(15000);
+        // 单位为ms
+        factory.setConnectTimeout(15000);
+        return factory;
+    }
+}
+~~~
+
+~~~java
+@Configuration
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE");
+    }
+}
+~~~
+
 ### 发送邮件
 * pom.xml添加引用
 ~~~xml
