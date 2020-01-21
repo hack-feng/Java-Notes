@@ -27,7 +27,7 @@ public class RegularExpression {
 //            System.out.println(m1.group());
 //        }
 
-        int coin=new Random().nextInt(2);
+        int coin= 5%2;
         System.out.println(coin);
 
     }
