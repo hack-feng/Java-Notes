@@ -101,4 +101,27 @@ hystrix:
     retryableStatusCodes: 404,502
 ~~~
 
+### OpenFegin Click的Retryer重试
+~~~
+/**
+ * 开启Fegin重试机制
+ */
+@Bean
+Retryer feignRetryer() {
+    return  new Retryer.Default(1L, 5L, 3);
+}
+~~~
 
+* Retryer继承了Cloneable接口，它定义了continueOrPropagate、clone方法；它内置了一个名为Default以及名为NEVER_RETRY的实现
+* Default有period、maxPeriod、maxAttempts参数可以设置，默认构造器使用的period为100，maxPeriod为1000，maxAttempts为5；continueOrPropagate方法首先判断attempt是否达到阈值，达到则抛出异常，否则进一步计算interval，然后进行sleep
+* NEVER_RETRY的continueOrPropagate直接抛出异常，而clone方法直接返回当前实例
+
+### 注意事项
+* 建议讲Hystrix的超时时间设置为大于多次重试所用时间的和。
+* 一般不建议将ribbon.OkToRetryOnAllOperations设为true。一旦启用，post请求时，由于缓存了请求题，此时可能会影响服务器的资源。
+* Ribbon重试不要和Retryer重试同时启用，会产生笛卡尔积的重试结果。
+
+> 本章到此结束。后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
+> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
+> GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git <br>
