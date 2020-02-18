@@ -1,3 +1,8 @@
+### Docker 卸载
+~~~
+sudo apt-get remove docker docker-engine docker.io containerd runc
+~~~
+
 ### Docker安装
 
 #### 1、Docker 要求 
@@ -125,7 +130,7 @@ Navicat连接：<br>
 
 #### 4、启动docker里的redis镜像
 ~~~
-[root@k8s-n1 /]# docker run -itd --name trade_redis -p 6380:6379 8280a2c45ce5
+[root@k8s-n1 /]# docker run -itd --name trade_redis -p 6379:6379 8280a2c45ce5
 ~~~
 
 参数说明：<br>
