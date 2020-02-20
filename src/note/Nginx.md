@@ -189,3 +189,8 @@ permanent: 返回301永久重定向，地址栏会显示跳转后的地址
 
 4. 配置文件修改重装载命令：nginx -s reload
 ~~~
+
+### docker启动nginx
+~~~
+docker run -d -p 9000:80 -v /data/deploy_yjwl/web:/usr/share/nginx/html --name nginxyjwl --restart always nginx
+~~~
