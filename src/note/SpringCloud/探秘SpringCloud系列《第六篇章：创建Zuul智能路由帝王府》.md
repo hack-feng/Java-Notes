@@ -157,4 +157,53 @@ zuul:
 ~~~
 此方式不会使用Ribbon来负载均衡多个URL。
 
-6. 
+6. 同时指定path和URL，并且不破坏Zuul的Hystrix、Ribbon的特性
+~~~
+zuul:
+  routes:
+    user-route:     # 该配置只是一个别名，可以任意起名
+      path: /user/**     # service-id对应的路径
+      service-id: user-service
+ribbon:
+  eureka:
+    enabled: false # 为Ribbon禁用Eureka
+user-service:
+  ribbon:
+    listOfServers: http://127.0.0.1:8080,http://127.0.0.1:8081
+~~~
+
+7、路由前缀
+示例1：
+~~~
+zuul:
+ prefix: /api
+ strip-prefix: false
+ routes:
+   user-service: /user/**
+~~~
+这样访问Zuul的/api/user-service/1路径，请求将转发到user-service的/api/1上。
+
+示例2：
+~~~
+zuul:
+  routes:
+    user-service:
+      path: /user/**
+      strip-prefix: false
+~~~
+这样访问Zuul的/user/1路径，请求将转发到user-service的/user/1上
+
+8、本地转发
+~~~
+zuul:
+  routes:
+    route-name:
+      path: /path-a/**
+      url: forward:/path-b
+~~~
+这样，访问zuul的/path-a/**路径，将转发到Zuul的/path-b/**上。
+
+> 本章到此结束。后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
+> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
+> GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git <br>
