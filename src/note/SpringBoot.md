@@ -106,6 +106,8 @@ public class EmailUtil {
     public void sendEmail(Context context, String templateName, String to, String [] cc,
                           String subject, String text, List<String> attachmentList){
         try {
+            // 解决附件名称过长导致的附件名称乱码问题
+            System.setProperty("mail.mime.splitlongparameters", "false");
             // 定义邮件信息
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper;

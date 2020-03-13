@@ -78,3 +78,93 @@ sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_
 ~~~
 
 重启mysql服务，顺利解决。
+
+### mysql卡死的问题排查
+
+查看发生死锁的业务对应的数据库，和innodb记录的死锁日志
+~~~
+show engine innodb status;
+~~~
+
+查看mysql当前进程
+~~~
+show full processlist; -- 查询全部当前进程;
+show processlist;-- 只列出前100条
+
+kill 99; -- 杀掉卡死的进程，99为卡死id
+~~~
+
+查看其他的状态
+~~~
+show status;
+
+Aborted_clients 由于客户没有正确关闭连接已经死掉，已经放弃的连接数量。
+Aborted_connects 尝试已经失败的MySQL服务器的连接的次数。
+Connections 试图连接MySQL服务器的次数。
+Created_tmp_tables 当执行语句时，已经被创造了的隐含临时表的数量。
+Delayed_insert_threads 正在使用的延迟插入处理器线程的数量。
+Delayed_writes 用INSERT DELAYED写入的行数。
+Delayed_errors 用INSERT DELAYED写入的发生某些错误(可能重复键值)的行数。
+Flush_commands 执行FLUSH命令的次数。
+Handler_delete 请求从一张表中删除行的次数。
+Handler_read_first 请求读入表中第一行的次数。
+Handler_read_key 请求数字基于键读行。
+Handler_read_next 请求读入基于一个键的一行的次数。
+Handler_read_rnd 请求读入基于一个固定位置的一行的次数。
+Handler_update 请求更新表中一行的次数。
+Handler_write 请求向表中插入一行的次数。
+Key_blocks_used 用于关键字缓存的块的数量。
+Key_read_requests 请求从缓存读入一个键值的次数。
+Key_reads 从磁盘物理读入一个键值的次数。
+Key_write_requests 请求将一个关键字块写入缓存次数。
+Key_writes 将一个键值块物理写入磁盘的次数。
+Max_used_connections 同时使用的连接的最大数目。
+Not_flushed_key_blocks 在键缓存中已经改变但是还没被清空到磁盘上的键块。
+Not_flushed_delayed_rows 在INSERT DELAY队列中等待写入的行的数量。
+Open_tables 打开表的数量。
+Open_files 打开文件的数量。
+Open_streams 打开流的数量(主要用于日志记载）
+Opened_tables 已经打开的表的数量。
+Questions 发往服务器的查询的数量。
+Slow_queries 要花超过long_query_time时间的查询数量。
+Threads_connected 当前打开的连接的数量。
+Threads_running 不在睡眠的线程数量。
+Uptime 服务器工作了多少秒。
+~~~
+
+### 修改mysql最大连接数，解决Can not connect to MySQL server. Too many connections”-mysql 1040错误
+
+#### 问题
+
+在使用MySQL数据库的时候，经常会遇到这么一个问题，就是“Can not connect to MySQL server. Too many connections”-mysql 1040错误，这是因为访问MySQL且还未释放的连接数目已经达到MySQL的上限。通常，mysql的最大连接数默认是100, 最大可以达到16384。
+
+查看当前的最大连接数
+~~~
+show variables like 'max_connections';
+~~~
+
+#### 通过sql命令修改最大连接数
+
+sql语句修改最大连接数，无需重启MySQL服务，但是重启mysql的时候会失效重置
+~~~
+set GLOBAL max_connections=300;
+~~~
+
+需注意的是，要通过root权限的mysql帐号才能操作，否则会报“1227 - Access denied; you need (at least one of) the SUPER privilege(s) for this operation”的错误。
+
+#### 通过修改配置文件修改最大连接数
+
+解决方式二：修改my.cnf
+
+打开mysql的配置文件vim /etc/my.cnf，加入max_connections=300一行（如果有，直接修改值即可），然后重启服务：/etc/init.d/mysqld restart，此时生效。
+
+
+#### 区别
+
+1.通过修改配置文件，需要重启服务；而用命令修改，即时生效。
+
+2.采用修改配置文件的方式，更稳定可靠。因为如果配置文件中有max_connections=100，再去用命令修改的话，一旦重启mysql服务后，会重新以配置文件中指定的连接数为准。
+
+#### 总结
+
+在修改最大连接数的时候会有这样一个疑问—这个值是不是越大越好，或者设置为多大才合适？这个参数的大小要综合很多因素来考虑，比如使用的平台所支持的线程库数量（windows只能支持到2048）、服务器的配置（特别是内存大小）、每个连接占用资源（内存和负载）的多少、系统需要的响应时间等。可以在global或session范围内修改这个参数。连接数的增加会带来很多连锁反应，需要在实际中避免由此引发的负面影响。希望本文大家使用mysql有所帮助。
