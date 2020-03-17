@@ -158,7 +158,7 @@ name: zhangsan
  至此，已成功构建了Config Server，并通过构造URL方式，获取了Git仓库的配置信息。
 
 
-## 三、编写config Client
+### 三、编写config Client
 上文已经构造了cloud-config，并使用Config Server端点获取到了配置信息。接下来讨论SpringCloud微服务如何获取配置信息。
 
  - 在cloud-service下，创建一个springBoot模块，命名为：pay-service ，pom.xml文件如下：
