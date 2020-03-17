@@ -188,3 +188,28 @@ public static String ToDBC(String input) {
          return returnString;
 }
 ~~~
+
+### 计算明天的日期
+~~~java
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+ 
+public class test {
+ 
+    public static void main(String[] args) {
+        Format f = new SimpleDateFormat("yyyy-MM-dd");
+ 
+        Date today = new Date();
+        System.out.println("今天是:" + f.format(today));
+ 
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DAY_OF_MONTH, 1);// 今天+1天
+ 
+        Date tomorrow = c.getTime();
+        System.out.println("明天是:" + f.format(tomorrow));
+    }
+}
+~~~
