@@ -6,9 +6,7 @@
     MAVEN 3.2.2
     SpringBoot 1.5.13.RELEASE
     Spring-Cloud Edgware.SR3
-    Fegin声明式调用
-    Ribbon负载均衡
-    RestTemplate服务调用
+    Spring Cloud Config声明式调用
 
 > 随着微服务的不断增多，微服务的管理便成了难题，那么怎么解决这个问题，于是便有了Spring Cloud Config.
 
