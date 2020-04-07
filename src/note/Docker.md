@@ -130,7 +130,7 @@ Navicat连接：<br>
 
 #### 4、启动docker里的redis镜像
 ~~~
-[root@k8s-n1 /]# docker run -itd --name trade_redis -p 6379:6379 8280a2c45ce5
+[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 8280a2c45ce5
 ~~~
 
 参数说明：<br>
@@ -151,7 +151,7 @@ Navicat连接：<br>
 #### 6、测试Redis
 * 进入docker容器测试
 ~~~
-$ docker exec -it redis-test /bin/bash
+$ docker exec -it redis_test /bin/bash
 
 root@1d71ab146d19:/data# redis-cli
 

@@ -227,3 +227,5 @@ rm -rf  ./test_chk_ln
 ~~~
 rm -rf ./test_chk_ln/ (这样就会把原来test_chk下的内容删除)
 ~~~
+
+### 删除挖矿程序

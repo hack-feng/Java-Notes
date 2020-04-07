@@ -229,7 +229,7 @@ spring:
       uri: http://127.0.0.1:6666/
   application:
     name: pay-service
-```
+~~~
 
  - 创建测试ConfigTestController.java 内容如下
 
