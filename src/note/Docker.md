@@ -78,7 +78,7 @@ command was: "mysqld --verbose --help"
 mysqld: Can't read dir of '/etc/mysql/conf.d/' (OS errno 13 - Permission denied)
 mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 ~~~
-如果出现上图错误：
+如果出现上图错误：   
 ~~~
 [root@k8s-n1 /]# docker run --privileged=true -p 3308:3306 --name trade_mysql -v /mnt/mysql/conf:/etc/mysql/conf.d -v /mnt/mysql/logs:/logs -v /mnt/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
