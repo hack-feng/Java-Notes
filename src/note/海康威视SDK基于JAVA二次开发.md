@@ -14,13 +14,35 @@
  ![CSDN-笑小枫](images/hkws/01.jpg)
  
  * Demo示例：其中有java的一个demo，大家也可以参考一下
- 
+ * 开发文档：包含了海康威视不同设备的SDK对接文档
+ * 库文件：需要部分dll文件引用，通过dll文件去调用海康威视的服务器，需要的文件下文详细介绍
  
  打开我们的SpringBoot项目
 
+- 首先将demo示例中java例子的HCNetSDK.java文件拷贝至我们项目，项目位置没有特殊要求。
+- 然后将库文件中的HCNetSDKCom文件夹及下面的所有文件、AudioRender.dll、HCCore.dll、HCNetSDK.dll、PlayCtrl.dll、SuperRender.dll文件放置指定的文件夹
+ ![CSDN-笑小枫](images/hkws/02.jpg)
+- 修改HCNetSDK.java文件的HCNetSDK加载dll文件的位置。如下：D:\\HKSDK\\HCNetSDK为dll文件存放的目录。
 
+~~~
+ HCNetSDK INSTANCE = (HCNetSDK) Native.loadLibrary("D:\\HKSDK\\HCNetSDK", HCNetSDK.class);
+~~~
 
+- pom文件引入SDK二次开发所需要的jar包。jar包均手动引入，不是通过maven网上下载。官方示例中的javaDemo中有相应的jar包。
+~~~
+<dependency>
+    <groupId>net.java.jna</groupId>
+    <artifactId>jna</artifactId>
+    <version>1.0.0</version>
+</dependency>
+<dependency>
+    <groupId>net.java.jna</groupId>
+    <artifactId>examples</artifactId>
+    <version>1.0.0</version>
+</dependency>
+~~~
 
+### 编写程序代码
 
 ~~~java
 import com.sun.jna.NativeLong;
@@ -140,7 +162,7 @@ public class VideoDowload {
         }
         VideoDowload test = new VideoDowload();
         Dvr dvr = new Dvr("http://192.168.0.167",80,"admin","123456");
-        int channel = 2;//通道
+        int channel = 33;//通道
         System.out.print(test.downloadVideo(dvr, startTime, endTime, "D:\\testhk\\test.mp4", channel));
     }
 }
@@ -174,3 +196,112 @@ public class Dvr {
     }
 }
 ~~~
+
+注意事项：
+* 自己的服务器信息请手动修改，保存目录等信息请手动修改
+* channel通道号是32起，比如你的通道为1，这里需要写33，原因咨询海康威视的技术。
+* 这里只是一个简单的demo，具体操作根据自己业务的实际情况来。
+
+下图是定时5分钟取一次数据的结果
+ ![CSDN-笑小枫](images/hkws/03.jpg)
+
+
+### 视频无法播放的问题
+> 因为你的音频不是mpeg4容器支持的音频格式。通过mediainfo分析可知，你的音频格式是pcm_alaw，并且还有一行警告信息:
+  FileExtension_Invalid : mpeg mpg m2p vob vro pss evo
+  你的视频格式应该是MPEG-PS格式，但是后缀却是mp4，其实是一个非法的MP4。mediainfo还会告诉你合法的后缀应该是上述那几个。由于你的音频格式根本不被浏览器支持，但是视频格式是被浏览器支持的(H.264/AVC)。那么解决方案其实也简单，抽调音频即可。参考ffmpeg命令行(不转码，直接复制流):
+  ffmpeg -i demo.mp4 -c copy -an demp_enc.mp4
+  速度很快，使用-an参数屏蔽掉音频流，将封装格式转为mp4。再次用mediainfo查看，格式已经显示MPEG-4，是一个标准的mp4容器封装了，在当今主流的浏览器都能直接播放。
+  
+ 下载ffmpeg解码工具[官网](http://www.ffmpeg.org/download.html)下载ffmpeg，解压安装找到ffmpeg.exe。
+ 
+ 
+添加一下工具类
+~~~
+// ffmpeg.exe存放的位置
+private static String ffmpegEXE = "D:\\software\\ffmpg\\bin\\ffmpeg.exe";
+
+//ffmpeg -i demo.mp4 -c copy -an demp_enc.mp4
+public static void convetor(String videoInputPath, String videoOutPath) throws Exception {
+    List<String> command = new ArrayList<String>();
+    command.add(ffmpegEXE);
+    command.add("-i");
+    command.add(videoInputPath);
+    command.add("-c");
+    command.add("copy");
+    command.add("-an");
+    command.add(videoOutPath);
+    ProcessBuilder builder = new ProcessBuilder(command);
+    Process process = null;
+    try {
+        process = builder.start();
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    // 使用这种方式会在瞬间大量消耗CPU和内存等系统资源，所以这里我们需要对流进行处理
+    InputStream errorStream = process.getErrorStream();
+    InputStreamReader inputStreamReader = new InputStreamReader(errorStream);
+    BufferedReader br = new BufferedReader(inputStreamReader);
+    String line = "";
+    while ((line = br.readLine()) != null) {
+    }
+    if (br != null) {
+        br.close();
+    }
+    if (inputStreamReader != null) {
+        inputStreamReader.close();
+    }
+    if (errorStream != null) {
+        errorStream.close();
+    }
+
+}
+~~~
+
+下载视频成功后，调用该方法进行转码，修改VideoDowload.java代码为以下：
+~~~
+if (produce == 100) {//下载成功
+    hcNetSDK.NET_DVR_StopGetFile(loadHandle);
+    loadHandle.setValue(-1);
+    hcNetSDK.NET_DVR_Logout(userId);//退出录像机
+    logger.info("hksdk(视频)-退出状态" + hcNetSDK.NET_DVR_GetLastError());
+    hcNetSDK.NET_DVR_Cleanup();
+
+    Media media = new Media();
+    media.setDisasterId(disasterId);
+    media.setType(MediaType.VIDEO);
+    media.setCreateDate(new Date());
+    media.setUploadTime(new Date());
+    media.setAttachmentName("z" + fileName);
+    media.setIsDeleted(false);
+    media.setUpdate_rhtx(1);
+    media.setFlag("OTHER");
+    media.setNewsFeedId(0);
+    String http_path = restUrlLocalhost;
+    media.setUrl(http_path + "/urgentlogistic/file/mp4/" + newDate + "/z" +fileName);
+    mediaService.create(media);
+
+    try {
+        // 视频进行转码
+        convetor(filePath + fileName,filePath + "z" +fileName);
+        File file = new File(filePath + fileName);
+        // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
+        file.delete();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return true;
+}
+~~~
+
+运行完就会多一个视频文件，然后就可以用通用播放器播放这个新的视频了，至于老的视频任凭自己需求处理掉就行啦
+
+最后在附上官方开发人员的邮箱 sdk@hikvision.com
+
+如果对您有帮助，请点个赞，关注下小编再走哟，有什么问题可以在评论区留言，经常在线，看到一定回复。
+
+> 本章到此结束。后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
+> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
