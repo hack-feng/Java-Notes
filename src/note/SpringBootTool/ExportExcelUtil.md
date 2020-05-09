@@ -758,7 +758,8 @@ public class ExportExcelTitle {
 最后，再多来几种主题吧。主题通过配置ExportExcelBean下的theme实现。什么，没有你喜欢的颜色？青青草原淡绿色都配上了，居然还没有你喜欢的。算了算了，你自己在 ExportExcelTheme 下面添加自己喜欢的色彩吧
 ![SpringCloud江湖](../images/exportexcel/03.jpg)
 
-好了，到这里真的该结束了，如果你还需要其他功能，可以基于现有功能添加，当然也可以贡献给我们，让大家一起白嫖。
+好了，到这里真的该结束了，如果你还需要其他功能，可以基于现有功能添加，当然也可以贡献给我们，让大家一起白嫖。有什么问题，可以留言或者联系我哟~~~
 
 > 本文到此结束了，后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
-> 源码已上传至github：https://github.com/hack-feng/maple-common.git/
+> 源码已上传至github：https://github.com/hack-feng/maple-common.git/ <br>
+> 点个关注再走呗~~~
