@@ -1,3 +1,5 @@
+[TOC]
+
 > 小伙伴们工作中有没有导出excel需求呀，这里为大家献上一个风骚的导出excel的工具类。具体怎么风骚，请看下文分析。
 
 ### 项目环境：
@@ -182,6 +184,10 @@ public enum ExportExcelTheme {
     public XSSFColor[] theme;
 }
 ~~~
+
+颜色设置可以直接在idea里面选择，挺方便的
+
+![SpringCloud江湖](../images/exportexcel/05.jpg)
 
 #### 【重点】导出excel的工具类：ExportExcelUtil.java
 ~~~java
@@ -753,3 +759,6 @@ public class ExportExcelTitle {
 ![SpringCloud江湖](../images/exportexcel/03.jpg)
 
 好了，到这里真的该结束了，如果你还需要其他功能，可以基于现有功能添加，当然也可以贡献给我们，让大家一起白嫖。
+
+> 本文到此结束了，后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
+> 源码已上传至github：https://github.com/hack-feng/maple-common.git/
