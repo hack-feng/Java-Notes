@@ -6,6 +6,8 @@ CONFIG set requirepass "runoob"
 CONFIG get requirepass
 # 密码登录
 AUTH password
+# 访问其他服务上redis。需要在本地装redis客户端
+redis-cli -h ip地址 -p 6379
 ~~~
 
 ### Redis常用的操作
