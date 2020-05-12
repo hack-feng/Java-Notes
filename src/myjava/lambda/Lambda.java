@@ -103,6 +103,7 @@ public class Lambda {
             return age;
         }
 
+        @Override
         public String toString(){
             return "id="+this.id + ",name="+this.name+",age="+this.age;
         }

@@ -2,13 +2,13 @@
 
 > 小伙伴们工作中有没有导出excel需求呀，这里为大家献上一个风骚的导出excel的工具类。具体怎么风骚，请看下文分析。
 
-### 项目环境：
+### 项目环境
  * SpringBoot: 2.2.6.RELEASE
  * JDK: 1.8
  * POI: 4.1.2
  * lombok: 1.16.18
 
-### 实现功能：
+### 实现功能
  * 导出简单的excel
  * 导出多sheet的excel
  * 导出多sheet页，每个sheet页多个表格区域
@@ -359,7 +359,12 @@ public class ExportExcelUtil {
             //产生序号，1,2,3,4,5...的递增序号，不需要，header去掉‘序号’就可以了
             if("序号".equals(excel.getHeaders().get(0))){
                 XSSFCell cell = row.createCell(0);
-                cell.setCellStyle(titleStyleOne);
+                // 设置隔行样式
+                if(i % 2 == 0){
+                    cell.setCellStyle(titleStyleOne);
+                }else{
+                    cell.setCellStyle(titleStyleTwo);
+                }
                 cell.setCellValue(i + 1 + "");
             }
 
