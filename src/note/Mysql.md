@@ -168,3 +168,24 @@ set GLOBAL max_connections=300;
 #### 总结
 
 在修改最大连接数的时候会有这样一个疑问—这个值是不是越大越好，或者设置为多大才合适？这个参数的大小要综合很多因素来考虑，比如使用的平台所支持的线程库数量（windows只能支持到2048）、服务器的配置（特别是内存大小）、每个连接占用资源（内存和负载）的多少、系统需要的响应时间等。可以在global或session范围内修改这个参数。连接数的增加会带来很多连锁反应，需要在实际中避免由此引发的负面影响。希望本文大家使用mysql有所帮助。
+
+### win10下安装Mysql5.7
+
+https://jingyan.baidu.com/article/af9f5a2d16fa4d43150a4552.html
+
+### 修改密码
+~~~
+ALTER USER USER() IDENTIFIED BY '123456';
+~~~
+
+### Host is not allowed to connect to this MySQL server解决方法
+
+先说说这个错误，其实就是我们的MySQL不允许远程登录，所以远程登录失败了，解决方法如下：
+
+1. 在装有MySQL的机器上登录MySQL mysql -u root -p密码
+2. 执行use mysql;
+3. 执行update user set host = '%' where user = 'root';这一句执行完可能会报错，不用管它。
+4. 执行FLUSH PRIVILEGES;
+
+经过上面4步，就可以解决这个问题了。
+注: 第四步是刷新MySQL的权限相关表，一定不要忘了，我第一次的时候没有执行第四步，结果一直不成功，最后才找到这个原因。

@@ -1,3 +1,15 @@
+### 
+
+设置3个系统变量，参数如下：
+~~~
+* 变量名：JAVA_HOME
+* 变量值：D:\Program Files\Java\jdk-12.0.2        // 要根据自己的实际路径配置
+* 变量名：CLASSPATH
+* 变量值：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;         //记得前面有个"."
+* 变量名：Path
+* 变量值：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
+~~~
+
 ###SpringBoot JUnit测试
 
 ~~~java

@@ -268,3 +268,21 @@ vi /etc/selinux/config
 ~~~
 docker run -i -t -v /soft:/soft --privileged=true 637fe9ea94f0 /bin/bash
 ~~~
+
+### SpringBoot项目打包成docker镜像
+#### 创建Dockerfile文件，内容如下：
+~~~
+FROM openjdk:8-jdk-alpine
+VOLUME /temp
+EXPOSE 9001
+ADD logistics-quote-1.0.0.jar logistics-quote.jar
+ENTRYPOINT ["java","-jar","/logistics-quote.jar"]
+~~~
+
+#### 打成docker镜像
+将jar包和Dockerfile放在服务器的统一目录下，执行命令：
+~~~
+docker build -t quote:1.0.0 .
+~~~
+
+执行docker images 可以查看到生成的镜像
