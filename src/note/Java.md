@@ -225,3 +225,9 @@ public class test {
     }
 }
 ~~~
+
+### SimpleDateFormat显示毫秒
+
+~~~
+SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmmssSSS");
+~~~

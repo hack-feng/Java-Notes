@@ -10,27 +10,27 @@ import java.util.Objects;
 public class IoDemo {
 
     public static void main(String[] args) {
-        String path = "D:" + File.separator + "io";
+        String path = "D:" + File.separator + "1111io";
         String fileName = "test.txt";
         // 创建一个新文件夹
         createPath(path);
-        // 创建一个新文件
-        createFile(path, fileName);
-        // 列出指定目录的全部文件（包括隐藏文件）
-        listFile(path);
-        // 判断是否为文件夹
-        isDirectory(path);
-        // 判断是否为文件
-        isFile(path, fileName);
-        // 删除一个文件
-        deleteFile(path, fileName);
-
-        // 写文件
-        writeFile(path, fileName);
-        // 在文件中追加内容
-        appendFileContent(path, fileName);
-        // 读取文件
-        readFile(path, fileName);
+//        // 创建一个新文件
+//        createFile(path, fileName);
+//        // 列出指定目录的全部文件（包括隐藏文件）
+//        listFile(path);
+//        // 判断是否为文件夹
+//        isDirectory(path);
+//        // 判断是否为文件
+//        isFile(path, fileName);
+//        // 删除一个文件
+//        deleteFile(path, fileName);
+//
+//        // 写文件
+//        writeFile(path, fileName);
+//        // 在文件中追加内容
+//        appendFileContent(path, fileName);
+//        // 读取文件
+//        readFile(path, fileName);
     }
 
     private static void readFile(String path, String fileName) {
@@ -112,8 +112,8 @@ public class IoDemo {
 
     private static void createPath(String path) {
         File pathFile = new File(path);
-        if(pathFile.exists()){
-            System.out.println(path + " --- createPath result：" + pathFile.mkdir());
+        if(pathFile.mkdirs()){
+            System.out.println(path + " --- createPath result");
         }
     }
 
