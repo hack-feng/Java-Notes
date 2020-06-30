@@ -286,3 +286,22 @@ docker build -t quote:1.0.0 .
 ~~~
 
 执行docker images 可以查看到生成的镜像
+
+#### docker 启动镜像
+~~~
+docker run -d --name trade_test -p 9002:9001 imageId
+~~~
+
+
+### docker删除
+~~~
+# 停止容器运行
+docker stop containsId
+
+# 删除容器
+docker rm containsId
+
+# 删除镜像
+docker rmi imagesId
+
+~~~

@@ -229,3 +229,8 @@ rm -rf ./test_chk_ln/ (这样就会把原来test_chk下的内容删除)
 ~~~
 
 ### 删除挖矿程序
+
+### Linux文件传输
+~~~
+scp local_file user@ip:remote_folder
+~~~
