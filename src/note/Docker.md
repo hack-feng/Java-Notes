@@ -96,7 +96,7 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 
 # mysql -u root -p
 
-mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Hege2213@#$';
 ~~~
 
 #### 6、安装成功

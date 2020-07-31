@@ -194,3 +194,9 @@ permanent: 返回301永久重定向，地址栏会显示跳转后的地址
 ~~~
 docker run -d -p 9000:80 -v /data/deploy_yjwl/web:/usr/share/nginx/html --name nginxyjwl --restart always nginx
 ~~~
+
+
+
+
+
+docker run -d -p 8889:80 -v /hege/web:/usr/share/nginx/html --name nginx --restart always nginx
