@@ -231,3 +231,140 @@ public class test {
 ~~~
 SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmmssSSS");
 ~~~
+
+### 自动设置结束时间为n个工作日后的日期
+需求：
+自动设置截止日期为工作日15天
+
+>需要手动维护节假调休的工作日，以及非周末的节假日
+
+>例如：
+
+>   5月1号，周四为节假日，则需要维护为节假日
+
+>  5月4号，周天需要调休工作，则需要维护为调休工作日
+     
+
+#### 1、定义表结构，维护节假日或工作日
+~~~sql
+CREATE TABLE `holiday_info` (
+  `id` int(11) DEFAULT NULL COMMENT '主键id',
+  `date_info` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '日期信息',
+  `date_type` int(1) DEFAULT NULL COMMENT '日期类型(0：节假日  1：工作日)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+~~~
+
+#### 2、编写程序，实现功能
+* java实现
+~~~java
+public class Test{
+    public String getDate(int days){
+        int flag = 0;
+        String startDate = DateUtil.parseDateToString(null, new Date());
+        // 查询休息日
+        Set<String> countRest = holidayInfoDao.getCount(startDate, 1);
+        // 查询工作日
+        Set<String> countWork = holidayInfoDao.getCount(startDate, 0);
+
+        while(flag <= days){
+            flag ++;
+            Date date = DateUtil.addDateByDays(new Date(),flag);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int w = cal.get(Calendar.DAY_OF_WEEK);
+            // 周天和周六为休息日 周天为1，周六为7
+            if (w == 1 || w == 7){
+                // 判断周六和周天不是调休的工作日，则延后一天
+                if(!countWork.contains(DateUtil.parseDateToString(null, date))){
+                    days ++;
+                }
+            }else{
+                // 判断周一和周五是节假日，则延后一天
+                if(countRest.contains(DateUtil.parseDateToString(null, date))){
+                    days ++;
+                }
+            }
+        }
+        String result = DateUtil.parseDateToString(null,DateUtil.addDateByDays(new Date(),days));
+        System.out.println(result);
+        return  result;
+    }
+}
+~~~
+
+* DateUtil.java日期处理类
+~~~java
+import com.ict.framework.common.utils.StringUtil;
+import org.sqlite.date.DateFormatUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class DateUtil {
+    //日期 转 str
+    public static String parseDateToString(String format, Date date) {
+        if (format == null) {
+            format = "yyyy-MM-dd";
+        }
+       return DateFormatUtils.format(date, format);
+    }
+
+    public static Date addDateByDays(Date date, int Days) {
+            Calendar calendar = new GregorianCalendar();
+            calendar.add(Calendar.DATE, Days);
+            date = calendar.getTime();
+            return date;
+    }
+}
+~~~
+
+* mybatis查询sql
+~~~sql
+select date_info from holiday_info where date_type = #{type} and date_info > #{startDate} 
+~~~
+
+### 根据版本号设置展示的编号为为A-ZZ
+>需求：   <br>
+>版本号从1开始递增，页面展示为A-ZZ   <br>
+>例如：  <br>
+>version = 1 ,则 versionDisplay = A  <br>
+>version = 27 ,则 versionDisplay = AA
+
+具体代码实现如下：
+~~~java
+public class Test{
+    public String getVersionDisplay(int version){
+        if(version < 1){
+            throw new RuntimeException("订单的版本号不能小于1");
+        }
+        if(version > 702){
+            throw new RuntimeException("订单修改次数过多，请您创建新的订单");
+        }
+        String result;
+        // A对应的ASCII编码为65
+        // 因为第一位编号默认从1开始，version = 1时， first = A
+        // first = first + version
+        // 故first取值64
+        int first = 64;
+        int second = 65;
+        
+        // 如果version小于26，则只有一位编号；如果大于26，则有两位编号。
+        if(version > 26){
+            // 通过整除，得到第一位编号
+            first = first + (version - 1)/26;
+            // 通过取余，得到第二位编号
+            second = second + (version - 1)%26;
+            result = (char) first + "" + (char) second;
+        }else{
+            first = first + version;
+            result = (char) first + "";
+        }
+        return result;
+    }
+}
+~~~
+
+
+
