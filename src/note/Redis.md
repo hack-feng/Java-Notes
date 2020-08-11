@@ -126,3 +126,12 @@ protected-mode"no"
 5. 在Redis根目录下尝试远程连接并查看
 redis-cli -h ip地址 -p 6379 能够连接
 info 能够输出信息
+
+### java使用redis递增
+如果key在redis中不存在，则会自动初始化生成key，并返回0。
+~~~
+public Long getIncr(String key){
+    RedisAtomicLong redisAtomicLong = new RedisAtomicLong(key, redisTemplate.getConnectionFactory());
+    return redisAtomicLong.getAndIncrement();
+}
+~~~
