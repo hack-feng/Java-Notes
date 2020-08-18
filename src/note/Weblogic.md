@@ -283,3 +283,10 @@ public class DemoApplication extends SpringBootServletInitializer implements Web
 #### 系统测试
 显示结果如下图：
 ![笑小枫](./images/weblogic/07.jpg)
+
+#### 程序源码
+本文涉及到的项目源码已经push到github上，需要的小伙伴可以去拿一下。
+如果项目一直部署不成功，建议小伙伴创建一个新的空项目，然后只放必须的pom依赖，放入weblogic的配置，打包试一下是否成功。
+若使用本文的配置，建议使用全套呦，可能因为很小的细节不一致，就会导致项目部署出错。
+
+github地址：[https://github.com/hack-feng/weblogic_springboot](https://github.com/hack-feng/weblogic_springboot)
