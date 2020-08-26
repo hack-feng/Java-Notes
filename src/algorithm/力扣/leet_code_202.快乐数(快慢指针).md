@@ -1,5 +1,4 @@
-package algorithm.力扣;
-
+~~~java
 /**
  * @author ZhangFZ
  * @date 2020/4/30 10:59
@@ -50,3 +49,4 @@ public class leet_code_202_快乐数 {
         return result;
     }
 }
+~~~

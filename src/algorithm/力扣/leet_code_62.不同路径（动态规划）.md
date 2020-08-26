@@ -1,5 +1,4 @@
-package algorithm.力扣;
-
+~~~java
 import java.util.Arrays;
 
 /**
@@ -38,3 +37,4 @@ public class leet_code_62不同路径 {
         return array[n-1];
     }
 }
+~~~
