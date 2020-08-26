@@ -27,6 +27,25 @@ systemctl start docker.service
 systemctl enable docker.service
 ~~~
 
+### Docker阿里云镜像加速
+~~~
+sudo mkdir -p /etc/docker
+~~~
+
+~~~
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://89d885cf.mirror.aliyuncs.com"]
+}
+EOF
+~~~
+
+~~~
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+~~~
+
+
 ### Docker安装Mysql
 
 #### 1、下载mysql镜像
@@ -50,12 +69,12 @@ systemctl enable docker.service
 
 #### 3、创建目录
 ~~~
-[root@k8s-n1 /]# mkdir -p /mnt/mysql/data /mnt/mysql/logs /mnt/mysql/conf
+[root@k8s-n1 /]# mkdir -p /data/mysql/data /data/mysql/logs /data/mysql/conf
 ~~~
 
 #### 4、启动docker里面的mysql镜像
 ~~~
-[root@k8s-n1 /]# docker run -p 3308:3306 --name trade_mysql -v /mnt/mysql/conf:/etc/mysql/conf.d -v /mnt/mysql/logs:/logs -v /mnt/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
+[root@k8s-n1 /]# docker run -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
 
 参数说明：<br>
@@ -80,7 +99,7 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 ~~~
 如果出现上图错误：   
 ~~~
-[root@k8s-n1 /]# docker run --privileged=true -p 3308:3306 --name trade_mysql -v /mnt/mysql/conf:/etc/mysql/conf.d -v /mnt/mysql/logs:/logs -v /mnt/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
+[root@k8s-n1 /]# docker run --privileged=true -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
 添加 **--privileged=true** 增加权限命令，启动成功。
 
@@ -92,11 +111,11 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 
 #### 5、进入docker容器修改Mysql
 ~~~
-[root@k8s-n1 mysql]# docker exec -it trade_mysql /bin/sh
+[root@k8s-n1 mysql]# docker exec -it mysql_8 /bin/sh
 
 # mysql -u root -p
 
-mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Hege2213@#$';
+mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Psy0822@#$';
 ~~~
 
 #### 6、安装成功
