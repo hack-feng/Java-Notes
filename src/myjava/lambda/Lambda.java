@@ -66,6 +66,10 @@ public class Lambda {
         userList.sort(Comparator.comparing(User::getAge).thenComparing(User::getId).reversed());
         userList.forEach(list -> System.out.println(list.toString()));
 
+        System.out.println("删除list的某个值----------------------------------------------------");
+        String a = "a";
+        forTestList.removeIf(s -> s.equals(a));
+
         System.out.println("list转为map---------------------------------------------------------------");
         Map<Integer, User> map = userList.stream().collect(Collectors.toMap(User :: getId, list -> list));
         map.forEach((k, v) -> System.out.println("id:" + k + "            value:" + v.toString()));
