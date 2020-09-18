@@ -156,6 +156,21 @@ Navicat连接：<br>
 -p 6380:6379：映射容器服务的 6379 端口到宿主机的 6380 端口。外部可以直接通过宿主机ip:6380 访问到 Redis 的服务。<br>
 8280a2c45ce5 镜像id（ IMAGE ID ）
 
+
+如果启动redis后面需要加参数 使用以下命令：
+~~~
+[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 8280a2c45ce5 redis-server --bind 0.0.0.0 --protected-mode no --daemonize no --appendonly yes
+~~~
+redis-server后面的代表使用以下参数配置，支持映射配置文件<br>
+redis-server --bind 0.0.0.0 --protected-mode no --daemonize no --appendonly yes
+
+使用映射的配置文件
+~~~
+[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 -v /data/redis/redis.conf:/etc/redis/redis.conf 8280a2c45ce5 redis-server /etc/redis/redis.conf --appendonly yes
+~~~
+* -v 挂载外部文件/data/redis/redis.conf 到 /etc/redis/redis.conf
+* redis-server /etc/redis/redis.conf 启动时使用能够该配置文件
+
 #### 5、安装成功
 ~~~
 [root@k8s-n1 /]# docker ps
