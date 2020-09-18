@@ -135,3 +135,48 @@ public Long getIncr(String key){
     return redisAtomicLong.getAndIncrement();
 }
 ~~~
+
+### Redis分布式锁
+ ~~~java
+ class Redis{
+    /**
+      * setNX
+      * @param lockKey  锁
+      * @param value   请求标识
+      * @param exptime 过期时间
+      * @return 是否获取到锁
+      */
+     public boolean tryGetDistributedRedisLock( String lockKey, Serializable value, final long exptime) {
+         return (Boolean) redisTemplate.execute(new RedisCallback<Boolean>() {
+             @Override
+             public Boolean doInRedis(RedisConnection connection) {
+                 RedisSerializer valueSerializer = redisTemplate.getValueSerializer();
+                 RedisSerializer keySerializer = redisTemplate.getKeySerializer();
+                 Object obj = connection.execute("set", keySerializer.serialize(lockKey),
+                         valueSerializer.serialize(value),
+                         SafeEncoder.encode("NX"),
+                         SafeEncoder.encode("EX"),
+                         Protocol.toByteArray(exptime));
+                 return obj != null;
+             }
+         });
+     }
+ 
+     /**
+      * 释放锁
+      */
+     private  final Long RELEASE_SUCCESS = 1L;
+ 
+     /**
+      * 释放分布式锁
+      * @param lockKey 锁
+      * @param requestId 请求标识
+      * @return 是否释放成功
+      */
+     public  boolean releaseDistributedRedisLock(String lockKey, String requestId) {
+         String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
+         Object result = redisTemplate.execute(new DefaultRedisScript(script,Long.class), Collections.singletonList(lockKey), requestId);
+         return RELEASE_SUCCESS.equals(result);
+     }
+ }
+ ~~~
