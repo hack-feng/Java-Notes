@@ -234,3 +234,5 @@ rm -rf ./test_chk_ln/ (这样就会把原来test_chk下的内容删除)
 ~~~
 scp local_file user@ip:remote_folder
 ~~~
+
+### 添加、修改、删除用户
