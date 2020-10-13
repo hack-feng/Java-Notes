@@ -1,4 +1,4 @@
-# MapleDemo搭建
+# MapleAdmin搭建
 
 ## 1 搭建SpringBoot基础框架
 
