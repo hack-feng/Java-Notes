@@ -189,3 +189,29 @@ ALTER USER USER() IDENTIFIED BY '123456';
 
 经过上面4步，就可以解决这个问题了。
 注: 第四步是刷新MySQL的权限相关表，一定不要忘了，我第一次的时候没有执行第四步，结果一直不成功，最后才找到这个原因。
+
+### 修改忽略表名大小写
+
+mysql数据库版本：8.0.15
+
+
+/etc/my.cnf 文件，在[mysqld]节点下，加入一行：
+~~~
+lower_case_table_names=1
+~~~
+
+报错:
+![CSDN-笑小枫](images/mysql/mysql-1.jpg)
+
+查看MySQL官方文档，有记录：
+>lower_case_table_names can only be configured when initializing the
+ server. Changing the lower_case_table_names setting after the server
+ is initialized is prohibited.
+ 
+只有在初始化的时候设置 lower_case_table_names=1才有效，此后无法更改，并且被禁止.
+
+我这里用的是docker，删除容器，重新创建容器添加：--lower_case_table_names=1命令
+
+~~~
+docker run -p 3306:3306  --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd --lower_case_table_names=1
+~~~

@@ -77,6 +77,9 @@ sudo systemctl restart docker
 [root@k8s-n1 /]# docker run -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
 
+忽略大小写：--lower_case_table_names=1，如果之前重启过，及得要把/data/mysql/data数据清除（一定要先备份，不然数据会丢失）
+自动重启：--restart=always
+
 参数说明：<br>
 -v 挂载宿主机目录和 docker容器中的目录<br>
 -d 后台运行<br>
@@ -159,7 +162,7 @@ Navicat连接：<br>
 
 如果启动redis后面需要加参数 使用以下命令：
 ~~~
-[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 8280a2c45ce5 redis-server --bind 0.0.0.0 --protected-mode no --daemonize no --appendonly yes
+[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 8280a2c45ce5 redis-server --bind 0.0.0.0 --requirepass 123456 --protected-mode no --daemonize no --appendonly yes
 ~~~
 redis-server后面的代表使用以下参数配置，支持映射配置文件<br>
 redis-server --bind 0.0.0.0 --protected-mode no --daemonize no --appendonly yes
@@ -345,3 +348,25 @@ docker exec -it containsId /bin/bash
 
 cat /etc/hosts
 ~~~
+
+### 下载docker镜像里面的文件
+~~~
+docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
+~~~
+[OPTIONS]:保持源目标中的链接，例：
+~~~
+docker cp ecef8319d2c8:/root/test.txt /root/
+~~~
+
+该命令的意思是将容器id为ecef8319d2c8的家目录（root）文件夹下的文件test.txt拷贝到当前操作系统（Linux）家目录（root）下。如果是win系统的话请替换为win下的合法路径（例如：D:/test.txt）。
+
+### 上传文件到docker镜像里面
+~~~
+docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+~~~
+[OPTIONS]:保持源目标中的链接，例：
+~~~
+docker cp /root/test.txt ecef8319d2c8:/root/
+~~~
+
+该命令的意思是将当前操作系统（Linux）家目录（root）下的文件test.txt拷贝到容器id为ecef8319d2c8的家目录（root）文件夹下。如果是win系统的话请替换为win下的合法路径（例如：D:/test.txt）。
