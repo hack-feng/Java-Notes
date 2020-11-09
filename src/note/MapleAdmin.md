@@ -1249,7 +1249,6 @@ UserMapper.xml
 ![CSDN-笑小枫](images/mapleadmin/3.1.3-1.jpg)
 
 
-
 #### 3.1.4 引入Redis配置
 
 

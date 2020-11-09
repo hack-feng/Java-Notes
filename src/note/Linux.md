@@ -236,3 +236,40 @@ scp local_file user@ip:remote_folder
 ~~~
 
 ### 添加、修改、删除用户
+
+### Linux安装JDK1.8
+1、首先在/usr/local目录下新建一个文件夹jdk，然后将下载好的jdk压缩文件放入这个文件夹
+~~~
+mkdir /usr/local/jdk
+
+cd /usr/local/jdk
+
+tar -zxvf jdk-8u181-linux-x64.tar.gz
+~~~
+
+2、环境变量配置
+
+修改/etc目录下的profile文件,在profile文件末尾添加如下内容：
+~~~
+export JAVA_HOME=/usr/local/jdk/jdk1.8.0_181
+export CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/ 
+export PATH=$PATH:$JAVA_HOME/bin
+~~~
+
+其中 JAVA_HOME需要根据实际安装路径和JDK版本进行修改
+
+修改完成后，执行如下命令使修改生效
+~~~
+source /etc/profile
+~~~
+
+3、验证安装
+~~~
+java -version
+~~~
+
+![CSDN-笑小枫](images/linux/jdk-version.jpg)
+
+
+
+
