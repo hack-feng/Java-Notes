@@ -248,6 +248,24 @@ OK
 ![浏览器访问图片](../images/rabbitMQ-success.jpg)
 
 
+### docker下安装nginx
+1、docker拉取nginx镜像
+
+docker pull nginx:版本号, 拉取指定版本nginx或docker pull nginx,拉取最新版本 
+
+2、目录、端口映射
+
+目录映射： /data/deploy_honsupply_web/html:/usr/share/nginx/html
+
+端口映射：8000:80
+
+* 注 前端打包文件放在/data/deploy_honsupply_web/html目录下
+
+3、启动nginx
+~~~
+docker run -d -p 8999:80 -v /data/web/html:/usr/share/nginx/html --name nginx8999 --restart always nginx
+~~~
+
 ### Docker容器内部无法访问宿主机网络(No Route to host)
 
 * 关闭防火墙(局域网内推荐)
