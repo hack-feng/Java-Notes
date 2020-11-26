@@ -1,12 +1,12 @@
 ### 设置密码
 ~~~
 # 设置密码
-CONFIG set requirepass "Hege2213@#$"
+CONFIG set requirepass "123456"
 # 查询密码
 CONFIG get requirepass
 # 密码登录
 AUTH password
-auth HeGe113344.
+auth 123456
 # 访问其他服务上redis。需要在本地装redis客户端
 redis-cli -h ip地址 -p 6379
 ~~~
