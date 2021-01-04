@@ -17,6 +17,9 @@ systemctl restart xxx
 ### 禁用服务
 systemctl disable xxx
 
+### 查看端口号
+netstat -anp |grep 端口号
+
 ### 停止tomcat:在tomcat /bin目录下执行
 sh shutdown.sh
 

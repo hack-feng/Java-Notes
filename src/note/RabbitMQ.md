@@ -13,6 +13,11 @@ yum install erlang
 
 ### 安装完erlang
 
+### Springboot所需依赖
+~~~
+
+~~~
+
 ### 启动
 前端页面：http://localhost:15672
 程序连接：
