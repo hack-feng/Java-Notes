@@ -291,4 +291,17 @@ java -version
 
 
 
+### 查看命令
+uname -a   # 查看linux版本的命令
+
+java -version  # 查看java版本的命令
+
+mysql -V    # 查看mysql版本的命令
+
+redis-server -v  # 查看redis版本的命令
+
+
+
+
+
 

@@ -74,7 +74,7 @@ sudo systemctl restart docker
 
 #### 4、启动docker里面的mysql镜像
 ~~~
-[root@k8s-n1 /]# docker run -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
+[root@k8s-n1 /]# docker run  -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
 
 忽略大小写：--lower_case_table_names=1，如果之前重启过，及得要把/data/mysql/data数据清除（一定要先备份，不然数据会丢失）
@@ -94,7 +94,7 @@ docker ps
 
 如果mysql启动没有成功，查看mysql启动日志
 ~~~
-[root@k8s-n1 mysql/]#  docker logs -f trade_mysql
+[root@k8s-n1 mysql/]#  docker logs -f mysql_8
 ERROR: mysqld failed while attempting to check config
 command was: "mysqld --verbose --help"
 mysqld: Can't read dir of '/etc/mysql/conf.d/' (OS errno 13 - Permission denied)
@@ -118,7 +118,9 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 
 # mysql -u root -p
 
-mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Psy0822@#$';
+mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
+
+Qhsh-0129.R@#$
 ~~~
 
 #### 6、安装成功
@@ -152,7 +154,7 @@ Navicat连接：<br>
 
 #### 4、启动docker里的redis镜像
 ~~~
-[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 8280a2c45ce5
+[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 191c4017dcdd
 ~~~
 
 参数说明：<br>
@@ -162,8 +164,10 @@ Navicat连接：<br>
 
 如果启动redis后面需要加参数 使用以下命令：
 ~~~
-[root@k8s-n1 /]# docker run -itd --name redis_test -p 6379:6379 8280a2c45ce5 redis-server --bind 0.0.0.0 --requirepass 123456 --protected-mode no --daemonize no --appendonly yes
+[root@k8s-n1 /]# docker run -itd --name redis4.0 -p 6379:6379 191c4017dcdd redis-server --bind 0.0.0.0 --requirepass test001 --protected-mode no --daemonize no --appendonly yes
 ~~~
+
+docker run -d --name trade_test -p 8997:8997 -it --network msnetwork --network-alias mstrade 
 redis-server后面的代表使用以下参数配置，支持映射配置文件<br>
 redis-server --bind 0.0.0.0 --protected-mode no --daemonize no --appendonly yes
 
@@ -263,9 +267,15 @@ docker pull nginx:版本号, 拉取指定版本nginx或docker pull nginx,拉取�
 
 3、启动nginx
 ~~~
-docker run -d -p 8999:80 -v /data/web/html:/usr/share/nginx/html --name nginx8999 --restart always nginx
+docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html --name nginx8998 --restart always f6d0b4767a6c
 ~~~
 
+
+~~~
+
+docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf.d:/etc/nginx/conf.d --name nginx8998 --restart always f6d0b4767a6c
+
+~~~
 ### Docker容器内部无法访问宿主机网络(No Route to host)
 
 * 关闭防火墙(局域网内推荐)
@@ -344,9 +354,12 @@ docker build -t quote:1.0.0 .
 
 #### docker 启动镜像
 ~~~
-docker run -d --name trade_test -p 9002:9001 imageId
+docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
 ~~~
 
+
+
+docker run -d --name trade_test -p 8997:8997 -it --network ms-network --network-alias mstrade 
 
 ### docker删除
 ~~~

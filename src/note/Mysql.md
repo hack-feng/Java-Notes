@@ -220,3 +220,12 @@ docker run -p 3306:3306  --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v
 
 
 https://www.cnblogs.com/pekkle/p/12190229.html
+
+
+### linux安装mysql 8.0
+
+~~~
+
+wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.20-linux-glibc2.12-x86_64.tar.xz
+
+~~~
