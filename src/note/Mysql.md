@@ -282,3 +282,22 @@ crontab -e
 ~~~
 tail -f /var/log/cron
 ~~~
+
+### docker 下配置Mysql主从复制
+docker下安装mysql 8.0.15
+~~~
+docker pull mysql:8.0.15
+~~~
+
+启动mysql-master，当作主库
+~~~
+docker run  -p 3320:3306 --name mysql_master -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
+~~~
+
+
+启动mysql-slave，当作主库
+~~~
+docker run  -p 3321:3306 --name mysql_slave -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
+~~~
+
+
