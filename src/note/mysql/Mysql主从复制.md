@@ -73,7 +73,7 @@ ALTER USER 'slave'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
 ~~~
 GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'slave'@'%';
 ~~~
-![创建用户图片](./images/mysql/mysql-master-1.jpg)
+![创建用户图片](../images/mysql/mysql-master-1.jpg)
 
 ## 配置Slave(从)
 和配置Master(主)一样，在Slave配置文件my.cnf中添加如下配置：
@@ -93,18 +93,18 @@ relay_log=edu-mysql-relay-bin
 
 在Master进入mysql，执行`show master status;`
 
-![笑小枫专属图片](./images/mysql/mysql-master-2.jpg)
+![笑小枫专属图片](../images/mysql/mysql-master-2.jpg)
 
 File和Position字段的值后面将会用到，在后面的操作完成之前，需要保证Master库不能做任何操作，否则将会引起状态变化，File和Position字段的值变化。
 
 在Slave 中进入 mysql，执行
 ~~~
-change master to master_host='172.17.0.8', master_user='slave', master_password='test001', master_port=3306, master_log_file='mysql-bin.000002', master_log_pos= 994, master_connect_retry=30;
+change master to master_host='172.17.0.8', master_user='slave', master_password='test001', master_port=3306, master_log_file='mysql-bin.000002', master_log_pos=994, master_connect_retry=30;
 ~~~
 
 * 命令说明
 
-![笑小枫专属图片](./images/mysql/mysql-2.jpg)
+![笑小枫专属图片](../images/mysql/mysql-2.jpg)
 
     master_host ：Master的地址，指的是容器的独立ip,可以通过docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器名称|容器id查询容器的ip
 
@@ -122,20 +122,21 @@ change master to master_host='172.17.0.8', master_user='slave', master_password=
 
 在Slave 中的mysql终端执行`show slave status \G;`用于查看主从同步状态。
 
-![笑小枫专属图片](./images/mysql/mysql-slave-1.jpg)
+![笑小枫专属图片](../images/mysql/mysql-slave-1.jpg)
 
 * Slave_IO_Running：负责从库去主库读取二进制日志，并写入到从库的中继日志
 * Slave_SQL_Running：负责将中继日志转换成SQL语句后执行
 
-正常情况下，SlaveIORunning 和 SlaveSQLRunning 都是No，因为我们还没有开启主从复制过程。使用`start slave;`开启主从复制过程，然后再次查询主从同步状态`show slave status \G;`。
+正常情况下，SlaveIORunning 和 SlaveSQLRunning 都是No，因为我们还没有开启主从复制过程。
+使用`start slave;`开启主从复制过程，然后再次查询主从同步状态`show slave status \G;`。
 
-![笑小枫专属图片](./images/mysql/mysql-slave-3.jpg)
+![笑小枫专属图片](../images/mysql/mysql-slave-3.jpg)
 
 SlaveIORunning 和 SlaveSQLRunning 都是Yes，说明主从复制已经开启。此时可以测试数据同步是否成功。
 
 ## 主从复制排错
 
-![笑小枫专属图片](./images/mysql/mysql-slave-2.jpg)
+![笑小枫专属图片](../images/mysql/mysql-slave-2.jpg)
 
 使用start slave开启主从复制过程后，如果SlaveIORunning一直是Connecting，则说明主从复制一直处于连接状态，这种情况一般是下面几种原因造成的，我们可以根据 Last_IO_Error提示予以排除。
 
@@ -155,4 +156,4 @@ SlaveIORunning 和 SlaveSQLRunning 都是Yes，说明主从复制已经开启。
 
 在主库（master）创建test数据库，并添加test表，然后可以看到从库中也出现了对应的数据库和表
 
-![笑小枫专属图片](./images/mysql/mysql-master-3.jpg)
+![笑小枫专属图片](../images/mysql/mysql-master-3.jpg)
