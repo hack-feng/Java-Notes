@@ -120,7 +120,6 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
 
-Qhsh-0129.R@#$
 ~~~
 
 #### 6、安装成功
