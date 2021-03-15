@@ -216,8 +216,6 @@ lower_case_table_names=1
 docker run -p 3306:3306  --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd --lower_case_table_names=1
 ~~~
 
-https://www.cnblogs.com/pekkle/p/12190229.html
-
 ### linux安装mysql 8.0
 
 ~~~
