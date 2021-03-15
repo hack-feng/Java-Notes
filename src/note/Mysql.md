@@ -230,4 +230,13 @@ wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.20-linux-glibc2.12-
 ### Mysql数据库自动备份
 [Mysql数据库自动备份](mysql/Mysql数据库自动备份.md)
 
+### 修改数据库用户密码
+ 
+~~~sql
+-- 创建数据库用户
+CREATE USER 'test'@'%' IDENTIFIED BY 'test123';
+
+-- 授权数据库的操作权限
+GRANT ALL ON database.* TO 'test'@'%';
+~~~
 
