@@ -32,6 +32,9 @@ crontab -e
 编辑定时任务，这里每分钟执行一次，编辑完保存即可
 ~~~
 * * * * * /bin/sh /test/mysql_dump.sh
+
+
+0 22 * * * /bin/sh /app/qhshdb/trade/mysql_dump.sh
 ~~~
 
 定时任务的执行最小单位为分钟，详情代表如下：
