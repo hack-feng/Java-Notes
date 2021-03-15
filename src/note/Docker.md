@@ -290,6 +290,11 @@ firewall-cmd --zone=public --add-port=7001/tcp --permanent
 firewall-cmd --reload
 ~~~
 
+### 修改docker已启动的程序开机自启动
+~~~
+docker update mysql8.0 --restart=always
+~~~
+
 ### Docker启动报错 : iptables failed
 
 #### 错误信息
@@ -400,3 +405,17 @@ docker cp /root/test.txt ecef8319d2c8:/root/
 ~~~
 
 该命令的意思是将当前操作系统（Linux）家目录（root）下的文件test.txt拷贝到容器id为ecef8319d2c8的家目录（root）文件夹下。如果是win系统的话请替换为win下的合法路径（例如：D:/test.txt）。
+
+### 将docker操作授权给普通用户
+~~~
+# 创建docker组
+groupadd docker
+
+# 将test1用户加入docker组
+gpasswd -a test1 docker
+
+# 更新用户组
+newgrp docker
+~~~
+
+重启docker服务，然后使用test1用户就可以操作docker了
