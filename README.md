@@ -1,11 +1,61 @@
-# JAVA NOTES
+# MAPLE NOTES
 
+## JAVA日常笔记
 
-SpringCloud文档：[/src/note/SpringCloud/SpringCloud.md](src/note/SpringCloud/SpringCloud.md)
+### 日常开发常用命令
+
+Java文档：[/src/note/Java.md](src/note/Java.md)
+
+SpringBoot文档：[/src/note/Redis.md](src/note/SpringBoot.md)
+
+Docker文档：[/src/note/Docker.md](src/note/Docker.md)
+
+Git文档：[/src/note/Git.md](src/note/Git.md)
+
+Linux文档：[/src/note/Linux.md](src/note/Linux.md)
+
+Mysql文档：[/src/note/Mysql.md](src/note/Mysql.md)
+
+Nginx文档：[/src/note/Nginx.md](src/note/Nginx.md)
+
+Redis文档：[/src/note/Redis.md](src/note/Redis.md)
+
+Swagger2文档：[/src/note/Swagger2.md](src/note/Swagger.md)
+
+Weblogic文档：[/src/note/Weblogic.md](src/note/Weblogic.md)
+
+WebSocket文档：[/src/note/WebSocket.md](src/note/WebSocket.md)
+
+### SpringCloud系列
+
+SpringCloud文档：[/src/note/SpringCloud/探秘SpringCloud系列.md](/src/note/SpringCloud/探秘SpringCloud系列.md)
 
 SpringCloud文档对应的源码：[https://github.com/hack-feng/Spring-Cloud-Edgware](https://github.com/hack-feng/Spring-Cloud-Edgware)
 
-## 树型结构
+### SpringBoot常用工具类
+
+文件与base64字符串互转[/src/note/SpringBootTool/Base64AndFile.md](src/note/SpringBootTool/Base64AndFile.md)
+
+Excel导出工具类[/src/note/SpringBootTool/ExportExcelUtil.md](src/note/SpringBootTool/ExportExcelUtil.md)
+
+Word导出工具类[/src/note/SpringBootTool/ExportWordUtil.md](src/note/SpringBootTool/ExportWordUtil.md)
+
+Java压缩文件工具类[/src/note/SpringBootTool/ZipUtils.md](src/note/SpringBootTool/ZipUtils.md)
+
+SpringBoot集成Redis[/src/note/SpringBootTool/RedisUtil.md](src/note/SpringBootTool/RedisUtil.md)
+
+转换大写人民币工具类[/src/note/SpringBootTool/MoneyUtil.md](src/note/SpringBootTool/MoneyUtil.md)
+
+## 面试系列
+
+## 文档系列
+
+阿里巴巴JAVA开发规范：[/src/note/sofeware/Java-huashanxinban.pdf](src/note/sofeware/Java-huashanxinban.pdf)
+
+
+## 算法系列
+
+### 树型结构
 
 二叉搜索树：[/src/algorithm/tree/BinarySearchTree.java](src/algorithm/tree/BinarySearchTree.java)
 
@@ -14,11 +64,11 @@ SpringCloud文档对应的源码：[https://github.com/hack-feng/Spring-Cloud-Ed
 红黑树：[/src/algorithm/tree/RedBlackTree.java](src/algorithm/tree/RedBlackTree.java)
 
 
-## 查找算法
+### 查找算法
 
 二分查找：[/src/algorithm/search/BinarySearch.java](src/algorithm/search/BinarySearch.java)
 
-## 排序算法
+### 排序算法
 
 冒泡排序：[/src/algorithm/sort/BubbleSort.java](src/algorithm/sort/BubbleSort.java)
 
