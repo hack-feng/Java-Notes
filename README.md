@@ -1,5 +1,7 @@
 # MAPLE NOTES
 
+路过的小伙伴们，大家好，我是笑小枫，专注于JAVA开发
+
 ## JAVA日常笔记
 
 ### 日常开发常用命令
@@ -46,12 +48,19 @@ SpringBoot集成Redis[/src/note/SpringBootTool/RedisUtil.md](src/note/SpringBoot
 
 转换大写人民币工具类[/src/note/SpringBootTool/MoneyUtil.md](src/note/SpringBootTool/MoneyUtil.md)
 
-## 面试系列
+## 资源
+
+【注意】数据不会随着变更及时更新，如有发现变更联系我[1150640979@qq.com]，谢谢大家的支持
+
+世界国家SQL：[/src/data/sys_country.sql](src/data/sys_country.sql)
+
+中国省市区SQL：[/src/data/sys_region.sql](src/data/sys_region.sql)
 
 ## 文档系列
 
 阿里巴巴JAVA开发规范：[/src/note/sofeware/Java-huashanxinban.pdf](src/note/sofeware/Java-huashanxinban.pdf)
 
+## 面试系列
 
 ## 算法系列
 

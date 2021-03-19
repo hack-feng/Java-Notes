@@ -1,9 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 192.168.2.21
 Source Server Version : 50722
-Source Host           : 192.168.2.21:3306
 Source Database       : sale
 
 Target Server Type    : MYSQL

@@ -1,11 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 121.89.188.211
 Source Server Version : 80015
-Source Host           : 121.89.188.211:3306
-Source Database       : quote_new
-
 Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
