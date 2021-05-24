@@ -405,4 +405,13 @@ Set<String> staffsSet = new HashSet<>(Arrays.asList(staffs));
 List<String> result = new ArrayList<>(staffsSet);
 ~~~
 
+~~~
+<mirror>
+            <id>alimaven</id>
+            <mirrorOf>central</mirrorOf>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+	</mirror> 
+~~~
+
 

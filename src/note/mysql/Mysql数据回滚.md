@@ -62,7 +62,9 @@ mysql> show variables like 'log_bin';
 | log_bin       | ON    |
 +---------------+-------+
 1 row in set (0.00 sec)
-~~~~
+~~~
+
+
 
 
 

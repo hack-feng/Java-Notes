@@ -195,8 +195,17 @@ permanent: 返回301永久重定向，地址栏会显示跳转后的地址
 docker run -d -p 9000:80 -v /data/deploy_yjwl/web:/usr/share/nginx/html --name nginxyjwl --restart always nginx
 ~~~
 
+### nginx 配置vue使用history模式
+在location里面添加
 
+`try_files $uri $uri/ /index.html;`
 
-
-
-docker run -d -p 8889:80 -v /hege/web:/usr/share/nginx/html --name nginx --restart always nginx
+详细如下所示
+~~~
+location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    # 配置vue的history模式
+    try_files $uri $uri/ /index.html;
+}
+~~~

@@ -127,3 +127,27 @@ $ git pull origin master                # 下载远程代码
 $ git merge master                      # 合并master分支
 $ git push -u origin master             # 上传代码
 ~~~
+
+### GitLab安装使用
+
+#### 配置yum源
+
+~~~
+vim /etc/yum.repos.d/gitlab-ce.repo
+~~~
+
+将以下内容复制到上述打开的文件中`/etc/yum.repos.d/gitlab-ce.repo`
+~~~
+[gitlab-ce]
+name=Gitlab CE Repository
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el$releasever/
+gpgcheck=0
+enabled=1
+~~~
+
+#### 更新本地yum缓存
+~~~
+yum makecache
+~~~
+
+#### 安装GitLab社区版
