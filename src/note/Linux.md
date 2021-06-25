@@ -249,6 +249,24 @@ rm -rf ./test_chk_ln/ (这样就会把原来test_chk下的内容删除)
 
 ### 删除挖矿程序
 
+查看通过top命令看不到的cup占用进程
+~~~
+ps aux --sort=-pcpu | head -10
+~~~
+
+查看进程所在的目录
+~~~
+ls -l /proc/30534/exe
+~~~
+
+查看线程监听情况
+~~~
+netstat -ltnp
+~~~
+
+
+
+
 ### Linux文件传输
 ~~~
 scp local_file user@ip:remote_folder
