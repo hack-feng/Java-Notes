@@ -59,6 +59,36 @@ class Maple{
 }
 ~~~
 
+### 常见创建对象的几种方式
+1. new一个对象
+~~~
+Employee emp = new Employee();
+~~~
+
+2. 反射机制 class.newInstance();
+~~~
+Employee emp2 = (Employee) Class.forName("com.test.Employee").newInstance();
+or
+Employee emp3 = Employee.class.newInstance();
+~~~
+
+3. 使用Constructor类的newInstance方法
+~~~
+Constructor<Employee> constructor = Employee.class.getConstructor();
+Employee emp3 = constructor.newInstance();
+~~~
+
+4. 使用clone方法
+~~~
+Employee emp4 = (Employee) emp3.clone();
+~~~
+
+5. 使用反序列化
+~~~
+ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"));
+Employee emp5 = (Employee) in.readObject();
+~~~
+
 ### String、StringBuilder、StringBuffer的区别？
 * String:
 
