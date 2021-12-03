@@ -2,7 +2,6 @@
 
 
 ### 常用
-
 ~~~
 $ git remote add origin git@github.com:yeszao/dofiler.git         # 配置远程git版本库
 $ git pull origin master                                          # 下载代码及快速合并 
