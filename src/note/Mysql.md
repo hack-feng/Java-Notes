@@ -28,30 +28,30 @@ mysql8.0:
 ~~~
 
 ### 执行sql文件报`Data too long for column`错误
-在sql文件的头上添加`/*!40101 SET NAMES utf8 */;
+在sql文件的头上添加`/*!40101 SET NAMES utf8 */`;
 
 ### 解决this is incompatible with sql_mode=only_full_group_by问题
 
 ~~~
-       一、原理层面
+   一、原理层面
 
-       这个错误发生在mysql 5.7 版本及以上版本会出现的问题：
+   这个错误发生在mysql 5.7 版本及以上版本会出现的问题：
 
-       mysql 5.7版本默认的sql配置是:sql_mode="ONLY_FULL_GROUP_BY"，这个配置严格执行了"SQL92标准"。
+   mysql 5.7版本默认的sql配置是:sql_mode="ONLY_FULL_GROUP_BY"，这个配置严格执行了"SQL92标准"。
 
-       很多从5.6升级到5.7时，为了语法兼容，大部分都会选择调整sql_mode，使其保持跟5.6一致，为了尽量兼容程序。
+   很多从5.6升级到5.7时，为了语法兼容，大部分都会选择调整sql_mode，使其保持跟5.6一致，为了尽量兼容程序。
 
-        
+   
 
-        二、sql层面
+    二、sql层面
 
-        在sql执行时，出现该原因：
+    在sql执行时，出现该原因：
 
-        简单来说就是：输出的结果是叫target list，就是select后面跟着的字段，还有一个地方group by column，就是
+    简单来说就是：输出的结果是叫target list，就是select后面跟着的字段，还有一个地方group by column，就是
 
-        group by后面跟着的字段。由于开启了ONLY_FULL_GROUP_BY的设置，所以如果一个字段没有在target list 
+    group by后面跟着的字段。由于开启了ONLY_FULL_GROUP_BY的设置，所以如果一个字段没有在target list
 
-        和group by字段中同时出现，或者是聚合函数的值的话，那么这条sql查询是被mysql认为非法的，会报错误。
+    和group by字段中同时出现，或者是聚合函数的值的话，那么这条sql查询是被mysql认为非法的，会报错误。
 ~~~
 
 > #### 一、查看sql_mode的语句如下
@@ -180,7 +180,7 @@ ALTER USER USER() IDENTIFIED BY '123456';
 
 ### Host is not allowed to connect to this MySQL server解决方法
 
-先说说这个错误，其实就是我们的MySQL不允许远程登录，所以远程登录失败了，解决方法如下：
+先说说这个错误，其实就是我们的MySQL不允许远程登录，默认host是localhost登录，所以远程登录失败了，所以把host改为‘%’，所有的地址都可以远程登录了，解决方法如下：
 
 1. 在装有MySQL的机器上登录MySQL mysql -u root -p密码
 2. 执行use mysql;
@@ -238,3 +238,53 @@ CREATE USER 'test'@'%' IDENTIFIED BY 'test123';
 GRANT ALL ON database.* TO 'test'@'%';
 ~~~
 
+
+### mysql下的“group_concat_max_len"参数设置
+当遇到表关系是一对多的情况，例如一篇文章（article）有多个标签（label）时，当列表查询文章时，并要展示文章对应的标签。对应sql如下：
+~~~sql
+select 
+       t1.id, t1.title, GROUP_CONCAT(t2.`name`) 
+from article t1 
+    LEFT JOIN label t2 on t1.id = t2.article_id 
+GROUP BY t1.id 
+~~~
+当标签的数量不多时，没有什么问题，当文章的标签没有限制，出现很多时，会莫名其妙被截掉后面的标签。
+因为mysql下的`GROUP_CONCAT`函数默认的长度为1024/1KB，当拼接的长度超过1024时，会自动截取掉后面的数据。
+
+#### 如何查询group_concat的长度
+~~~
+mysql> show variables like "group_concat%";
+
++--------------------------+------------+
+| Variable_name            | Value      |
++--------------------------+------------+
+| group_concat_max_len     | 1024       |
++--------------------------+------------+
+~~~
+
+#### 修改方法
+
+1. 修改配置文件
+   
+   可以编辑my.cnf来修改（windows下my.ini）,在[mysqld]段或者mysql的server配置段进行修改。可以编辑my.cnf来修改（windows下my.ini）,在[mysqld]段或者mysql的server配置段进行修改。
+   
+代码如下:
+~~~
+group_concat_max_len = 102400
+~~~
+
+如果找不到my.cnf可以通过
+代码如下:
+~~~
+mysql --help | grep my.cnf
+~~~
+
+linux下该文件在/etc/下。
+
+2. 直接通过sql语句修改
+~~~
+SET GLOBAL group_concat_max_len = 102400;
+SET SESSION group_concat_max_len = 102400;
+~~~
+
+注意：该方法缺点是重启服务后设置失效

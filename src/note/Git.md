@@ -2,6 +2,7 @@
 
 
 ### 常用
+
 ~~~
 $ git remote add origin git@github.com:yeszao/dofiler.git         # 配置远程git版本库
 $ git pull origin master                                          # 下载代码及快速合并 
@@ -12,7 +13,8 @@ $ git branch                                                      # 显示所有
 $ git checkout master                                             # 切换到master分支
 $ git checkout -b dev                                             # 创建并切换到dev分支
 $ git commit -m "first version"                                   # 提交
-
+$ git branch -u 远程分支 本地分支                                    # 将本地dev和远程仓库的origin/dev连接起来
+$ git branch -u origin/dev dev                                    # 将本地dev和远程仓库的origin/dev连接起来
 $ git status                                                      # 查看状态
 $ git log                                                         # 查看提交历史
 
@@ -68,6 +70,25 @@ $ git reset --hard <version>      # 撤销到某个特定版本
 $ git checkout HEAD <file>        # 撤消指定的未提交文件的修改内容
 $ git checkout -- <file>          # 同上一个命令
 $ git revert <commit>             # 撤消指定的提交
+~~~
+
+### 撤销commit
+~~~
+git reset --soft HEAD~1
+
+## 如果进行了2次commit，想都撤回，可以使用：
+git reset --soft HEAD~2
+
+## ... 以此类推
+~~~
+
+### 撤销add
+~~~
+## 全部撤销
+git reset HEAD
+
+## 指定文件撤销 git reset HEAD <file>，文件名可通过git status命令获取。
+git reset HEAD src/main/java/wang/leisure/gitpractice/FirstClass.java
 ~~~
 
 ### 分支与标签
@@ -127,3 +148,36 @@ $ git pull origin master                # 下载远程代码
 $ git merge master                      # 合并master分支
 $ git push -u origin master             # 上传代码
 ~~~
+
+### GitLab安装使用
+
+#### 配置yum源
+
+~~~
+vim /etc/yum.repos.d/gitlab-ce.repo
+~~~
+
+将以下内容复制到上述打开的文件中`/etc/yum.repos.d/gitlab-ce.repo`
+~~~
+[gitlab-ce]
+name=Gitlab CE Repository
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el$releasever/
+gpgcheck=0
+enabled=1
+~~~
+
+#### 更新本地yum缓存
+~~~
+yum makecache
+~~~
+
+#### 安装GitLab社区版
+
+
+
+
+
+> 恭喜你发现了一只迷路的笑小枫，一键三连支持一下吧。<br>
+> 本文到此结束了，谢谢您的的支持，有问题请留言。<br>
+> CSDN：https://zhangfz.blog.csdn.net <br>
+> Github文档：https://github.com/hack-feng/Java-Notes <br>

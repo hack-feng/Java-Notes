@@ -119,7 +119,6 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 # mysql -u root -p
 
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
-
 ~~~
 
 #### 6、安装成功
@@ -269,11 +268,8 @@ docker pull nginx:版本号, 拉取指定版本nginx或docker pull nginx,拉取�
 docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html --name nginx8998 --restart always f6d0b4767a6c
 ~~~
 
-
 ~~~
-
 docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf.d:/etc/nginx/conf.d --name nginx8998 --restart always f6d0b4767a6c
-
 ~~~
 ### Docker容器内部无法访问宿主机网络(No Route to host)
 
