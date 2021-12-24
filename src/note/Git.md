@@ -81,6 +81,9 @@ git reset --soft HEAD~2
 ## ... 以此类推
 ~~~
 
+git config --unset http.proxy
+git config --unset https.proxy
+
 ### 撤销add
 ~~~
 ## 全部撤销

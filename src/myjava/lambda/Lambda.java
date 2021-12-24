@@ -80,6 +80,8 @@ public class Lambda {
                 System.out.println("age的值为3的id是：" + k);
             }
         });
+        
+        List<Integer> ids = userList.stream().map(User::getId).collect(Collectors.toList());
 
         System.out.println("取数据的最大值和最小值-------------------------------------------------------");
         Integer maxId = userList.stream().map(User::getId).max(Integer::compareTo).get();

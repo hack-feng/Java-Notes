@@ -326,11 +326,9 @@ public class ExportExcelUtil {
                         horizontalNum = i;
                         horizontalValue = excel.getHeaders().get(i);
                         // 当前为最后一列，开启合并
-                    }else if(i == excel.getHeaders().size() - 1){
-                        if(i - horizontalNum >= 1){
-                            CellRangeAddress cra = new CellRangeAddress(listCount, listCount, horizontalNum, i);
-                            sheet.addMergedRegion(cra);
-                        }
+                    }else if(i == excel.getHeaders().size() - 1 && i - horizontalNum >= 1){
+                        CellRangeAddress cra = new CellRangeAddress(listCount, listCount, horizontalNum, i);
+                        sheet.addMergedRegion(cra);
                     }
                 }
             }else{
@@ -378,7 +376,11 @@ public class ExportExcelUtil {
                     }else{
                         cell.setCellStyle(titleStyleTwo);
                     }
-                    cell.setCellValue(obj.get(excel.getKeys().get(j)) + "");
+                    if (obj.get(table.getKeys().get(j)) == null) {
+                        cell.setCellValue("");
+                    } else {
+                        cell.setCellValue(obj.get(table.getKeys().get(j)) + "");
+                    }
 
                     // 纵向合并数据
                     if(excel.getVerticalMergerColumnHeaders() != null
@@ -396,11 +398,9 @@ public class ExportExcelUtil {
                                 verticalNum[j] = line;
                                 verticalValue[j] = obj.get(excel.getKeys().get(j));
                                 // 当前为最后一列，开启合并
-                            }else if(i == excel.getDataList().size() - 1){
-                                if(line - verticalNum[j] >= 1){
-                                    CellRangeAddress cra = new CellRangeAddress(verticalNum[j], line, j, j);
-                                    sheet.addMergedRegion(cra);
-                                }
+                            }else if(i == excel.getDataList().size() - 1 && line - verticalNum[j] >= 1){
+                                CellRangeAddress cra = new CellRangeAddress(verticalNum[j], line, j, j);
+                                sheet.addMergedRegion(cra);
                             }
                         }
                     }else{
