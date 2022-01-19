@@ -1,4 +1,3 @@
-
 ## 环境配置
 
 * JDK8
@@ -75,7 +74,7 @@ http://127.0.0.1:8848/nacos/index.html#/login
 
 ![笑小枫](./images/nacos/01/nacos-7.png)
 
-用户名：nacos  密码：nacos
+用户名：nacos 密码：nacos
 
 登录后可以以下页面（新建的应该是空的，我的这个进行过一些配置）
 
@@ -103,6 +102,7 @@ http://127.0.0.1:8848/nacos/index.html#/login
 ![笑小枫](./images/nacos/01/nacos-14.png)
 
 在pom.xml中引入依赖，注意，和alibaba Cloud的引入方式不同，这里只是单服务的SpringBoot项目
+
 ~~~
 <dependency>
     <groupId>com.alibaba.boot</groupId>
@@ -112,12 +112,15 @@ http://127.0.0.1:8848/nacos/index.html#/login
 ~~~
 
 ### 简单点的配置(不推荐)
+
 在application.java的启动项上添加注解
+
 ~~~
 @NacosPropertySource(dataId = "maple-admin", autoRefreshed = true)
 ~~~
 
 在application.properties配置文件添加配置
+
 ~~~
 spring.application.name=maple-admin
 server.port=8888
@@ -126,6 +129,7 @@ nacos.config.namespace=dev
 ~~~
 
 编写测试类
+
 ~~~java
 
 import lombok.RequiredArgsConstructor;
@@ -158,6 +162,7 @@ public class DemoController {
 ### 详细的配置（推荐）
 
 调整application.properties配置文件为application.yml(非必须操作，只是我比较喜欢用yml格式，可以忽略哈)
+
 ~~~yml
 server:
   port: 8888
@@ -199,6 +204,12 @@ nacos:
 ![笑小枫](./images/nacos/01/nacos-13.png)
 
 测试的方式同上，注意不同的namespace和data-ids
+
+如果需要实时的刷新配置，可以使用`@NacosValue`注解，设置autoRefreshed=true，默认false
+
+~~~
+@NacosValue(value = "${test:bbb}",autoRefreshed = true)
+~~~
 
 ## 写在最后
 
