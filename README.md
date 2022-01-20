@@ -2,6 +2,12 @@
 
 路过的小伙伴们，大家好，我是笑小枫，专注于JAVA开发
 
+大家可以关注我的微信公众号，以后有文章第一时间推送哟，扫码关注不吃亏
+
+![CSDN-笑小枫](src/images/xiaoxiaofeng.jpg)
+
+我的csdn博客：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net) 
+
 ## JAVA日常笔记
 
 ### 日常开发常用命令
