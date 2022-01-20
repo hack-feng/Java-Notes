@@ -23,6 +23,27 @@ HttpClient 提供的主要的功能
 6. 调用 HttpResponse 的 getAllHeaders()、getHeaders(String name) 等方法可获取服务器的响应头；调用 HttpResponse 的 getEntity() 方法可获取 HttpEntity 对象，该对象包装了服务器的响应内容。程序可通过该对象获取服务器的响应内容。
 7. 释放连接。无论执行方法是否成功，都必须释放连接
 
+## 简单的HttpClient使用示例
+~~~
+@Test
+public void TestGet() throws IOException {
+
+    String urlTest = "https://zhangfz.blog.csdn.net/article/details/122591052";
+    // 1.创建httpclient
+    CloseableHttpClient httpclient = HttpClients.createDefault();
+    //2. 创建HttpGet
+    HttpGet httpGetTest1 = new HttpGet(urlTest);
+    // 3. 请求执行，获取响应
+    CloseableHttpResponse response =  httpclient.execute(httpGetTest1);
+    System.out.println(response);
+    // 4.获取响应实体
+    HttpEntity entityTest = response.getEntity();
+    System.out.println(EntityUtils.toString(entityTest,"utf-8"));
+    response.close();
+    httpclient.close();
+}
+~~~
+
 详细的操作请看下下面的工具类和测试代码
 
 ## HttpClientUtil工具类
