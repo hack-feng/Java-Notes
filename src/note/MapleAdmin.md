@@ -809,7 +809,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("用户服务接口开发文档")
                 //创建人
-                .contact(new Contact("zhangfz", "", "zhangfz@hegeit.com"))
+                .contact(new Contact("笑小枫", "", "1150640979@qq.com"))
                 .description("用户服务接口开发文档")
                 .version("1.0")
                 .build();

@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 模拟大量用户去酒馆消费
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-15 19:39
  */
 @RestController
@@ -116,7 +116,7 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-16 10:32
  */
 @Configuration
@@ -160,7 +160,7 @@ import java.util.Map;
 
 /**
  * 模拟大量用户去酒馆消费
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-15 19:39
  */
 @RestController

@@ -1,7 +1,7 @@
 package algorithm.快慢指针;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/4/30 10:59
  **/
 public class leet_code_202_快乐数 {

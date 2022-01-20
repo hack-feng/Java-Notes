@@ -53,7 +53,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/9/4 16:33
  **/
 @Configuration
@@ -358,7 +358,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/9/4 16:33
  **/
 @Configuration
@@ -416,7 +416,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Redis监听key过期
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/10/31 10:41
  **/
 @Slf4j

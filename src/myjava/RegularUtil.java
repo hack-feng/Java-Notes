@@ -3,7 +3,7 @@ package myjava;
 /**
  * 通用的正则校验
  *
- * @author zhangfuzeng
+ * @author 笑小枫
  * @date 2021/11/19
  */
 public class RegularUtil {

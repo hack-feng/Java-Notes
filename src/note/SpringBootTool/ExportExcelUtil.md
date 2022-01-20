@@ -40,7 +40,7 @@ import java.util.Map;
 
 /**
  * 导出excel的bean定义
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2019/12/10 10:55
  **/
 @Data
@@ -125,7 +125,7 @@ import java.awt.*;
 
 /**
  * 定义导出excel的样式主题
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/5/7 18:01
  **/
 @AllArgsConstructor
@@ -218,7 +218,7 @@ import java.util.Map;
  * 支持sheet页数据加密，通过配置ExportExcelBean下的protectSheet实现
  * 支持自动生成数据的序号
  *
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2019/12/9 17:36
  **/
 public class ExportExcelUtil {
@@ -528,7 +528,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/5/7 13:52
  **/
 @RestController
@@ -657,7 +657,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/5/8 15:24
  **/
 public class ExportExcelTitle {

@@ -24,7 +24,7 @@ package algorithm;
  * 如果有，则访问此顶点，之后再从此顶点出发，进行与前述类似的访问；如果没有，就再退回一步进行搜索。
  * 重复上述过程，直到连通图中所有顶点都被访问过为止。
  *
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-4-20 10:23
  */
 public class DFS {

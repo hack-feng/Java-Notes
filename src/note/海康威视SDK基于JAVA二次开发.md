@@ -58,7 +58,7 @@ import java.util.Date;
 import java.util.Timer;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/4/20 20:23
  **/
 public class VideoDowload {
@@ -173,7 +173,7 @@ Dvr类：
 import lombok.Data;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020/4/21 9:32
  **/
 @Data

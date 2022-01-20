@@ -15,7 +15,7 @@ package algorithm;
  * 3. 若队列为空，表示整张图都检查过了——亦即图中没有欲搜寻的目标。结束搜寻并回传"找不到目标"。
  * 4. 重复步骤2。
  *
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-4-20 10:23
  */
 public class BFS {

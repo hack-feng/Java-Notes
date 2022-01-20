@@ -135,7 +135,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 用户去酒馆消费Controller
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-14 17:24
  */
 @RestController
@@ -183,7 +183,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-14 17:38
  */
 @FeignClient(name = "pub-service")
@@ -214,7 +214,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 酒馆服务用户Controller
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-14 17:26
  */
 @RestController
@@ -264,7 +264,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * @date 2020-1-14 17:37
  */
 @FeignClient(name = "user-service")
