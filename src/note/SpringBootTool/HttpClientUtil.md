@@ -7,7 +7,7 @@ Web服务，支持网络的设备和网络计算的发展继续将HTTP协议的�
 HttpClient旨在通过提供一个高效，最新且功能丰富的包来实现这一空白，该包实现了最新HTTP标准和建议的客户端。
 HttpClient专为扩展而设计，同时为基本HTTP协议提供强大支持，HttpClient可能对构建支持HTTP的客户端应用程序（如Web浏览器，Web服务客户端或利用或扩展HTTP协议进行分布式通信的系统）感兴趣。
 
-HttpClient 提供的主要的功能
+**HttpClient 提供的主要的功能**
 1. 实现了所有 HTTP 的方法（GET,POST,PUT,DELETE 等）
 2. 支持自动转向
 3. 支持 HTTPS 协议
@@ -24,6 +24,9 @@ HttpClient 提供的主要的功能
 7. 释放连接。无论执行方法是否成功，都必须释放连接
 
 ## 简单的HttpClient使用示例
+
+我们看一个简单的HttpClient使用示例
+
 ~~~
 @Test
 public void TestGet() throws IOException {
@@ -48,11 +51,11 @@ public void TestGet() throws IOException {
 
 ## HttpClientUtil工具类
 
-普通的的请求直接调用`sendGet(String urlStr, List<HttpReqInfo> param)`即可
+普通的请求直接调用`sendGet(String urlStr, List<HttpReqInfo> param)`即可
 
 如果是https请求，需要默认信任ssl证书时，调用`sendGet(CloseableHttpClient httpClient, String urlStr, List<HttpReqInfo> param)`
 
-`CloseableHttpClient httpClient` 传输工具类中的`getSslHttpsClient()`即可
+`CloseableHttpClient httpClient` 参数传工具类中的`getSslHttpsClient()`即可
 
 详细源码如下：
 
@@ -111,7 +114,7 @@ public class HttpClientUtil {
      * 取得连接客户端，默认获取连接，发送，读取为5分钟超时.
      * 跳过ssl证书验证，为全信任
      *
-     * @return 默认连接客户端
+     * @return 跳过ssl证书验证连接客户端
      */
     public static CloseableHttpClient getSslHttpsClient() {
         return getCloseableHttpClient(true);
@@ -288,7 +291,11 @@ public class HttpClientUtil {
      * @return 请求结果
      * @throws IOException 异常
      */
-    public static CloseableHttpResponse sendBodyPostHeaderContextRes(CloseableHttpClient httpClient, String urlStr, String body, List<HttpReqInfo> header, HttpContext httpContext) throws IOException {
+    public static CloseableHttpResponse sendBodyPostHeaderContextRes(CloseableHttpClient httpClient, 
+                                                                     String urlStr, 
+                                                                     String body, 
+                                                                     List<HttpReqInfo> header, 
+                                                                     HttpContext httpContext) throws IOException {
         EntityBuilder eb = EntityBuilder.create().setContentType(ContentType.APPLICATION_JSON).setText(body);
         HttpPost httpPost = new HttpPost(urlStr);
         if (header != null && !header.isEmpty()) {
@@ -432,7 +439,10 @@ public class HttpClientUtil {
      * @param httpContext 请求http上下文
      * @return 请求结果
      */
-    public static String sendDeleteContext(CloseableHttpClient httpClient, String urlStr, List<HttpReqInfo> param, HttpContext httpContext) {
+    public static String sendDeleteContext(CloseableHttpClient httpClient, 
+                                           String urlStr, 
+                                           List<HttpReqInfo> param, 
+                                           HttpContext httpContext) {
         String result = "";
 
         try {
@@ -527,6 +537,8 @@ public class HttpClientUtil {
 ~~~
 
 ## 测试发送请求
+
+这里测试使用的是普通的请求，直接调用`sendGet(String urlStr, List<HttpReqInfo> param)`方法
 
 ~~~java
 package com.xiaoxiaofeng;
