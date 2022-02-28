@@ -1,4 +1,4 @@
-package algorithm.动态规划;
+package algorithm.dp;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @author 笑小枫
  * @date 2020/4/30 14:31
  **/
-public class leet_code_62不同路径 {
+public class leet_code_62 {
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
      *

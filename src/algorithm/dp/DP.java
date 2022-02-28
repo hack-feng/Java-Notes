@@ -1,4 +1,4 @@
-package algorithm.动态规划;
+package algorithm.dp;
 
 /**
  * 动态规划
