@@ -375,7 +375,7 @@ docker rmi imagesId
 
 ### 查看docker容器的内部ip
 ~~~
-docker exec -it containsId /bin/bash
+docker exec -it f3fa4a28609a /bin/bash
 
 cat /etc/hosts
 ~~~
