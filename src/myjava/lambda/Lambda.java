@@ -80,6 +80,12 @@ public class Lambda {
                 System.out.println("age的值为3的id是：" + k);
             }
         });
+
+        // List转String，逗号分隔
+        List<String> strList = Arrays.asList("AA", "BB", "CC");
+        String newStr = strList.stream().collect(Collectors.joining(","));
+        String newStrB = String.join(",", strList);
+        System.out.println("Output:" + newStr + newStrB); 
         
         List<Integer> ids = userList.stream().map(User::getId).collect(Collectors.toList());
 

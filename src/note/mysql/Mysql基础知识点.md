@@ -39,15 +39,51 @@ MySQL、PostgreSQL、Oracle、SQL Server、SQLite（微信本地的聊天记录�
 
 ## Mysql常用sql
 
-### 数据库相关操作
+这里只做最基础的sql操作，后续出一篇详细的sql语句操作。
+
+###  数据库相关操作
 
 ~~~sql
 -- 创建数据库
 CREATE DATABASE <数据库名>;
+
 -- 删除数据库   骚年，要跑路吗？
 drop database <数据库名>;
+
 -- 选择数据库
 use <数据库名>;
+~~~
+
+### 数据表相关操作
+
+~~~sql
+-- 创建表结构
+CREATE TABLE IF NOT EXISTS `sys_config` (
+ `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `config_name` varchar(128) DEFAULT NULL COMMENT '参数名称',
+  `config_key` varchar(64) DEFAULT NULL COMMENT '参数键名',
+  `config_value` varchar(64) DEFAULT NULL COMMENT '参数键值',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统管理-参数配置表';
+
+-- 删除数据表
+DROP TABLE <表名> ;
+~~~
+
+### 数据相关操作
+
+~~~sql
+-- 插入数据
+INSERT INTO `sys_config` (`id`, `config_name`, `config_key`, `config_value`) VALUES ('1', '笑小枫', 'maple', '1');
+
+-- 修改数据
+UPDATE `sys_config` SET `id`='1', `config_name`='笑小枫', `config_key`='maple', `config_value`='2' WHERE (`id`='1');
+
+-- 删除数据
+DELETE FROM `sys_config` WHERE `id`='1';
+
+-- 查询表种所有数据
+SELECT * FROM `sys_config`;
 ~~~
 
 

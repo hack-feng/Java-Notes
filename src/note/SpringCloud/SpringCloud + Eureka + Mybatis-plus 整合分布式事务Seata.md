@@ -310,7 +310,7 @@ windows启动直接双击。
         </dependency>
     <dependencies>
 </dependencyManagement>
-~~~ 
+~~~
 
 #### 2、对应的service需要在resources目录下添加registry.conf和file.conf文件
 文件对应内容如下：
@@ -627,3 +627,4 @@ iqs库：
 > CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
 > Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
 > GitHub源码：https://github.com/hack-feng/Spring-Cloud-Edgware.git <br>
+
