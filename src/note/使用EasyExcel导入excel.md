@@ -1,4 +1,13 @@
-官方文档：https://www.yuque.com/easyexcel/doc/read
+## 功能背景
+
+简单的说下这个功能的背景需求吧，有类似需求的可以复用
+
+* 实现excel导入（废话...）
+* 多个sheet页一起导入
+* 第一个sheet页数据表头信息有两行，但只需根据第二行导入
+* 如果报错，根据不同的sheet页返回多个List记录报错原因
+
+
 
 ## 项目引入依赖
 
@@ -284,9 +293,9 @@ public class ImportExcelController {
                     .head(ExcelCompany.class)
                     .registerReadListener(new ImportExcelListener<ExcelCompany>(data -> {
                         // 处理你的业务逻辑，最好抽出一个方法单独处理逻辑
-                        log.info("公司信息数据--------------------------------------------------------------");
+                        log.info("公司信息数据----------------------------------------------");
                         log.info("公司信息数据：" + JSON.toJSONString(data));
-                        log.info("公司信息数据--------------------------------------------------------------");
+                        log.info("公司信息数据----------------------------------------------");
                     }, companyErrorList))
                     .headRowNumber(2)
                     .build();
@@ -297,9 +306,9 @@ public class ImportExcelController {
                     .head(ExcelContact.class)
                     .registerReadListener(new ImportExcelListener<ExcelContact>(data -> {
                         // 处理你的业务逻辑，最好抽出一个方法单独处理逻辑
-                        log.info("联系人信息数据--------------------------------------------------------------");
+                        log.info("联系人信息数据------------------------------------------");
                         log.info("联系人信息数据：" + JSON.toJSONString(data));
-                        log.info("联系人信息数据--------------------------------------------------------------");
+                        log.info("联系人信息数据------------------------------------------");
                     }, contactErrorList))
                     .build();
 
@@ -350,5 +359,8 @@ postman返回的结果数据如下：
 
 ![image-20220607104903223](http://file.xiaoxiaofeng.site/blog/image/image-20220607104903223.png)
 
+## 写在最后
 
+本文只是用到部分功能，简单的做了一下总结，更多的功能，可以去官网查阅。
 
+官方文档：https://www.yuque.com/easyexcel/doc/read
