@@ -6,6 +6,7 @@
 * 多个sheet页一起导入
 * 第一个sheet页数据表头信息有两行，但只需根据第二行导入
 * 如果报错，根据不同的sheet页返回多个List记录报错原因
+* 数据量稍微有些大（多个sheet页总量50w左右）
 
 
 
@@ -76,6 +77,8 @@ public class CommonExcel {
 ~~~
 
 * 定义经销商信息对象，代码如下：
+
+@ExcelProperty 对用的是excel的标题名称，如果不加@ExcelProperty，默认对应列号
 
 ~~~java
 package manage.model.excel;
@@ -186,7 +189,10 @@ import java.util.function.Consumer;
 @Slf4j
 public class ImportExcelListener<T> implements ReadListener<T> {
 
-    private static final int BATCH_COUNT = 500;
+    /**
+     * 默认一次读取1000条，可根据实际业务和服务器调整
+     */
+    private static final int BATCH_COUNT = 1000;
     /**
      * Temporary storage of data
      */
@@ -206,6 +212,7 @@ public class ImportExcelListener<T> implements ReadListener<T> {
 
     @Override
     public void invoke(T data, AnalysisContext context) {
+        // 记录行号
         if (data instanceof CommonExcel) {
             ReadRowHolder readRowHolder = context.readRowHolder();
             ((CommonExcel) data).setRowIndex(readRowHolder.getRowIndex() + 1);
@@ -252,6 +259,16 @@ public class ImportExcelListener<T> implements ReadListener<T> {
 
 * 编写controller进行测试，代码如下：
 
+~~~
+.readSheet(0)  读取哪个sheet页，默认从0开始
+
+.head(ExcelCompany.class) 对应定义的sheet页对象，不同的sheet页使用对应的对象
+
+.registerReadListener 使用的监听器，这里定义的时通用的，根据不同的业务逻辑，可以定义不同的监听器处理，如需特殊的返回处理，可以定义多个参数的构造器，在监听器里面处理返回
+
+.headRowNumber(2) 标题行在第几行
+~~~
+
 ~~~java
 package manage.controller;
 
@@ -287,7 +304,7 @@ public class ImportExcelController {
         List<String> companyErrorList = new ArrayList<>();
         List<String> contactErrorList = new ArrayList<>();
         try (ExcelReader excelReader = EasyExcelFactory.read(file.getInputStream()).build()) {
-            // 公司信息
+            // 公司信息构造器
             ReadSheet dealerSheet = EasyExcelFactory
                     .readSheet(0)
                     .head(ExcelCompany.class)
@@ -300,7 +317,7 @@ public class ImportExcelController {
                     .headRowNumber(2)
                     .build();
 
-            // 联系人信息
+            // 联系人信息构造器
             ReadSheet contactSheet = EasyExcelFactory
                     .readSheet(1)
                     .head(ExcelContact.class)
@@ -358,6 +375,44 @@ postman返回的结果数据如下：
 postman返回的结果数据如下：
 
 ![image-20220607104903223](http://file.xiaoxiaofeng.site/blog/image/image-20220607104903223.png)
+
+## 相关属性解读
+
+### 注解
+
+- `ExcelProperty` 指定当前字段对应excel中的那一列。可以根据名字或者Index去匹配。当然也可以不写，默认第一个字段就是index=0，以此类推。千万注意，要么全部不写，要么全部用index，要么全部用名字去匹配。千万别三个混着用，除非你非常了解源代码中三个混着用怎么去排序的。
+- `ExcelIgnore` 默认所有字段都会和excel去匹配，加了这个注解会忽略该字段
+- `DateTimeFormat` 日期转换，用`String`去接收excel日期格式的数据会调用这个注解。里面的`value`参照`java.text.SimpleDateFormat`
+- `NumberFormat` 数字转换，用`String`去接收excel数字格式的数据会调用这个注解。里面的`value`参照`java.text.DecimalFormat`
+- `ExcelIgnoreUnannotated` 默认不加`ExcelProperty` 的注解的都会参与读写，加了不会参与
+
+### 参数
+
+#### 通用参数
+
+`ReadWorkbook`,`ReadSheet` 都会有的参数，如果为空，默认使用上级。
+
+- `converter` 转换器，默认加载了很多转换器。也可以自定义。
+- `readListener` 监听器，在读取数据的过程中会不断的调用监听器。
+- `headRowNumber` 需要读的表格有几行头数据。默认有一行头，也就是认为第二行开始起为数据。
+- `head`  与`clazz`二选一。读取文件头对应的列表，会根据列表匹配数据，建议使用class。
+- `clazz` 与`head`二选一。读取文件的头对应的class，也可以使用注解。如果两个都不指定，则会读取全部数据。
+- `autoTrim` 字符串、表头等数据自动trim
+- `password` 读的时候是否需要使用密码
+
+#### ReadWorkbook（理解成excel对象）参数
+
+- `excelType` 当前excel的类型 默认会自动判断
+- `inputStream` 与`file`二选一。读取文件的流，如果接收到的是流就只用，不用流建议使用`file`参数。因为使用了`inputStream` easyexcel会帮忙创建临时文件，最终还是`file`
+- `file` 与`inputStream`二选一。读取文件的文件。
+- `autoCloseStream` 自动关闭流。
+- `readCache` 默认小于5M用 内存，超过5M会使用 `EhCache`,这里不建议使用这个参数。
+- `useDefaultListener` `@since 2.1.4` 默认会加入`ModelBuildEventListener` 来帮忙转换成传入`class`的对象，设置成`false`后将不会协助转换对象，自定义的监听器会接收到`Map<Integer,CellData>`对象，如果还想继续接听到`class`对象，请调用`readListener`方法，加入自定义的`beforeListener`、 `ModelBuildEventListener`、 自定义的`afterListener`即可。
+
+#### ReadSheet（就是excel的一个Sheet）参数
+
+- `sheetNo` 需要读取Sheet的编码，建议使用这个来指定读取哪个Sheet
+- `sheetName` 根据名字去匹配Sheet,excel 2003不支持根据名字去匹配
 
 ## 写在最后
 
