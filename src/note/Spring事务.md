@@ -1,10 +1,10 @@
 [TOC]
 
-## 一、Spring中事务
+## Spring中事务
 
 > Spring提供了两种事务管理机制：编程式事务、声明式事务
 
-### 1.1、编程式事务
+### 编程式事务
 
 在代码中手动的管理事务的提交、回滚等操作，代码侵入性比较强
 
@@ -18,7 +18,7 @@ try {
 }
 ```
 
-### 1.2、声明式事务(推荐)
+### 声明式事务(推荐)
 
 基于AOP面向切面的，它将具体业务与事务处理部分解耦，代码侵入性很低，所以在实际开发中声明式事务用的比较多。
 
@@ -30,9 +30,9 @@ public String test() {
 }
 ```
 
-## 二、@Transactional
+## @Transactional
 
-### 2.1、作用域
+### 作用域
 
 - **作用于类**
   当把@Transactional 注解放在类上时，表示所有该类的public方法都配置相同的事务属性信息。
@@ -41,7 +41,7 @@ public String test() {
 - **作用于接口**
   不推荐这种使用方法，因为一旦标注在Interface上并且配置了Spring AOP 使用CGLib动态代理，将会导致@Transactional注解失效
 
-### 2.2、属性
+### 属性
 
 | 属性                       | 功能描述                                                     |
 | -------------------------- | ------------------------------------------------------------ |
@@ -70,7 +70,7 @@ public String test() {
 
 （7）Propagation.NESTED ：表示如果当前已经存在一个事务，那么该方法将会在嵌套事务中运行。嵌套的事务可以独立于当前事务进行单独地提交或回滚。如果当前事务不存在，那么其行为和 Propagation.REQUIRED 效果一样。 
 
-### 2.3、关于rollbackFor回滚的异常类型
+### 关于rollbackFor回滚的异常类型
 
 ![image.png](http://file.xiaoxiaofeng.site/blog/image/20211105-bdd1a94e-2682-4057-91ce-7b6a1dece494.png)
 
@@ -82,7 +82,7 @@ public String test() {
 
 > 看其父类（或者“爷爷类”）是否是RuntimeException
 
-## 三、SpringBoot配置全局异常处理
+## SpringBoot配置全局异常处理
 
 - **自定义Controller注解**
 
@@ -112,7 +112,7 @@ public @interface MyService {
 
 一般不用，因为Controller层已经加了事务，再用这个可能因为`事务嵌套`
 
-## 四、失效场景
+## 失效场景
 
 **1、@Transactional 应用在非 public 修饰的方法上**
 
@@ -159,7 +159,7 @@ public class OrderService {
 
 > 方法被定义成了final的，这样会导致spring aop生成的代理对象不能复写该方法，而让事务失效。
 
-## 五、事务异常记录
+## 事务异常记录
 
 ### Transaction rolled back because it has been marked as rollback-only
 
@@ -235,3 +235,10 @@ public Class ClassB {
 | 属性               | 功能描述                                                     |
 | ------------------ | ------------------------------------------------------------ |
 | Propagation.NESTED | 表示如果当前已经存在一个事务，那么该方法将会在嵌套事务中运行。嵌套的事务可以独立于当前事务进行单独地提交或回滚。如果当前事务不存在，那么其行为和 Propagation.REQUIRED 效果一样。 |
+
+## 写在最后
+
+本文到此就结束了，博主会持续输出日常工作中常用的技术总结和面试的高频点。
+
+老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~
+
