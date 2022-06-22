@@ -201,7 +201,7 @@ lower_case_table_names=1
 ~~~
 
 报错:
-![CSDN-笑小枫](images/mysql/mysql-1.jpg)
+![CSDN-笑小枫](../images/mysql/mysql-1.jpg)
 
 查看MySQL官方文档，有记录：
 >lower_case_table_names can only be configured when initializing the
@@ -223,10 +223,10 @@ wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.20-linux-glibc2.12-
 ~~~
 
 ### Mysql主从复制
-[Mysql主从复制](mysql/Mysql主从复制.md)
+[Mysql主从复制](Mysql主从复制.md)
 
 ### Mysql数据库自动备份
-[Mysql数据库自动备份](mysql/Mysql数据库自动备份.md)
+[Mysql数据库自动备份](Mysql数据库自动备份.md)
 
 ### 修改数据库用户密码
  

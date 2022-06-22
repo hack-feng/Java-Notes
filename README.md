@@ -22,7 +22,7 @@ Git文档：[/src/note/Git.md](src/note/Git.md)
 
 Linux文档：[/src/note/Linux.md](src/note/Linux.md)
 
-Mysql文档：[/src/note/Mysql.md](src/note/Mysql.md)
+Mysql文档：[/src/note/Mysql.md](src/note/mysql/Mysql.md)
 
 Nginx文档：[/src/note/Nginx.md](src/note/Nginx.md)
 
