@@ -1,5 +1,3 @@
-### 本地生成ssh keys命令：```ssh-keygen -t rsa```
-
 
 ### 常用
 ~~~
@@ -22,6 +20,10 @@ $ git config core.ignorecase false                                # 设置大小
 $ git config --global user.name "YOUR NAME"                       # 设置用户名
 $ git config --global user.email "YOUR EMAIL ADDRESS"             # 设置邮箱
 ~~~
+
+### 本地生成ssh keys命令
+```ssh-keygen -t rsa```
+
 
 ### 别名Alias
 ~~~
@@ -172,11 +174,6 @@ enabled=1
 ~~~
 yum makecache
 ~~~
-
-#### 安装GitLab社区版
-
-
-
 
 
 > 恭喜你发现了一只迷路的笑小枫，一键三连支持一下吧。<br>
