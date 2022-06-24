@@ -1,7 +1,5 @@
 [TOC]
 
-# 笑小枫系列-SpringBoot返回结果包装
-
 ## 为什么要返回统一格式后的结果
 
 > 前后端分离的时代，如果没有统一的返回格式，给前端的结果各式各样，估计前端的小伙伴就要骂娘了。  
@@ -32,59 +30,6 @@
 }
 ~~~
 
-## @RestControllerAdvice简单介绍
-
-> 首先了解一下SpringBoot的`@RestControllerAdvice`注解，它是Spring框架3.2新增的的注解  
-点进去这个注解源码，可以看到它是由`@ControllerAdvice`和`@ResponseBody`的组合注解  
-它通常用来定义`@ExceptionHandler`， `@InitBinder`以及`@ModelAttribute`适用于所有方法`@RequestMapping`的方法。  
-直白点说，这就是一个增强Controller的注解。主要实现以下三个方面的功能
-
-1. 全局异常处理
-2. 全局数据预处理
-3. 全局数据绑定
-
-我们看一下`@RestControllerAdvice`注解的源码
-
-~~~java
-
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@ControllerAdvice
-@ResponseBody
-public @interface RestControllerAdvice {
-    @AliasFor(
-            annotation = ControllerAdvice.class
-    )
-    String[] value() default {};
-
-    @AliasFor(
-            annotation = ControllerAdvice.class
-    )
-    String[] basePackages() default {};
-
-    @AliasFor(
-            annotation = ControllerAdvice.class
-    )
-    Class<?>[] basePackageClasses() default {};
-
-    @AliasFor(
-            annotation = ControllerAdvice.class
-    )
-    Class<?>[] assignableTypes() default {};
-
-    @AliasFor(
-            annotation = ControllerAdvice.class
-    )
-    Class<? extends Annotation>[] annotations() default {};
-}
-~~~
-
-接下来说一下使用`@RestControllerAdvice`常做的两个功能的实现
-
-1. 返回统一格式的结果
-2. 异常统一处理
-
 ## SpringBoot怎么返回统一格式的结果
 
 首先创建一个测试的Controller，代码如下：
@@ -110,7 +55,7 @@ public class TestResultController {
         Test test = new Test();
         test.setName("笑小枫");
         test.setAge(18);
-        test.setRemark("大家好，我是笑小枫，喜欢我的小伙伴点个赞");
+        test.setRemark("大家好，我是笑小枫，喜欢我的小伙伴点个赞呗");
         return test;
     }
 
@@ -209,6 +154,120 @@ public class ResultJson {
 }
 ~~~
 
+### 普通返回版，代码侵入性强，但相对灵活
+
+这样我们可以把结果统一放在ResultJson里面返回，代码如下：
+
+~~~java
+package com.maple.rest.controller.example;
+
+import com.maple.common.model.ResultJson;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author zhangfuzeng
+ * @date 2021/12/7
+ */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/example")
+public class TestResultController {
+
+    @GetMapping("/testResultJson")
+    public ResultJson testResultJson() {
+        Test test = new Test();
+        test.setName("笑小枫");
+        test.setAge(18);
+        test.setRemark("大家好，我是笑小枫，喜欢我的小伙伴点个赞呗");
+        return new ResultJson(test);
+    }
+
+    @Data
+    static class Test {
+        private String name;
+
+        private Integer age;
+
+        private String remark;
+    }
+}
+~~~
+
+我们看一下返回的结果
+
+~~~json
+{
+  "status": true,
+  "code": "0000",
+  "msg": "",
+  "data": {
+    "name": "笑小枫",
+    "age": 18,
+    "remark": "大家好，我是笑小枫，喜欢我的小伙伴点个赞呗"
+  }
+}
+~~~
+
+## @RestControllerAdvice简单介绍
+
+> 首先了解一下SpringBoot的`@RestControllerAdvice`注解，它是Spring框架3.2新增的的注解  
+> 点进去这个注解源码，可以看到它是由`@ControllerAdvice`和`@ResponseBody`的组合注解  
+> 它通常用来定义`@ExceptionHandler`， `@InitBinder`以及`@ModelAttribute`适用于所有方法`@RequestMapping`的方法。  
+> 直白点说，这就是一个增强Controller的注解。主要实现以下三个方面的功能
+
+1. 全局异常处理
+2. 全局数据预处理
+3. 全局数据绑定
+
+我们看一下`@RestControllerAdvice`注解的源码
+
+~~~java
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@ControllerAdvice
+@ResponseBody
+public @interface RestControllerAdvice {
+    @AliasFor(
+            annotation = ControllerAdvice.class
+    )
+    String[] value() default {};
+
+    @AliasFor(
+            annotation = ControllerAdvice.class
+    )
+    String[] basePackages() default {};
+
+    @AliasFor(
+            annotation = ControllerAdvice.class
+    )
+    Class<?>[] basePackageClasses() default {};
+
+    @AliasFor(
+            annotation = ControllerAdvice.class
+    )
+    Class<?>[] assignableTypes() default {};
+
+    @AliasFor(
+            annotation = ControllerAdvice.class
+    )
+    Class<? extends Annotation>[] annotations() default {};
+}
+~~~
+
+接下来说一下使用`@RestControllerAdvice`常做的两个功能的实现
+
+1. 返回统一格式的结果
+2. 异常统一处理
+
+### RestControllerAdvice切面处理，代码无侵入，全局统一
+
+上述代码虽然实现了功能，但所有的返回结果都要处理，对代码有比较强的侵入，Spring拥有各种切面的支持，让我们看看如何代码无侵入的实现这个功能。
+
 最后创建一个配置类，添加`@RestControllerAdvice`注解，代码如下：
 
 ~~~java
@@ -277,7 +336,7 @@ public class RestResponseAdvice implements ResponseBodyAdvice<Object> {
   "data": {
     "name": "笑小枫",
     "age": 18,
-    "remark": "大家好，我是笑小枫，喜欢我的小伙伴点个赞"
+    "remark": "大家好，我是笑小枫，喜欢我的小伙伴点个赞呗"
   }
 }
 ~~~
@@ -291,7 +350,6 @@ public class RestResponseAdvice implements ResponseBodyAdvice<Object> {
 > 后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。
 > CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
 > GitHub文档：[https://github.com/hack-feng/Java-Notes](https://github.com/hack-feng/Java-Notes) 
-
 
 
 
