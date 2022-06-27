@@ -455,6 +455,10 @@ public class TestSystemLogController {
 
 ![image-20220627172936529](http://file.xiaoxiaofeng.site/blog/image/2022/06/27/20220627172936.png)
 
+看一下数据落库的结果吧，emmm... `operate_location`没采集，忽略吧🤣
+
+![image-20220627173315916](http://file.xiaoxiaofeng.site/blog/image/2022/06/27/20220627173316.png)
+
 ## 关于笑小枫
 
 > 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
