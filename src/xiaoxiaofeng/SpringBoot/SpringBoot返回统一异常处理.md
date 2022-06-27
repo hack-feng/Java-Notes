@@ -441,6 +441,7 @@ public class ExceptionAdvice {
 
 > 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
 > 老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~
-> 后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。
+> 后续文章会陆续更新，文档会同步在个人博客、CSDN和GitHub保持同步更新。
+> 笑小枫个人博客：[http://www.xiaoxiaofeng.site](http://www.xiaoxiaofeng.site)
 > CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
 > GitHub文档：[https://github.com/hack-feng/Java-Notes](https://github.com/hack-feng/Java-Notes) 
