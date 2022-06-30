@@ -181,11 +181,11 @@
 </project>
 ~~~
 
-(2) 修改application.properties后缀为application.yml，添加启动的端口号：8888
+(2) 修改application.properties后缀为application.yml，添加启动的端口号：6666
 
 ~~~
 server:
-  port: 8888
+  port: 6666
 ~~~
 
 (3) 修改MapeDemoApplicationTests.java文件，因为创建是高版本的SpringBoot，所以重新引入一下依赖。
@@ -220,7 +220,7 @@ public class TestController {
 可以直接在启动类上进行启动，启动成功后，详情如下：
  ![CSDN-笑小枫](http://file.xiaoxiaofeng.site/blog/image/1.3-1.jpg)
 
-(3) 项目启动成功，在浏览器输入http://127.0.0.1:8888/test地址进行测试，返回结果如下：
+(3) 项目启动成功，在浏览器输入http://127.0.0.1:6666/test地址进行测试，返回结果如下：
  ![CSDN-笑小枫](http://file.xiaoxiaofeng.site/blog/image/1.3-2.jpg)
 
 ### 1.4 常用工具类

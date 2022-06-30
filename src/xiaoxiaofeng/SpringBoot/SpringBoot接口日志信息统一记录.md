@@ -73,7 +73,7 @@ import lombok.EqualsAndHashCode;
  * 系统管理-操作日志记录
  * </p>
  *
- * @author Maple
+ * @author 笑小枫
  * @since 2021-12-07
  */
 @Data
@@ -161,7 +161,7 @@ mapper代码就不贴了，都是生成的，只用到了mybatis plus的insert�
 package com.maple.common.enums;
 
 /**
- * @author zhangfuzeng
+ * @author 笑小枫
  * @date 2022/6/27
  */
 public enum BusinessTypeEnum {
@@ -180,7 +180,7 @@ public enum BusinessTypeEnum {
 package com.maple.common.enums;
 
 /**
- * @author zhangfuzeng
+ * @author 笑小枫
  * @date 2022/6/27
  */
 public enum OperateTypeEnum {
@@ -205,7 +205,7 @@ import com.maple.common.enums.OperateTypeEnum;
 import java.lang.annotation.*;
 
 /**
- * @author Maple
+ * @author 笑小枫
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -260,7 +260,7 @@ import java.util.Objects;
 
 
 /**
- * @author ZhangFZ
+ * @author 笑小枫
  * 配置切面类，@Component 注解把切面类放入Ioc容器中
  */
 @Aspect
@@ -404,7 +404,7 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author zhangfuzeng
+ * @author 笑小枫
  * @date 2022/6/27
  */
 @RestController
@@ -459,11 +459,13 @@ public class TestSystemLogController {
 
 ![image-20220627173315916](http://file.xiaoxiaofeng.site/blog/image/2022/06/27/20220627173316.png)
 
+
 ## 关于笑小枫
 
 > 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
 > 老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~
-> 后续文章会陆续更新，文档会同步在个人博客、CSDN和GitHub保持同步更新。
+> 后续文章会陆续更新，文档会同步在微信公众号、个人博客、CSDN和GitHub保持同步更新。
+> 微信公众号：笑小枫
 > 笑小枫个人博客：[http://www.xiaoxiaofeng.site](http://www.xiaoxiaofeng.site)
 > CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
 > GitHub文档：[https://github.com/hack-feng/Java-Notes](https://github.com/hack-feng/Java-Notes) 

@@ -323,6 +323,8 @@ public class RedisUtil {
 
 * 开始redis过期Key的监听事件
 
+> **如果数据要求比较严谨，请慎用此功能**
+
 修改redis.conf配置为文件
 > notify-keyspace-events Ex
 

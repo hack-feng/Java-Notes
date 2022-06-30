@@ -84,7 +84,7 @@ public class CoreCategoryController {
 }
 ~~~
 
-请求地址：[http://127.0.0.1:8088/swagger-ui.html](请求地址：[http://127.0.0.1:8088/swagger-ui.html#/]())
+请求地址：[http://127.0.0.1:8088/swagger-ui.html](http://127.0.0.1:8088/swagger-ui.html)
 
 * Bean使用
 ~~~java
