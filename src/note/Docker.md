@@ -400,6 +400,9 @@ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
 docker cp /root/test.txt ecef8319d2c8:/root/
 ~~~
 
+docker cp /data/maple/default.conf 0d3d47824280:/etc/nginx/conf.d/
+
+
 该命令的意思是将当前操作系统（Linux）家目录（root）下的文件test.txt拷贝到容器id为ecef8319d2c8的家目录（root）文件夹下。如果是win系统的话请替换为win下的合法路径（例如：D:/test.txt）。
 
 ### 将docker操作授权给普通用户
