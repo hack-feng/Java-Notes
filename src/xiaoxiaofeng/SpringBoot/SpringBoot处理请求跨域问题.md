@@ -2,8 +2,8 @@
 
 CORS全称Cross-Origin Resource Sharing，意为跨域资源共享。当一个资源去访问另一个不同域名或者同域名不同端口的资源时，就会发出跨域请求。如果此时另一个资源不允许其进行跨域资源访问，那么访问就会遇到跨域问题。
 
-跨域指的是由于浏览器的安全性限制，不允许前端页面访问协议不同、域名不同、端口号不同的http接口，例如我本地创建一个html，里面写一个ajax请求访问我服务器SpringBoot应用提供的接口：192.168.1.11:8080/getUser
-则会出报 No 'Access-Control-Allow-Origin' header is present on the requested resource. 错误。
+跨域指的是由于浏览器的安全性限制，不允许前端页面访问协议不同、域名不同、端口号不同的http接口，例如我本地创建一个html，里面写一个ajax请求访问我服务器SpringBoot应用提供的接口：`192.168.1.11:8080/getUser`
+则会出报 `No 'Access-Control-Allow-Origin' header is present on the requested resource. `错误。
 
 ## SpringBoot怎么解决跨域
 
@@ -66,3 +66,12 @@ public class CorsFilter implements Filter {
 }
 ~~~
 
+## 关于笑小枫
+
+> 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+> 老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~
+> 后续文章会陆续更新，文档会同步在微信公众号、个人博客、CSDN和GitHub保持同步更新。
+> 微信公众号：笑小枫
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.site](https://www.xiaoxiaofeng.site)
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
+> GitHub文档：[https://github.com/hack-feng/Java-Notes](https://github.com/hack-feng/Java-Notes) 
