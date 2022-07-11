@@ -265,11 +265,15 @@ docker pull nginx:版本号, 拉取指定版本nginx或docker pull nginx,拉取�
 
 3、启动nginx
 ~~~
-docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html --name nginx8998 --restart always f6d0b4767a6c
+docker run -d -p 80:80 -p 443:443 -v /data/maple/web:/usr/share/nginx/html --name nginx8998 --restart always f6d0b4767a6c
 ~~~
 
 ~~~
 docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf.d:/etc/nginx/conf.d --name nginx8998 --restart always f6d0b4767a6c
+~~~
+
+~~~
+docker run -d -p 80:80 -p 443:443 -v /data/maple/web:/usr/share/nginx/html -v /data/maple/nginx.conf:/etc/nginx/nginx.conf -v /data/maple/conf.d:/etc/nginx/conf.d -v /data/maple/ssl:/etc/nginx/ssl --name nginx --restart always f0b8a9a54136
 ~~~
 ### Docker容器内部无法访问宿主机网络(No Route to host)
 
