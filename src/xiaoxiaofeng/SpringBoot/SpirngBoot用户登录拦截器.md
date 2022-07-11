@@ -1,4 +1,4 @@
-[toc]
+[[toc]]
 
 ## 什么是JWT
 什么是JWT,JWT(全称：Json Web Token)是一个开放标准(RFC 7519)，它定义了一种紧凑的、自包含的方式，用于作为JSON对象在各方之间安全地传输信息。 该信息可以被验证和信任，因为它是数字签名的。
@@ -27,11 +27,11 @@
 
 **用户登录**
 
-![img](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630143121.jpeg)
+![笑小枫-www.xiaoxiaofeng.site](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630143121.jpeg)
 
 **token认证访问**
 
-![img](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630143121.jpeg)
+![笑小枫-www.xiaoxiaofeng.site](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630143121.jpeg)
 
 注：系统中采用JWT对用户登录授权验证。
 
@@ -800,13 +800,13 @@ public class LoginController {
 
 ~~~
 在未登录状态请求接口，返回信息如下：
-![image-20220630155943091](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630155943.png)
+![笑小枫-20220630155943091](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630155943.png)
 
 调用登录接口，进行用户登录
-![image-20220630160212694](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630160213.png)
+![笑小枫-20220630160212694](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630160213.png)
 
 登录后，拿到token，在请求头设置`Authorization`参数后，再次调用，返回信息如下：
-![image-20220630160319904](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630160320.png)
+![笑小枫-20220630160319904](http://file.xiaoxiaofeng.site/blog/image/2022/06/30/20220630160320.png)
 
 本文代码如果直接复制，可能会缺失一些类，因为小编直接摘选的了项目中在用的功能，没有精力再次重头整理，但整体逻辑思想没有影响。
 
@@ -820,6 +820,6 @@ public class LoginController {
 > 老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~
 > 后续文章会陆续更新，文档会同步在微信公众号、个人博客、CSDN和GitHub保持同步更新。
 > 微信公众号：笑小枫
-> 笑小枫个人博客：[http://www.xiaoxiaofeng.site](http://www.xiaoxiaofeng.site)
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.site](https://www.xiaoxiaofeng.site)
 > CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
 > GitHub文档：[https://github.com/hack-feng/Java-Notes](https://github.com/hack-feng/Java-Notes) 

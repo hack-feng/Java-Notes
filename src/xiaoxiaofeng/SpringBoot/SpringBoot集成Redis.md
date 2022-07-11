@@ -1,8 +1,8 @@
-### SpringBoot集成Redis
+## SpringBoot集成Redis
 
 [Redis基础篇](https://zhangfz.blog.csdn.net/article/details/110196668)
 
-#### 引入依赖
+### 引入依赖
 * pom.xml
 ~~~
 <!-- 引入redis依赖 -->
@@ -18,7 +18,7 @@
 </dependency>
 ~~~
 
-#### Redis配置
+### Redis配置
 
 * application.yml 配置
 ~~~
@@ -87,7 +87,7 @@ public class RedisConfig {
 }
 ~~~
 
-#### 工具类
+### 工具类
 ~~~java
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
@@ -319,7 +319,7 @@ public class RedisUtil {
 }
 ~~~
 
-#### 监听redis Key过期的事件
+### 监听redis Key过期的事件
 
 * 开始redis过期Key的监听事件
 
@@ -440,3 +440,13 @@ public class RedisKeyExpireListener extends KeyExpirationEventMessageListener  {
     }
 }
 ~~~
+
+## 关于笑小枫
+
+> 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+> 老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~
+> 后续文章会陆续更新，文档会同步在微信公众号、个人博客、CSDN和GitHub保持同步更新。
+> 微信公众号：笑小枫
+> 笑小枫个人博客：[http://www.xiaoxiaofeng.site](http://www.xiaoxiaofeng.site)
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
+> GitHub文档：[https://github.com/hack-feng/Java-Notes](https://github.com/hack-feng/Java-Notes)
