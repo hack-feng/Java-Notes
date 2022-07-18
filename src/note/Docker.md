@@ -1,4 +1,7 @@
+## Docker相关操作
+
 ### Docker 卸载
+
 ~~~
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ~~~
@@ -45,6 +48,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ~~~
 
+## Docker安装相关软件
 
 ### Docker安装Mysql
 
@@ -264,17 +268,56 @@ docker pull nginx:版本号, 拉取指定版本nginx或docker pull nginx,拉取�
 * 注 前端打包文件放在/data/deploy_honsupply_web/html目录下
 
 3、启动nginx
+
+只挂载html目录
+
 ~~~
 docker run -d -p 80:80 -p 443:443 -v /data/maple/web:/usr/share/nginx/html --name nginx8998 --restart always f6d0b4767a6c
 ~~~
+
+挂载html和conf配置
 
 ~~~
 docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf.d:/etc/nginx/conf.d --name nginx8998 --restart always f6d0b4767a6c
 ~~~
 
+挂载html和conf配置，且同时放开80端口和443端口
+
 ~~~
 docker run -d -p 80:80 -p 443:443 -v /data/maple/web:/usr/share/nginx/html -v /data/maple/nginx.conf:/etc/nginx/nginx.conf -v /data/maple/conf.d:/etc/nginx/conf.d -v /data/maple/ssl:/etc/nginx/ssl --name nginx --restart always f0b8a9a54136
 ~~~
+### SpringBoot项目打包成docker镜像
+
+#### 创建Dockerfile文件，内容如下：
+
+~~~
+FROM openjdk:8-jdk-alpine
+VOLUME /temp
+EXPOSE 9001
+ADD logistics-quote-1.0.0.jar logistics-quote.jar
+ENTRYPOINT ["java","-jar","/logistics-quote.jar"]
+~~~
+
+#### 打成docker镜像
+
+将jar包和Dockerfile放在服务器的统一目录下，执行命令：
+
+~~~
+docker build -t quote:1.0.0 .
+~~~
+
+执行docker images 可以查看到生成的镜像
+
+#### docker 启动镜像
+
+~~~
+docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
+~~~
+
+docker run -d --name trade_test -p 8997:8997 -it --network ms-network --network-alias mstrade 
+
+## 常见问题
+
 ### Docker容器内部无法访问宿主机网络(No Route to host)
 
 * 关闭防火墙(局域网内推荐)
@@ -338,32 +381,7 @@ vi /etc/selinux/config
 docker run -i -t -v /soft:/soft --privileged=true 637fe9ea94f0 /bin/bash
 ~~~
 
-### SpringBoot项目打包成docker镜像
-#### 创建Dockerfile文件，内容如下：
-~~~
-FROM openjdk:8-jdk-alpine
-VOLUME /temp
-EXPOSE 9001
-ADD logistics-quote-1.0.0.jar logistics-quote.jar
-ENTRYPOINT ["java","-jar","/logistics-quote.jar"]
-~~~
 
-#### 打成docker镜像
-将jar包和Dockerfile放在服务器的统一目录下，执行命令：
-~~~
-docker build -t quote:1.0.0 .
-~~~
-
-执行docker images 可以查看到生成的镜像
-
-#### docker 启动镜像
-~~~
-docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
-~~~
-
-
-
-docker run -d --name trade_test -p 8997:8997 -it --network ms-network --network-alias mstrade 
 
 ### docker删除
 ~~~

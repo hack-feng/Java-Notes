@@ -4,7 +4,7 @@
 
 ## 脚本编写（mysql_dump.sh）
  脚本内容：注意一定要在unix环境下编写，如果在windows环境下重定向后文件名会出现问题。
- 
+
  注意替换mysql安装的路径（/usr/local/mysql/bin/mysqldump）和文件保存的路径（/test/dump/）
 ~~~bash
 #! /bin/bash
@@ -25,12 +25,12 @@ echo $dump_name'备份结束'
 ## 定时任务执行
 
 使用linux的crontab命令定时执行备份数据的脚本
-~~~
+~~~shell
 crontab -e
 ~~~
 
 编辑定时任务，这里每分钟执行一次，编辑完保存即可
-~~~
+~~~shell
 * * * * * /bin/sh /test/mysql_dump.sh
 
 
@@ -50,6 +50,6 @@ crontab -e
 ~~~
 
 查看定时任务执行的日志：
-~~~
+~~~shell
 tail -f /var/log/cron
 ~~~

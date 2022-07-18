@@ -107,17 +107,17 @@ change master to master_host='172.17.0.8', master_user='slave', master_password=
 ![笑小枫专属图片](../images/mysql/mysql-2.jpg)
 
     master_host ：Master的地址，指的是容器的独立ip,可以通过docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器名称|容器id查询容器的ip
-
+    
     master_port：Master的端口号，指的是容器的端口号
-
+    
     master_user：用于数据同步的用户
-
+    
     master_password：用于同步的用户的密码
-
+    
     master_log_file：指定 Slave 从哪个日志文件开始复制数据，即上文中提到的 File 字段的值
-
+    
     master_log_pos：从哪个 Position 开始读，即上文中提到的 Position 字段的值
-
+    
     master_connect_retry：如果连接失败，重试的时间间隔，单位是秒，默认是60秒
 
 在Slave 中的mysql终端执行`show slave status \G;`用于查看主从同步状态。
@@ -151,7 +151,7 @@ SlaveIORunning 和 SlaveSQLRunning 都是Yes，说明主从复制已经开启。
 3、pos不对
 
     检查Master的 Position
-    
+
 ## 测试主从复制测试
 
 在主库（master）创建test数据库，并添加test表，然后可以看到从库中也出现了对应的数据库和表

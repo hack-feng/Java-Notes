@@ -15,7 +15,7 @@ SpringMVC主要是通过前端控制器controller中的注解来完成请求处�
 
 ### Spring MVC工作流程
 
- ![CSDN-笑小枫](images/SpringMVC/SpringMVC工作流程.jpg)
+![笑小枫](http://file.xiaoxiaofeng.site/blog/image/2022/07/16/20220716185302.png)
 
 工作流程描述如下:
 
