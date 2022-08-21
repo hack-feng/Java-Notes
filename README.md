@@ -6,7 +6,7 @@
 
 ![CSDN-笑小枫](http://file.xiaoxiaofeng.site/blog/image/2022/07/01/20220701093608.png)
 
-笑小枫个人博客：[http://www.xiaoxiaofeng.site](http://www.xiaoxiaofeng.site)
+笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
 
 我的csdn博客：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net) 
 

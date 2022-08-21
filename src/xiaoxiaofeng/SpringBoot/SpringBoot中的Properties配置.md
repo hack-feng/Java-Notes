@@ -88,7 +88,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author 笑小枫
  * @date 2022/7/22
- * @see <a href="https://www.xiaoxiaofeng.site">https://www.xiaoxiaofeng.site</a>
+ * @see <a href="https://www.xiaoxiaofeng.com">https://www.xiaoxiaofeng.com</a>
  */
 @Data
 @Configuration
@@ -124,7 +124,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author 笑小枫
  * @date 2022/7/22
- * @see <a href="https://www.xiaoxiaofeng.site">https://www.xiaoxiaofeng.site</a>
+ * @see <a href="https://www.xiaoxiaofeng.com">https://www.xiaoxiaofeng.com</a>
  */
 @Slf4j
 @RestController
