@@ -9,24 +9,24 @@
 下载地址：[https://github.com/alibaba/nacos/releases/tag/2.0.3](https://github.com/alibaba/nacos/releases/tag/2.0.3)
 
 本文使用的是2.0.3版本
-![笑小枫](./images/nacos/01/nacos-1.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141159.png)
 
 以下文章以windows系统为例：
 
 下载后解压到对应的文件夹中，解压后目录如下：
-![笑小枫](./images/nacos/01/nacos-2.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141140.png)
 
 在0.7版本之前，在单机模式时nacos使用嵌入式数据库实现数据的存储，不方便观察数据存储的基本情况。0.7版本增加了支持mysql数据源能力。我们此处采用mysql的方式：
 
 在conf目录下找到nacos-mysql.sql文件，并在我们本地的数据库(需要安装mysql)中执行。
-![笑小枫](./images/nacos/01/nacos-3.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141138.png)
 
 执行完脚本，生成数据库如下：
-![笑小枫](./images/nacos/01/nacos-4.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141139.png)
 
 我们需要修改conf目录下的application.properties配置文件。连接我们自己的数据库
 
-~~~
+~~~properties
 #*************** Config Module Related Configurations ***************#
 ### If use MySQL as datasource:
 spring.datasource.platform=mysql
@@ -40,7 +40,7 @@ db.user.0=root
 db.password.0=Zhang123
 ~~~
 
-![笑小枫](./images/nacos/01/nacos-5.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141229.png)
 
 到此，nacos在windows环境的下载与安装就完成了。
 
@@ -62,7 +62,7 @@ windows启动命令为`cmd startup.cmd -m standalone`
 
 创建后，放在和startup.cmd同一个目录下，然后双击执行`startstandalone.bat`文件就可以了。
 
-![笑小枫](./images/nacos/01/nacos-6.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141117.png)
 
 到此，nacos就启动成功了。
 
@@ -72,38 +72,38 @@ nacos服务启动后，访问如下网址：
 
 http://127.0.0.1:8848/nacos/index.html#/login
 
-![笑小枫](./images/nacos/01/nacos-7.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141116.png)
 
 用户名：nacos 密码：nacos
 
 登录后可以以下页面（新建的应该是空的，我的这个进行过一些配置）
 
-![笑小枫](./images/nacos/01/nacos-8.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141107.png)
 
 简单的说说，使用Nacos当配置中心的简单配置
 
 在配置管理-配置列表进行新增配置，如下图所示：
-![笑小枫](./images/nacos/01/nacos-9.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141033.png)
 
 点图中的加号，就可以创建对应的配置
-![笑小枫](./images/nacos/01/nacos-10.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141017.png)
 
 根据项目需求，可以创建多个命名空间
-![笑小枫](./images/nacos/01/nacos-11.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141015.png)
 
 创建后展示的效果如下：
-![笑小枫](./images/nacos/01/nacos-12.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822141002.png)
 
 ## SpringBoot继承Nacos作为配置中心
 
 首先创建一个SpringBoot项目，这里不做过多的赘述，详情可参考：
 
 添加nacos配置
-![笑小枫](./images/nacos/01/nacos-14.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822140959.png)
 
 在pom.xml中引入依赖，注意，和alibaba Cloud的引入方式不同，这里只是单服务的SpringBoot项目
 
-~~~
+~~~xml
 <dependency>
     <groupId>com.alibaba.boot</groupId>
     <artifactId>nacos-config-spring-boot-starter</artifactId>
@@ -115,13 +115,13 @@ http://127.0.0.1:8848/nacos/index.html#/login
 
 在application.java的启动项上添加注解
 
-~~~
+~~~java
 @NacosPropertySource(dataId = "maple-admin", autoRefreshed = true)
 ~~~
 
 在application.properties配置文件添加配置
 
-~~~
+~~~properties
 spring.application.name=maple-admin
 server.port=8888
 nacos.config.server-addr=127.0.0.1:8848
@@ -157,7 +157,7 @@ public class DemoController {
 
 请求返回
 
-![笑小枫](./images/nacos/01/nacos-15.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822140937.png)
 
 ### 详细的配置（推荐）
 
@@ -201,18 +201,24 @@ nacos:
 ~~~
 
 配置对应的nacos的配置如下图所示：
-![笑小枫](./images/nacos/01/nacos-13.png)
+![笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/08/22/xxf-20220822140947.png)
 
 测试的方式同上，注意不同的namespace和data-ids
 
 如果需要实时的刷新配置，可以使用`@NacosValue`注解，设置autoRefreshed=true，默认false
 
-~~~
+~~~java
 @NacosValue(value = "${test:bbb}",autoRefreshed = true)
 ~~~
 
-## 写在最后
+## 关于笑小枫💕
 
-后续更多高级的使用，以及在项目中的实战，欢迎大家关注MapleAdmin的搭建
-
+> 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net
+>
 
