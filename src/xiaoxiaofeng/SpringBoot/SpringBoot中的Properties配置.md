@@ -204,6 +204,19 @@ public class TestConfigController {
 
 我们项目可以整合一些其他的工具进行配置管理，例如阿里的`nocas`，携程的`apollo`等等都是很好的开源的配置管理系统，我们可以直接使用，这里不展开介绍，感兴趣的小伙伴可以阅读下面的文章。
 
-[]()
+[SpringBoot整合Nacos详细教程](https://www.xiaoxiaofeng.com/archives/nacos)
 
-[Apollo微服务配置中心详解]()
+[Apollo微服务配置中心详解](https://www.xiaoxiaofeng.com/archives/apollo)
+
+## 关于笑小枫💕
+
+> 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
+>
+> 本文源码：[https://github.com/hack-feng/maple-demo](https://github.com/hack-feng/maple-demo)
+
