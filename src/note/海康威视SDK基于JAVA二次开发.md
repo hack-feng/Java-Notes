@@ -1,27 +1,27 @@
-### 项目背景
+## 项目背景
 项目中用到了海康威视的摄像机视频服务器。项目要求，要将海康威视的摄像视频同步按时间至我们自己的服务器，并且在项目中记录文件信息。
 
-### 项目环境
+## 项目环境
 * SpringBoot + JDK1.8
 * 海康威视设备型号：DS-7608N-K2/8P
 
-### 引入SDK
+## 引入SDK
 首先在海康卫视下载对应的SDK包。
 
 官网下载地址：[https://www.hikvision.com/cn/download_61.html](https://www.hikvision.com/cn/download_61.html)
 
 解压下载的SDK文件，如下图：
- ![CSDN-笑小枫](images/hkws/01.jpg)
- 
+ ![CSDN-笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/09/09/xxf-20220909095806.jpg)
+
  * Demo示例：其中有java的一个demo，大家也可以参考一下
  * 开发文档：包含了海康威视不同设备的SDK对接文档
  * 库文件：需要部分dll文件引用，通过dll文件去调用海康威视的服务器，需要的文件下文详细介绍
- 
+
  打开我们的SpringBoot项目
 
 - 首先将demo示例中java例子的HCNetSDK.java文件拷贝至我们项目，项目位置没有特殊要求。
 - 然后将库文件中的HCNetSDKCom文件夹及下面的所有文件、AudioRender.dll、HCCore.dll、HCNetSDK.dll、PlayCtrl.dll、SuperRender.dll文件放置指定的文件夹
- ![CSDN-笑小枫](images/hkws/02.jpg)
+ ![CSDN-笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/09/09/xxf-20220909095815.jpg)
 - 修改HCNetSDK.java文件的HCNetSDK加载dll文件的位置。如下：D:\\HKSDK\\HCNetSDK为dll文件存放的目录。
 
 ~~~
@@ -42,7 +42,7 @@
 </dependency>
 ~~~
 
-### 编写程序代码
+## 编写程序代码
 
 ~~~java
 import com.sun.jna.NativeLong;
@@ -203,21 +203,21 @@ public class Dvr {
 * 这里只是一个简单的demo，具体操作根据自己业务的实际情况来。
 
 下图是定时5分钟取一次数据的结果
- ![CSDN-笑小枫](images/hkws/03.jpg)
+ ![CSDN-笑小枫](https://image.xiaoxiaofeng.site/article/img/2022/09/09/xxf-20220909095847.png)
 
 
-### 视频无法播放的问题
+## 视频无法播放的问题
 > 因为你的音频不是mpeg4容器支持的音频格式。通过mediainfo分析可知，你的音频格式是pcm_alaw，并且还有一行警告信息:
   FileExtension_Invalid : mpeg mpg m2p vob vro pss evo
   你的视频格式应该是MPEG-PS格式，但是后缀却是mp4，其实是一个非法的MP4。mediainfo还会告诉你合法的后缀应该是上述那几个。由于你的音频格式根本不被浏览器支持，但是视频格式是被浏览器支持的(H.264/AVC)。那么解决方案其实也简单，抽调音频即可。参考ffmpeg命令行(不转码，直接复制流):
   ffmpeg -i demo.mp4 -c copy -an demp_enc.mp4
   速度很快，使用-an参数屏蔽掉音频流，将封装格式转为mp4。再次用mediainfo查看，格式已经显示MPEG-4，是一个标准的mp4容器封装了，在当今主流的浏览器都能直接播放。
-  
+
  下载ffmpeg解码工具[官网](http://www.ffmpeg.org/download.html)下载ffmpeg，解压安装找到ffmpeg.exe。
- 
- 
+
+
 添加一下工具类
-~~~
+~~~java
 // ffmpeg.exe存放的位置
 private static String ffmpegEXE = "D:\\software\\ffmpg\\bin\\ffmpeg.exe";
 
@@ -260,7 +260,7 @@ public static void convetor(String videoInputPath, String videoOutPath) throws E
 ~~~
 
 下载视频成功后，调用该方法进行转码，修改VideoDowload.java代码为以下：
-~~~
+~~~java
 if (produce == 100) {//下载成功
     hcNetSDK.NET_DVR_StopGetFile(loadHandle);
     loadHandle.setValue(-1);
@@ -302,6 +302,12 @@ if (produce == 100) {//下载成功
 
 如果对您有帮助，请点个赞，关注下小编再走哟，有什么问题可以在评论区留言，经常在线，看到一定回复。
 
-> 本章到此结束。后续文章会陆续更新，文档会同步在CSDN和GitHub保持同步更新。<br>
-> CSDN：https://blog.csdn.net/qq_34988304/category_8820134.html <br>
-> Github文档：https://github.com/hack-feng/Java-Notes/tree/master/src/note/SpringCloud <br>
+## 关于笑小枫💕
+
+> 本章到这里结束了，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
