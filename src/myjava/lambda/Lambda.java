@@ -81,6 +81,8 @@ public class Lambda {
             }
         });
 
+        Map<Integer, List<User>> fileMap = userList.stream().collect(Collectors.groupingBy(User::getAge));
+
         // List转String，逗号分隔
         List<String> strList = Arrays.asList("AA", "BB", "CC");
         String newStr = strList.stream().collect(Collectors.joining(","));
