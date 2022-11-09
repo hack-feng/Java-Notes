@@ -228,30 +228,30 @@ SELECT id FROM table WHERE id=1;
 
 1.添加 PRIMARY KEY（主键索引）
 
-```
+```sql
 ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` )
 ```
 
 2.添加 UNIQUE(唯一索引)
 
-```
+```sql
 ALTER TABLE `table_name` ADD UNIQUE ( `column` )
 ```
 
 3.添加 INDEX(普通索引)
 
-```
+```sql
 ALTER TABLE `table_name` ADD INDEX index_name ( `column` )
 ```
 
 4.添加 FULLTEXT(全文索引)
 
-```
+```sql
 ALTER TABLE `table_name` ADD FULLTEXT ( `column`)
 ```
 
 5.添加多列索引
 
-```
+```sql
 ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
 ```
