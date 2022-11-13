@@ -61,17 +61,6 @@
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293007971.jpg)  
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293008324.jpg)
 
+7、在cmd窗口下（快捷键：Win+R 输入cmd），输入`javac`，如下图所示,则说明配置环境变量完成。
 
-[https_www.oracle.com_java_technologies_javase_javase-jdk8-downloads.html]: https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
-[5c92ab79690dd9b81871f8382b17219a.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/5c92ab79690dd9b81871f8382b17219a.png#pic_center
-[34a16bac200718b5b16ac60011a47e40.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/34a16bac200718b5b16ac60011a47e40.png#pic_center
-[8f53446c9002e6bc1f71bf2649625a24.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/8f53446c9002e6bc1f71bf2649625a24.png#pic_center
-[8467c0a5333b4b68b3395ee01f8798fd.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/8467c0a5333b4b68b3395ee01f8798fd.png#pic_center
-[aecdd8976004a054eb1af6f0fb96ca4e.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/aecdd8976004a054eb1af6f0fb96ca4e.png#pic_center
-[e24699a67f06e9a9de1ad9db50fee65c.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/e24699a67f06e9a9de1ad9db50fee65c.png#pic_center
-[21acf5cb040b25b013f82316e919ee3c.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/21acf5cb040b25b013f82316e919ee3c.png#pic_center
-[ee233342c14921d2b366eeb3991d9750.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/ee233342c14921d2b366eeb3991d9750.png#pic_center
-[761b5cd36453bf5c39d40f9f98c061c1.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/761b5cd36453bf5c39d40f9f98c061c1.png#pic_center
-[3eb68db82c25da72edd12dca68ed2f69.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/3eb68db82c25da72edd12dca68ed2f69.png#pic_center
-[e9ce06e41cb791492b7fb67d7c7c60a9.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/e9ce06e41cb791492b7fb67d7c7c60a9.png#pic_center
-[474a8dc6c67e04602899d9a0bc55a1e1.png_pic_center]: https://img-blog.csdnimg.cn/img_convert/474a8dc6c67e04602899d9a0bc55a1e1.png#pic_center
+![image-20221112153717365](https://image.xiaoxiaofeng.site/blog/image/image-20221112153717365.png?xiaoxiaofeng)
