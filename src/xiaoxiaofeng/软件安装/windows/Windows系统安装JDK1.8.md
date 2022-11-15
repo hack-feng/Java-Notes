@@ -23,9 +23,11 @@
 
 # 一、安装 #
 
-1、进入官网[https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html][https_www.oracle.com_java_technologies_javase_javase-jdk8-downloads.html]下载JDK
+1、方式一：进入官网[https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html][https_www.oracle.com_java_technologies_javase_javase-jdk8-downloads.html]下载JDK
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293003850.jpg)
+
+方式二：博主提供的百度网盘版本下载：[https://pan.baidu.com/s/1QkhJo9b79zQi_6ll2zoVbg?pwd=gro3](https://pan.baidu.com/s/1QkhJo9b79zQi_6ll2zoVbg?pwd=gro3)
 
 2、下载后双击即可安装，选择下一步
 
