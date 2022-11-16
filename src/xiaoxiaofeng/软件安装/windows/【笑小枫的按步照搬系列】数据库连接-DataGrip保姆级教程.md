@@ -1,8 +1,16 @@
-![ec7033cd0ae6e308924584e8b59fe2b5.png][]
+## 笑小枫💕
 
-来源：https://www.cnblogs.com/zuge/p/7397255.html  
+> 欢迎来到笑小枫的世界，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
 
-**DataGrip使用入门**
+
+
+## DataGrip使用入门
 
 最近看到一款数据库客户端工具，DataGrip，是大名鼎鼎的JetBrains公司出品的，就是那个出品Intellij IDEA的公司。
 
@@ -341,7 +349,4 @@ public static void main(String[] args) {
         String test = "[b52c1b6931452c37cdaaf80ee35cd50d.png]: https://img-blog.csdnimg.cn/img_convert/b52c1b6931452c37cdaaf80ee35cd50d.png\n" +
                 "[1b320a029c8583e0f666d39856f3c33f.png]: https://img-blog.csdnimg.cn/img_convert/1b320a029c8583e0f666d39856f3c33f.png";
         
-        String[] array = test.split("\n");
-        System.out.println(array[1]);
-        
-    }
+

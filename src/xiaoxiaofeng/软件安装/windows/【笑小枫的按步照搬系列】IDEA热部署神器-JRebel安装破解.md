@@ -8,6 +8,20 @@
 >
 > 链接：https://blog.csdn.net/u011291072/article/details/123594219
 
+## 笑小枫💕
+
+> 欢迎来到笑小枫的世界，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
+
+
+
+## 热部署方案比较
+
 首先，看一看JRebel和市场上热门的热部署方案比较，如下图：
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660306287580.png)

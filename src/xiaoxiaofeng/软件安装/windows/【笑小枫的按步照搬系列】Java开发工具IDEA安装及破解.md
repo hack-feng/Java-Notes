@@ -1,5 +1,16 @@
-# IDEA 2021.3.1 版本破解
+# 
+## 笑小枫💕
+
+> 欢迎来到笑小枫的世界，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
+
 ## 简介
+
 支持全家桶，如idea,pycharm,webstorm,goland......等等，亲测有效，请放心使用~
 
 针对最新 **2021.3.1**版本可以做到永久激活、直接激活99年！首先将电脑上的旧版本 IDEA 卸载干净，如果你的电脑是一台新电脑、没有安装过 IDEA ，那么你就可以跳过这一步。一定要按照下图所示勾选，确保完全卸载干净。

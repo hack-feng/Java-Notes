@@ -10,14 +10,17 @@
 
 
 
+# 笑小枫💕
+
+> 欢迎来到笑小枫的世界，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
 
 
-
-
-### 目录 ###
-
- *  一、安装
- *  二、配置
 
 --------------------
 
@@ -27,7 +30,7 @@
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293003850.jpg)
 
-方式二：博主提供的百度网盘版本下载：[https://pan.baidu.com/s/1QkhJo9b79zQi_6ll2zoVbg?pwd=gro3](https://pan.baidu.com/s/1QkhJo9b79zQi_6ll2zoVbg?pwd=gro3)
+方式二：博主提供的百度网盘版本下载：[https://pan.baidu.com/s/1liNHej2hGXJU_L8yQNRZmQ?pwd=9w3f ](https://pan.baidu.com/s/1liNHej2hGXJU_L8yQNRZmQ?pwd=9w3f)
 
 2、下载后双击即可安装，选择下一步
 

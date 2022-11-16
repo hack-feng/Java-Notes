@@ -1,8 +1,20 @@
-# Redis 安装
+## 笑小枫💕
+
+> 欢迎来到笑小枫的世界，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
+>
+> 微信公众号：笑小枫
+>
+> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
+>
+> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
+
+
 
 ## Windows 下安装
 
-**下载地址：**https://github.com/tporadowski/redis/releases。
+方式一：https://github.com/tporadowski/redis/releases。
+
+方式二：博主提供的百度网盘版本下载：[https://pan.baidu.com/s/14_RxyUw_3B4mMP5tZGe3Bg?pwd=44wq](https://pan.baidu.com/s/14_RxyUw_3B4mMP5tZGe3Bg?pwd=44wq)
 
 Redis 支持 32 位和 64 位。这个需要根据你系统平台的实际情况选择，这里我们下载 **Redis-x64-xxx.zip**压缩包到 C 盘，解压后，将文件夹重新命名为 **redis**。
 
