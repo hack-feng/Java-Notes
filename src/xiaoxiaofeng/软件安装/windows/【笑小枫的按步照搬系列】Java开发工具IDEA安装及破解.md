@@ -22,7 +22,7 @@
 
 ## 获取插件
 
-插件下载地址：http://file.xiaoxiaofeng.site/software/idea-common.zip
+插件下载地址：https://pan.baidu.com/s/1MGRmLL06o0AircXmF466Vg?pwd=aghq 
 
 关注微信公众号【笑小枫】，可以微信搜索，或者直接用微信扫描下方二维码直接进行关注，回复【破解2021】获取插件解压用到的密码呦。
 
