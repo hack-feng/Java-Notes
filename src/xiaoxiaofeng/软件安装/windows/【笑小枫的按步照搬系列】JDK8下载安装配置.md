@@ -1,16 +1,4 @@
-> 标题：Windows 安装，配置JDK1.8
->
-> 简介：目录下载一、安装二、环境配置下载进入官网https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html下载JDK一、安装下载后双击即可安装，如图在这里插入代码片选择开发工具，更改jdk安装路径（默认安装在C盘），然后下一步更改jre安装路径（采用默认安装位置），下一步安装完成二、环境配置右击计算机图标，接着点击菜单最下方的属性菜单项，选择高级系统设置选择”高级“选项卡，然后点击下方的环
->
-> 标签：Windows,windows,jdk
->
-> 来源：https://blog.csdn.net/weixin_43940133/article/details/118941594
->
-> 作者：不二e
-
-
-
-# 笑小枫💕
+## 笑小枫💕
 
 > 欢迎来到笑小枫的世界，喜欢的朋友关注一下我呦，大伙的支持，就是我坚持写下去的动力。
 >
@@ -24,9 +12,9 @@
 
 --------------------
 
-# 一、安装 #
+## 一、安装 
 
-1、方式一：进入官网[https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html][https_www.oracle.com_java_technologies_javase_javase-jdk8-downloads.html]下载JDK
+1、方式一：进入官网[https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html](https_www.oracle.com_java_technologies_javase_javase-jdk8-downloads.html)下载JDK
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293003850.jpg)
 
@@ -44,7 +32,7 @@
 5、安装完成  
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293005523.jpg)
 
-# 二、配置 #
+## 二、配置 #
 
 1、右击计算机图标，接着点击菜单最下方的属性菜单项，选择高级系统设置
 
