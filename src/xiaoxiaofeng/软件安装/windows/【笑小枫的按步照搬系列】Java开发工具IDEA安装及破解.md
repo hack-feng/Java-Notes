@@ -61,7 +61,7 @@
 
 如下如所示，就说明你已经激活成功了。
 
- ![img](http://file.xiaoxiaofeng.site/blog/qYueG6dugR-Ahr_sKrA38g.png)        
+![image-20221128194123310](https://image.xiaoxiaofeng.site/blog/image/image-20221128194123310.png?xiaoxiaofeng)        
 
 切记，后续不要升级 IDEA，否则激活可能会失效！！！。
 
@@ -93,4 +93,4 @@
 
 然后打开idea，配合文件夹中的code进行激活，操作如window一致。然后就可以看到成功激活到了2099年。
 
-![img](http://file.xiaoxiaofeng.site/blog/52baef2eef47372e4c6f43c057c516b1eff82755.png@819w_632h_progressive.webp)
+![image-20221128194153062](https://image.xiaoxiaofeng.site/blog/image/image-20221128194153062.png?xiaoxiaofeng)
