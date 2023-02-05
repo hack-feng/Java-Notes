@@ -108,16 +108,3 @@ cd命令进入项目tomcat的webapps目录下 --> 删除ROOT.war包和ROOT文件
 7.  ps -ef|grep tomcat：查看进程号；
 8.  kill -9 进程号：强制杀死进程。
 
-
-
-
-[http_www.hostbuf.com_downloads_finalshell_install.exe]: http://www.hostbuf.com/downloads/finalshell_install.exe
-[http_www.hostbuf.com_downloads_finalshell_install.pkg]: http://www.hostbuf.com/downloads/finalshell_install.pkg
-[20191030170633269.png]: https://img-blog.csdnimg.cn/20191030170633269.png
-[2019103017065937.png]: https://img-blog.csdnimg.cn/2019103017065937.png
-[20191030182550815.png]: https://img-blog.csdnimg.cn/20191030182550815.png
-[20191030182636888.png]: https://img-blog.csdnimg.cn/20191030182636888.png
-[20191030182301728.png]: https://img-blog.csdnimg.cn/20191030182301728.png
-[20191030182124485.png]: https://img-blog.csdnimg.cn/20191030182124485.png
-[https_blog.csdn.net_weixin_44259720_article_details_102824800]: https://blog.csdn.net/weixin_44259720/article/details/102824800
-[20191030182908795.png]: https://img-blog.csdnimg.cn/20191030182908795.png
