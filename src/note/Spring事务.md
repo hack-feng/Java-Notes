@@ -153,7 +153,7 @@ public class OrderService {
 
 如果此时把 @Service 注解注释掉，这个类就不会被加载成一个 Bean，那这个类就不会被 Spring 管理了，事务自然就失效了。
 
-**8、方法被定义为finall**
+**8、方法被定义为final**
 
 > 方法被定义成了final的，这样会导致spring aop生成的代理对象不能复写该方法，而让事务失效。
 
