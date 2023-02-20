@@ -40,7 +40,9 @@
 
 ### 为什么说Mybatis是半自动ORM映射工具？
 
-Hibernate属于全自动ORM映射工具，使用Hibernate查询关联对象或者关联集合对象时，可以根据对象关系模型直接获取，所以它是全自动的。而Mybatis在查询关联对象或关联集合对象时，需要手动编写sql来完成，所以，称之为半自动ORM映射工具。
+Hibernate属于全自动ORM映射工具，使用Hibernate查询关联对象或者关联集合对象时，可以根据对象关系模型直接获取，所以它是全自动的。
+
+Mybatis在查询关联对象或关联集合对象时，需要手动编写sql来完成，所以，称之为半自动ORM映射工具。
 
 ### #{}和${}的区别是什么？
 
@@ -135,11 +137,11 @@ system.out.println("generatedkeyvalue=" + name.getid());
 
 ### Mybatis的一级、二级缓存
 
-1)一级缓存:基于PerpetualCache的HashMap本地缓存，其存储作用域为Session，当Sessionflush或close之后，该Session中的所有Cache就将清空，默认打开一级缓存。
+1. 一级缓存:基于PerpetualCache的HashMap本地缓存，其存储作用域为Session，当Sessionflush或close之后，该Session中的所有Cache就将清空，默认打开一级缓存。
 
-2)二级缓存与一级缓存其机制相同，默认也是采用PerpetualCache，HashMap存储，不同在于其存储作用域为Mapper(Namespace)，并且可自定义存储源，如Ehcache。默认不打开二级缓存，要开启二级缓存，使用二级缓存属性类需要实现Serializable序列化接口(可用来保存对象的状态),可在它的映射文件中配置<cache/>；
+2. 二级缓存与一级缓存其机制相同，默认也是采用PerpetualCache，HashMap存储，不同在于其存储作用域为Mapper(Namespace)，并且可自定义存储源，如Ehcache。默认不打开二级缓存，要开启二级缓存，使用二级缓存属性类需要实现Serializable序列化接口(可用来保存对象的状态),可在它的映射文件中配置<cache/>；
 
-3)对于缓存数据更新机制，当某一个作用域(一级缓存Session/二级缓存Namespaces)的进行了C/U/D操作后，默认该作用域下所有select中的缓存将被clear。
+3. 对于缓存数据更新机制，当某一个作用域(一级缓存Session/二级缓存Namespaces)的进行了C/U/D操作后，默认该作用域下所有select中的缓存将被clear。
 
 ### 什么是MyBatis的接口绑定？
 

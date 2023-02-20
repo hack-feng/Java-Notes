@@ -10,15 +10,15 @@
 
 JAVA的小伙伴，别管用不用得到，先扫码收藏吧~
 
-![applet](https://image.xiaoxiaofeng.site/article/img/2023/02/15/xxf-20230215172705.jpeg)
+![applet-tg](https://image.xiaoxiaofeng.site/blog/image/applet-tg.png?xiaoxiaofeng)
 
 如果不方便搜索~你也可以通过微信搜索【笑小枫】，小程序是我，没错，公众号也是我，感兴趣的小伙伴也可以关注下，后续有通知会在公众号第一时间通知大家哟~
 
 当然需要人肉我的小伙伴，可以关注公众号后，在联系我们添加我的微信好友~
 
-![image-20230215172839672](https://image.xiaoxiaofeng.site/article/img/2023/02/15/xxf-20230215172844.png)
+<img src="https://image.xiaoxiaofeng.site/article/img/2023/02/15/xxf-20230215172844.png" alt="image-20230215172839672" style="zoom:25%;" />
 
-![image-20230215172847611](https://image.xiaoxiaofeng.site/article/img/2023/02/15/xxf-20230215172851.png)
+<img src="https://image.xiaoxiaofeng.site/article/img/2023/02/15/xxf-20230215172851.png" alt="image-20230215172847611" style="zoom:25%;" />
 
 ### 目前小程序已支持的功能
 
@@ -422,4 +422,4 @@ JVM & 什么是双亲委派模型的破坏？
 当然，如果可以，再奢求您的一个免费的关注~
 
 JAVA撸题免费小程序，速速戳进来吧~
-![applet](https://image.xiaoxiaofeng.site/article/img/2023/02/15/xxf-20230215172705.jpeg)
+![applet-tg](https://image.xiaoxiaofeng.site/blog/image/applet-tg.png?xiaoxiaofeng)
