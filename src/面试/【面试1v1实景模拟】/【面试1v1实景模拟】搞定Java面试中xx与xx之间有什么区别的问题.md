@@ -1,3 +1,30 @@
+## 前言/背景
+
+据说今年面试压力特别大，不知真假~
+
+不管面试压力大不大，复习好，该掌握的技术点都熟练掌握，珍惜每一次面试机会
+
+今天给大家分享一篇基础的面试题，不要输在这些基础且又常见的问题上
+
+![image-20230315192849401](https://image.xiaoxiaofeng.site/blog/image/image-20230315192849401.png?xiaoxiaofeng)
+
+
+## 资料总结/刷题指南
+
+
+
+![image-20230315193002814](https://image.xiaoxiaofeng.site/blog/image/image-20230315193002814.png?xiaoxiaofeng)
+
+这里先自荐一个面试刷题的小程序吧，大家可以免费去刷题，希望可以帮助到你。
+
+大家可以扫码前往，也可以微信搜索**【Java面试 | 笑小枫】**小程序。持续更新中，后续会上一些资源、简历模板、面试分享内容
+
+![applet-tg](https://image.xiaoxiaofeng.site/blog/image/applet-tg.png?xiaoxiaofeng)
+
+## 面试流程
+
+![image-20230315193356436](https://image.xiaoxiaofeng.site/blog/image/image-20230315193356436.png?xiaoxiaofeng)
+
 ### 老面👴：&和&&有什么区别？
 
 笑小枫🍁：&可用于位运算，当左右两边的条件不是布尔型，而是数字时，它会进行位运算；
@@ -279,3 +306,13 @@ run()方法是在本线程里的，只是线程里的一个函数，而不是多
 6. 跨域支持上不同
 * cookie支持跨域；
 * session不支持跨域。
+
+![image-20230315193758765](https://image.xiaoxiaofeng.site/blog/image/image-20230315193758765.png?xiaoxiaofeng)
+
+## 寄语
+
+本文到此就结束了，希望本文可以帮助到你，希望你可以找到一个满意的工作
+
+如果需要**简历模板**或者进行**面试指导**，可以关注**【笑小枫】**公众号私聊我哈
+
+![image-20230315193421391](https://image.xiaoxiaofeng.site/blog/image/image-20230315193421391.png?xiaoxiaofeng)
