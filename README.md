@@ -10,6 +10,12 @@
 
 我的csdn博客：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net) 
 
+## 赞赏
+
+![zhifubao](https://image.xiaoxiaofeng.site/blog/image/zhifubao.png?xiaoxiaofeng)![weixin](https://image.xiaoxiaofeng.site/blog/image/weixin.png?xiaoxiaofeng)
+
+
+
 ## JAVA日常笔记
 
 ### 日常开发常用命令

@@ -4,6 +4,8 @@
 
 随着分布式系统越来越普及，分布式系统中的并发编程成为了一个重要的话题。Java作为一种高级编程语言，其并发编程能力得到了广泛的认可。但在分布式系统中，Java并发编程面临着一些新的挑战。本文将介绍在分布式系统下Java并发编程的一些技术和实际案例。
 
+![image-20230409205028209](https://image.xiaoxiaofeng.site/blog/image/image-20230409205028209.png?xiaoxiaofeng)
+
 ## 一、线程安全
 
 在多线程编程中，线程安全是一个重要的问题。如果多个线程同时访问同一个共享资源，就会出现线程安全问题。例如，在银行账户转账时，如果多个线程同时对同一个账户进行操作，就会出现线程安全问题。
@@ -80,6 +82,8 @@ public class Counter {
 在这个示例中，Counter类使用ReentrantLock类来创建一个显式锁。increment()和decrement()方法获取锁并释放锁。这样，在同一时间只有一个线程可以访问increment()和decrement()方法。
 
 ## 三、死锁
+
+<img src="https://image.xiaoxiaofeng.site/blog/image/image-20230409205211771.png?xiaoxiaofeng" alt="image-20230409205211771" style="zoom:50%;" />
 
 死锁是多线程编程中的一种问题，它发生在两个或多个线程互相等待对方释放锁的情况下。例如：
 
@@ -161,6 +165,8 @@ public class DeadlockExample {
 
 ## 四、分布式系统下的并发编程挑战
 
+<img src="https://image.xiaoxiaofeng.site/blog/image/image-20230409205403525.png?xiaoxiaofeng" alt="image-20230409205403525" style="zoom:50%;" />
+
 在分布式系统中，由于不同的节点之间通过网络进行通信，因此会带来以下一些挑战：
 
 1. 网络延迟
@@ -178,6 +184,8 @@ public class DeadlockExample {
 ## 五、分布式锁的实现
 
 在分布式系统中，为了保证数据一致性，需要采用分布式锁来控制对共享资源的访问。下面介绍一种基于Redis实现的分布式锁。
+
+<img src="https://image.xiaoxiaofeng.site/blog/image/image-20230409205625391.png?xiaoxiaofeng" alt="image-20230409205625391" style="zoom:50%;" />
 
 ### 1. Redis实现分布式锁的原理
 
@@ -319,13 +327,15 @@ public class DistributedLockDemo {
 
 在分布式系统中，为了保证数据一致性，需要采用分布式事务来控制对共享资源的访问。下面介绍一种基于XA协议实现的分布式事务。
 
+<img src="https://image.xiaoxiaofeng.site/blog/image/image-20230409205723358.png?xiaoxiaofeng" alt="image-20230409205723358" style="zoom:33%;" />
+
 ### 1. XA协议的原理
 
 XA协议是一种分布式事务协议，可以用于协调多个数据库的事务。XA协议的原理如下：
 
 1）事务管理器向数据库发送XA START命令，开始一个分布式事务。
 
-2）事务管理器向数据库发送XA END命���，结束一个分布式事务。
+2）事务管理器向数据库发送XA END命令，结束一个分布式事务。
 
 3）事务管理器向数据库发送XA PREPARE命令，准备提交一个分布式事务。
 
@@ -445,7 +455,7 @@ public class XADistributedTransaction {
 }
 ```
 
-### 3. 阿里开源框架Seata实现分布式事务实现
+
 
 
 ## 七、总结

@@ -1,5 +1,6 @@
 > 分布式系统只能同时满足CAP中的两种，在设计分布式架构时必须做出取舍，而分区容忍性是基本要求，必须要满足，所以设计分布式系统，就是在一致性和可用性之间取一个平衡。BASE是对CAP中一致性和可用性权衡的结果，核心思想是即使无法做到强一致性，但每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性。
 
+![image-20230327222641965](C:\Users\cango\Desktop\image-20230327222641965.png)
 
 # 一、CAP理论与BASE理论： #
 
@@ -165,78 +166,3 @@ Raft算法将一致性问题分解为两个的子问题，Leader选举 + 数据�
 ⑨ 两个节点 Partition 的 Leader 自动降级为 Follower，因为这个 Partition 的数据 “bob” 没有 Commit，返回给客户端的是错误，客户端知道请求没有成功，所以 Follower 在收到 AppendEntries 请求时，可以把 “bob“ 删除，然后同步 ”tom”，通过这么一个过程，就完成了在 Network Partition 情况下的复制日志，保证了数据的一致性。
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2023/3/23/xxf-1679550330653.png)
-
---------------------
-
-> 相关阅读：
-> 
-> [常见的服务器架构入门：从单体架构、EAI 到 SOA 再到微服务和 ServiceMesh][EAI _ SOA _ ServiceMesh]
-> 
-> [常见分布式理论（CAP、BASE）和一致性协议（Gosssip协议、Raft一致性算法）][CAP_BASE_Gosssip_Raft]
-> 
-> [一致性哈希算法原理详解][Link 1]
-> 
-> [Nacos注册中心的部署与用法详细介绍][Nacos]
-> 
-> [Nacos配置中心用法详细介绍][Nacos 1]
-> 
-> [SpringCloud OpenFeign 远程HTTP服务调用用法与原理][SpringCloud OpenFeign _HTTP]
-> 
-> [什么是RPC？RPC框架dubbo的核心流程][RPC_RPC_dubbo]
-> 
-> [服务容错设计：流量控制、服务熔断、服务降级][Link 2]
-> 
-> [sentinel 限流熔断神器详细介绍][sentinel]
-> 
-> [Sentinel 规则持久化到 apollo 配置中心][Sentinel _ apollo]
-> 
-> [Sentinel-Dashboard 与 apollo 规则的相互同步][Sentinel-Dashboard _ apollo]
-> 
-> [Spring Cloud Gateway 服务网关的部署与使用详细介绍][Spring Cloud Gateway]
-> 
-> [Spring Cloud Gateway 整合 sentinel 实现流控熔断][Spring Cloud Gateway _ sentinel]
-> 
-> [Spring Cloud Gateway 整合 knife4j 聚合接口文档][Spring Cloud Gateway _ knife4j]
-> 
-> [常见分布式事务详解（2PC、3PC、TCC、Saga、本地事务表、MQ事务消息、最大努力通知）][2PC_3PC_TCC_Saga_MQ]
-> 
-> [分布式事务Seata原理][Seata]
-> 
-> [RocketMQ事务消息原理][RocketMQ]
-
-
-[2308ba0e864c4b6480147da22ef5fa48.png]: https://img-blog.csdnimg.cn/2308ba0e864c4b6480147da22ef5fa48.png
-[https_juejin.cn_post_7023918632216297479]: https://juejin.cn/post/7023918632216297479
-[d0111ba48c06425fa94c278e8620222c.png]: https://img-blog.csdnimg.cn/d0111ba48c06425fa94c278e8620222c.png
-[f332afd0613a40d98fa5cb2632e91e18.png]: https://img-blog.csdnimg.cn/f332afd0613a40d98fa5cb2632e91e18.png
-[https_baijiahao.baidu.com_s_id_1693824822611080380_wfr_spider_for_pc]: https://baijiahao.baidu.com/s?id=1693824822611080380&wfr=spider&for=pc
-[1529cebf81ab43fe8d5e7dd739cd9f07.png]: https://img-blog.csdnimg.cn/1529cebf81ab43fe8d5e7dd739cd9f07.png
-[5e016ee96dc74ffea9fea5048d8cef88.png]: https://img-blog.csdnimg.cn/5e016ee96dc74ffea9fea5048d8cef88.png
-[a1c559d783f743b89e303db59e108092.png]: https://img-blog.csdnimg.cn/a1c559d783f743b89e303db59e108092.png
-[b2380ac85485480593c2701ea3b25325.png]: https://img-blog.csdnimg.cn/b2380ac85485480593c2701ea3b25325.png
-[cd69ae79c7164475a8637956301ba1fd.png]: https://img-blog.csdnimg.cn/cd69ae79c7164475a8637956301ba1fd.png
-[26d33dbf66484eceafacf00ba90854e2.png]: https://img-blog.csdnimg.cn/26d33dbf66484eceafacf00ba90854e2.png
-[b042fd93816745548a54cb7089bb81c6.png]: https://img-blog.csdnimg.cn/b042fd93816745548a54cb7089bb81c6.png
-[338605d1d9e94a8fa622f02f382e153a.png]: https://img-blog.csdnimg.cn/338605d1d9e94a8fa622f02f382e153a.png
-[b8fa17b0689d409db6fe0e081be30df3.png]: https://img-blog.csdnimg.cn/b8fa17b0689d409db6fe0e081be30df3.png
-[fba444fab7c5486d977296e0ad04832f.png]: https://img-blog.csdnimg.cn/fba444fab7c5486d977296e0ad04832f.png
-[edcab9b0a82742ff934670813e01d6a8.png]: https://img-blog.csdnimg.cn/edcab9b0a82742ff934670813e01d6a8.png
-[877e496f90d043039ac40f453bc2594a.png]: https://img-blog.csdnimg.cn/877e496f90d043039ac40f453bc2594a.png
-[9eea2757aa4a4d60ab8988a93b354edd.png]: https://img-blog.csdnimg.cn/9eea2757aa4a4d60ab8988a93b354edd.png
-[EAI _ SOA _ ServiceMesh]: https://blog.csdn.net/a745233700/article/details/117448077
-[CAP_BASE_Gosssip_Raft]: https://blog.csdn.net/a745233700/article/details/122401700
-[Link 1]: https://blog.csdn.net/a745233700/article/details/120814088
-[Nacos]: https://blog.csdn.net/a745233700/article/details/122915663
-[Nacos 1]: https://blog.csdn.net/a745233700/article/details/122916208
-[SpringCloud OpenFeign _HTTP]: https://blog.csdn.net/a745233700/article/details/122916856
-[RPC_RPC_dubbo]: https://blog.csdn.net/a745233700/article/details/122445199
-[Link 2]: https://blog.csdn.net/a745233700/article/details/120819219
-[sentinel]: https://blog.csdn.net/a745233700/article/details/122733366
-[Sentinel _ apollo]: https://blog.csdn.net/a745233700/article/details/122725604
-[Sentinel-Dashboard _ apollo]: https://blog.csdn.net/a745233700/article/details/122659459
-[Spring Cloud Gateway]: https://blog.csdn.net/a745233700/article/details/122917167
-[Spring Cloud Gateway _ sentinel]: https://blog.csdn.net/a745233700/article/details/122917160
-[Spring Cloud Gateway _ knife4j]: https://blog.csdn.net/a745233700/article/details/122917137
-[2PC_3PC_TCC_Saga_MQ]: https://blog.csdn.net/a745233700/article/details/122402303
-[Seata]: https://blog.csdn.net/a745233700/article/details/122402795
-[RocketMQ]: https://blog.csdn.net/a745233700/article/details/122656108

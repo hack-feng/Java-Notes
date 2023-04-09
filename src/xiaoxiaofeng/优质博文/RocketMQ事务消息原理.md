@@ -78,79 +78,77 @@ RocketMQ的安装与部署请参考这篇文章：[https://blog.csdn.net/a745233
 
 实现 TransactionListener 接口，在实现的数据库事务提交方法executeLocalTransaction() 和回查事务状态方法checkLocalTransaction() 中模拟结果
 
+```java
+/**
+ * rocketmq 事务消息回调类
+ */
+@Slf4j
+@Component
+public class OrderTransactionListener implements TransactionListener
+{
+    @Resource
+    private ShopOrderMapper shopOrderMapper;
+
     /**
-     * rocketmq 事务消息回调类
+     * half消息发送成功后回调此方法，执行本地事务
+     *
+     * @param message 回传的消息，利用transactionId即可获取到该消息的唯一Id
+     * @param arg 调用send方法时传递的参数，当send时候若有额外的参数可以传递到send方法中，这里能获取到
+     * @return 返回事务状态，COMMIT：提交  ROLLBACK：回滚  UNKNOW：回调
      */
-    @Slf4j
-    @Component
-    public class OrderTransactionListener implements TransactionListener
+    @Override
+    @Transactional
+    public LocalTransactionState executeLocalTransaction(Message message, Object arg)
     {
-        @Resource
-        private ShopOrderMapper shopOrderMapper;
-    
-        /**
-         * half消息发送成功后回调此方法，执行本地事务
-         *
-         * @param message 回传的消息，利用transactionId即可获取到该消息的唯一Id
-         * @param arg 调用send方法时传递的参数，当send时候若有额外的参数可以传递到send方法中，这里能获取到
-         * @return 返回事务状态，COMMIT：提交  ROLLBACK：回滚  UNKNOW：回调
-         */
-        @Override
-        @Transactional
-        public LocalTransactionState executeLocalTransaction(Message message, Object arg)
+        log.info("开始执行本地事务：订单信息：" + new String(message.getBody()));
+        String msgKey = new String(message.getBody());
+        ShopOrderPojo shopOrder = JSONObject.parseObject(msgKey, ShopOrderPojo.class);
+
+        int saveResult;
+        LocalTransactionState state;
+        try
         {
-            log.info("开始执行本地事务：订单信息：" + new String(message.getBody()));
-            String msgKey = new String(message.getBody());
-            ShopOrderPojo shopOrder = JSONObject.parseObject(msgKey, ShopOrderPojo.class);
-    
-            int saveResult;
-            LocalTransactionState state;
-            try
+            //修改为true时，模拟本地事务异常
+            boolean imitateException = true;
+            if(imitateException)
             {
-                //修改为true时，模拟本地事务异常
-                boolean imitateException = true;
-                if(imitateException)
-                {
-                    throw new RuntimeException("更新本地事务时抛出异常");
-                }
-    
-                // 生成订单，本地事务的回滚依赖于DB的ACID特性，所以需要添加Transactional注解。当本地事务提交失败时，返回ROLLBACK_MESSAGE，则会回滚rocketMQ中的half message，保证分布式事务的一致性。
-                saveResult = shopOrderMapper.insert(shopOrder);
-                state = saveResult == 1 ? LocalTransactionState.COMMIT_MESSAGE : LocalTransactionState.ROLLBACK_MESSAGE;
-    
-                // 更新本地事务并将事务号持久化，为后续的幂等做准备
-                // TransactionDao.add(transactionId)
+                throw new RuntimeException("更新本地事务时抛出异常");
             }
-            catch (Exception e)
-            {
-                log.error("本地事务执行异常，异常信息：", e);
-                state = LocalTransactionState.ROLLBACK_MESSAGE;
-            }
-    
-            //修改为true时，模拟本地事务超时，对于超时的消息，rocketmq会调用checkLocalTransaction方法回查本地事务执行状况
-            boolean imitateTimeout = false;
-            if(imitateTimeout)
-            {
-                state = LocalTransactionState.UNKNOW;
-            }
-    
-            log.info("本地事务执行结果：msgKey=" + msgKey + ",execute state:" + state);
-            return state;
+
+            // 生成订单，本地事务的回滚依赖于DB的ACID特性，所以需要添加Transactional注解。当本地事务提交失败时，返回ROLLBACK_MESSAGE，则会回滚rocketMQ中的half message，保证分布式事务的一致性。
+            saveResult = shopOrderMapper.insert(shopOrder);
+            state = saveResult == 1 ? LocalTransactionState.COMMIT_MESSAGE : LocalTransactionState.ROLLBACK_MESSAGE;
+
+            // 更新本地事务并将事务号持久化，为后续的幂等做准备
+            // TransactionDao.add(transactionId)
+        }
+        catch (Exception e)
+        {
+            log.error("本地事务执行异常，异常信息：", e);
+            state = LocalTransactionState.ROLLBACK_MESSAGE;
         }
 
-
-​    
-        /**
-         * 回查本地事务接口
-         *
-         * @param messageExt 通过获取transactionId来判断这条消息的本地事务执行状态
-         * @return 返回事务状态，COMMIT：提交  ROLLBACK：回滚  UNKNOW：回调
-         */
-        @Override
-        public LocalTransactionState checkLocalTransaction(MessageExt messageExt)
+        //修改为true时，模拟本地事务超时，对于超时的消息，rocketmq会调用checkLocalTransaction方法回查本地事务执行状况
+        boolean imitateTimeout = false;
+        if(imitateTimeout)
         {
+            state = LocalTransactionState.UNKNOW;
+        }
+
+        log.info("本地事务执行结果：msgKey=" + msgKey + ",execute state:" + state);
+        return state;
+    }
+
+
+    /**
+     * 回查本地事务接口
+     *
+     * @param messageExt 通过获取transactionId来判断这条消息的本地事务执行状态
+     * @return 返回事务状态，COMMIT：提交  ROLLBACK：回滚  UNKNOW：回调
+     */
+    @Override
+    public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
             log.info("调用回查本地事务接口：msgKey=" +  new String(messageExt.getBody()));
-    
             String msgKey = new String(messageExt.getBody());
             ShopOrderPojo shopOrder = JSONObject.parseObject(msgKey, ShopOrderPojo.class);
     
@@ -166,53 +164,55 @@ RocketMQ的安装与部署请参考这篇文章：[https://blog.csdn.net/a745233
             return state;
         }
     }
-
+```
 为了方便验证，上面 Demo 使用了两个 boolean 变量 imitateException、imitateTimeout 分别模拟了事务执行异常和超时的情况，只需要将布尔值设置为 true 即可。
 
 **（3）投递事务消息：**
 
-    import com.alibaba.fastjson.JSONObject;
-    import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-    import lombok.extern.slf4j.Slf4j;
-    import org.apache.rocketmq.client.producer.SendStatus;
-    import org.apache.rocketmq.client.producer.TransactionMQProducer;
-    import org.apache.rocketmq.client.producer.TransactionSendResult;
-    import org.apache.rocketmq.spring.core.RocketMQTemplate;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.messaging.support.MessageBuilder;
-    import org.springframework.stereotype.Service;
-    
-    @Slf4j
-    @Service
-    public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrderPojo> implements ShopOrderService
+```java
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.SendStatus;
+import org.apache.rocketmq.client.producer.TransactionMQProducer;
+import org.apache.rocketmq.client.producer.TransactionSendResult;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrderPojo> implements ShopOrderService
+{
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private OrderTransactionListener orderTransactionListener;
+
+    /**
+     * 发送事务消息
+     */
+    @Override
+    public boolean sendOrderRocketMqMsg(ShopOrderPojo shopOrderPojo)
     {
-        @Resource
-        private RocketMQTemplate rocketMQTemplate;
-        @Autowired
-        private OrderTransactionListener orderTransactionListener;
-    
-        /**
-         * 发送事务消息
-         */
-        @Override
-        public boolean sendOrderRocketMqMsg(ShopOrderPojo shopOrderPojo)
-        {
-            String topic = "storage";
-            String tag = "reduce";
-    
-            // 设置监听器，此处如果使用MQ其他版本，可能导致强转异常
-            ((TransactionMQProducer) rocketMQTemplate.getProducer()).setTransactionListener(orderTransactionListener);
-    
-            //构建消息体
-            String msg = JSONObject.toJSONString(shopOrderPojo);
-            org.springframework.messaging.Message<String> message = MessageBuilder.withPayload(msg).build();
-            //发送事务消息，由消费者进行进行减少库存
-            TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction(topic + ":" + tag , message, null);
-    
-            log.info("Send transaction msg result: " + sendResult);
-            return sendResult.getSendStatus() == SendStatus.SEND_OK;
-        }
+        String topic = "storage";
+        String tag = "reduce";
+
+        // 设置监听器，此处如果使用MQ其他版本，可能导致强转异常
+        ((TransactionMQProducer) rocketMQTemplate.getProducer()).setTransactionListener(orderTransactionListener);
+
+        //构建消息体
+        String msg = JSONObject.toJSONString(shopOrderPojo);
+        org.springframework.messaging.Message<String> message = MessageBuilder.withPayload(msg).build();
+        //发送事务消息，由消费者进行进行减少库存
+        TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction(topic + ":" + tag , message, null);
+
+        log.info("Send transaction msg result: " + sendResult);
+        return sendResult.getSendStatus() == SendStatus.SEND_OK;
     }
+}
+```
 
 ### 4、消费端代码： ###
 
@@ -227,45 +227,47 @@ RocketMQ的安装与部署请参考这篇文章：[https://blog.csdn.net/a745233
 
 **（2）消费监听类：** 
 
-    import com.alibaba.fastjson.JSONObject;
-    import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
-    import org.apache.rocketmq.spring.core.RocketMQListener;
-    import org.springframework.stereotype.Component;
-    import javax.annotation.Resource;
-    
+```java
+import com.alibaba.fastjson.JSONObject;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
+import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
+
+/**
+ * 库存管理消费者类
+ **/
+@Component
+@RocketMQMessageListener (consumerGroup = "order_storage", topic = "storage")
+public class StorageConsumerListener implements RocketMQListener<String>
+{
+    @Resource
+    private TStorageService tStorageService;
+
     /**
-     * 库存管理消费者类
-     **/
-    @Component
-    @RocketMQMessageListener (consumerGroup = "order_storage", topic = "storage")
-    public class StorageConsumerListener implements RocketMQListener<String>
+     * rocketMQ消费者
+     */
+    @Override
+    public void onMessage(String message)
     {
-        @Resource
-        private TStorageService tStorageService;
-    
-        /**
-         * rocketMQ消费者
-         */
-        @Override
-        public void onMessage(String message)
-        {
-            System.out.println("消费者开始消费：从MQ中获取的消息是：" + message);
-            ShopOrderPojo shopOrder = JSONObject.parseObject(message, ShopOrderPojo.class);
-    
-            // 1、幂等校验，防止消息重复消费--此处省略相关的代码逻辑：
-            // TransactionDao.isExistTx(transactionId)
-    
-            // 2、执行消息消费操作--减少商品库存：
-            TStoragePojo shop = tStorageService.getById(shopOrder.getShopId());
-            shop.setNum(shop.getNum() - 1);
-            boolean updateResult = tStorageService.updateById(shop);
-    
-            // 3、添加事务操作记录--此次省略代码：
-            // TransactionDao.add(transactionId)
-    
-            System.out.println("消费者完成消费：操作结果：" + updateResult);
-        }
+        System.out.println("消费者开始消费：从MQ中获取的消息是：" + message);
+        ShopOrderPojo shopOrder = JSONObject.parseObject(message, ShopOrderPojo.class);
+
+        // 1、幂等校验，防止消息重复消费--此处省略相关的代码逻辑：
+        // TransactionDao.isExistTx(transactionId)
+
+        // 2、执行消息消费操作--减少商品库存：
+        TStoragePojo shop = tStorageService.getById(shopOrder.getShopId());
+        shop.setNum(shop.getNum() - 1);
+        boolean updateResult = tStorageService.updateById(shop);
+
+        // 3、添加事务操作记录--此次省略代码：
+        // TransactionDao.add(transactionId)
+
+        System.out.println("消费者完成消费：操作结果：" + updateResult);
     }
+}
+```
 
 至此，一个完整的基于 RocketMQ 事务消息实现的分布式事务的最终一致性就完成了。
 

@@ -154,60 +154,62 @@ TC 运行需要将事务信息保存在数据库，因此需要创建一些表�
 
 以 MySQL 数据库为例，创建数据库 seata，并执行 mysql.sql 文件中的sql语句：
 
-    CREATE TABLE IF NOT EXISTS `global_table`
-    (
-        `xid`                       VARCHAR(128) NOT NULL,
-        `transaction_id`            BIGINT,
-        `status`                    TINYINT      NOT NULL,
-        `application_id`            VARCHAR(32),
-        `transaction_service_group` VARCHAR(32),
-        `transaction_name`          VARCHAR(128),
-        `timeout`                   INT,
-        `begin_time`                BIGINT,
-        `application_data`          VARCHAR(2000),
-        `gmt_create`                DATETIME,
-        `gmt_modified`              DATETIME,
-        PRIMARY KEY (`xid`),
-        KEY `idx_gmt_modified_status` (`gmt_modified`, `status`),
-        KEY `idx_transaction_id` (`transaction_id`)
-    ) ENGINE = InnoDB
-      DEFAULT CHARSET = utf8;
-    
-    -- the table to store BranchSession data
-    CREATE TABLE IF NOT EXISTS `branch_table`
-    (
-        `branch_id`         BIGINT       NOT NULL,
-        `xid`               VARCHAR(128) NOT NULL,
-        `transaction_id`    BIGINT,
-        `resource_group_id` VARCHAR(32),
-        `resource_id`       VARCHAR(256),
-        `branch_type`       VARCHAR(8),
-        `status`            TINYINT,
-        `client_id`         VARCHAR(64),
-        `application_data`  VARCHAR(2000),
-        `gmt_create`        DATETIME(6),
-        `gmt_modified`      DATETIME(6),
-        PRIMARY KEY (`branch_id`),
-        KEY `idx_xid` (`xid`)
-    ) ENGINE = InnoDB
-      DEFAULT CHARSET = utf8;
-    
-    -- the table to store lock data
-    CREATE TABLE IF NOT EXISTS `lock_table`
-    (
-        `row_key`        VARCHAR(128) NOT NULL,
-        `xid`            VARCHAR(128),
-        `transaction_id` BIGINT,
-        `branch_id`      BIGINT       NOT NULL,
-        `resource_id`    VARCHAR(256),
-        `table_name`     VARCHAR(32),
-        `pk`             VARCHAR(36),
-        `gmt_create`     DATETIME,
-        `gmt_modified`   DATETIME,
-        PRIMARY KEY (`row_key`),
-        KEY `idx_branch_id` (`branch_id`)
-    ) ENGINE = InnoDB
-      DEFAULT CHARSET = utf8;
+```sql
+CREATE TABLE IF NOT EXISTS `global_table`
+(
+    `xid`                       VARCHAR(128) NOT NULL,
+    `transaction_id`            BIGINT,
+    `status`                    TINYINT      NOT NULL,
+    `application_id`            VARCHAR(32),
+    `transaction_service_group` VARCHAR(32),
+    `transaction_name`          VARCHAR(128),
+    `timeout`                   INT,
+    `begin_time`                BIGINT,
+    `application_data`          VARCHAR(2000),
+    `gmt_create`                DATETIME,
+    `gmt_modified`              DATETIME,
+    PRIMARY KEY (`xid`),
+    KEY `idx_gmt_modified_status` (`gmt_modified`, `status`),
+    KEY `idx_transaction_id` (`transaction_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+-- the table to store BranchSession data
+CREATE TABLE IF NOT EXISTS `branch_table`
+(
+    `branch_id`         BIGINT       NOT NULL,
+    `xid`               VARCHAR(128) NOT NULL,
+    `transaction_id`    BIGINT,
+    `resource_group_id` VARCHAR(32),
+    `resource_id`       VARCHAR(256),
+    `branch_type`       VARCHAR(8),
+    `status`            TINYINT,
+    `client_id`         VARCHAR(64),
+    `application_data`  VARCHAR(2000),
+    `gmt_create`        DATETIME(6),
+    `gmt_modified`      DATETIME(6),
+    PRIMARY KEY (`branch_id`),
+    KEY `idx_xid` (`xid`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+-- the table to store lock data
+CREATE TABLE IF NOT EXISTS `lock_table`
+(
+    `row_key`        VARCHAR(128) NOT NULL,
+    `xid`            VARCHAR(128),
+    `transaction_id` BIGINT,
+    `branch_id`      BIGINT       NOT NULL,
+    `resource_id`    VARCHAR(256),
+    `table_name`     VARCHAR(32),
+    `pk`             VARCHAR(36),
+    `gmt_create`     DATETIME,
+    `gmt_modified`   DATETIME,
+    PRIMARY KEY (`row_key`),
+    KEY `idx_branch_id` (`branch_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+```
 
 创建的三张表如下图：
 
@@ -221,30 +223,32 @@ TC 运行需要将事务信息保存在数据库，因此需要创建一些表�
 
 找到 seata-server-1.4.2\\seata\\conf 目录，其中有一个 registry.conf 文件，其中配置了TC的注册中心和配置中心。默认的注册中心是 file 形式，实际使用中肯定不能使用，需要改成Nacos形式；同样 Seate 的 TC 的配置中心默认也是使用 file 形式，需要修改为 nacos 作为配置中心：
 
-    registry {
-      # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
-      type = "nacos"
-      nacos {
-        application = "seata-server"
-        serverAddr = "localhost:8848"
-        namespace = "XXXXXXXXXX"
-        cluster = "default"
-        username = "nacos"
-        password = "nacos"
-      }
-    }
-    
-    config {
-      # file、nacos 、apollo、zk、consul、etcd3
-      type = "nacos"
-      nacos {
-        serverAddr = "localhost:8848"
-        namespace = "XXXXXXXXXX"
-        group = "SEATA_GROUP"
-        username = "nacos"
-        password = "nacos"
-      }
-    }
+```
+registry {
+  # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
+  type = "nacos"
+  nacos {
+    application = "seata-server"
+    serverAddr = "localhost:8848"
+    namespace = "XXXXXXXXXX"
+    cluster = "default"
+    username = "nacos"
+    password = "nacos"
+  }
+}
+
+config {
+  # file、nacos 、apollo、zk、consul、etcd3
+  type = "nacos"
+  nacos {
+    serverAddr = "localhost:8848"
+    namespace = "XXXXXXXXXX"
+    group = "SEATA_GROUP"
+    username = "nacos"
+    password = "nacos"
+  }
+}
+```
 
 需要改动的地方如下：
 
@@ -324,57 +328,61 @@ redis模式 Seata-Server 1.3 及以上版本支持，性能较高，但存在事
 
 ### 2.1、maven 添加 seata 依赖： ###
 
-    <dependency>
-       <groupId>com.alibaba.cloud</groupId>
-       <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-       <!-- 排除依赖，指定版本和服务端一致 -->
-        <exclusions>
-           <exclusion>
-               <groupId>io.seata</groupId>
-               <artifactId>seata-spring-boot-starter</artifactId>
-           </exclusion>
-           <exclusion>
-               <groupId>io.seata</groupId>
-               <artifactId>seata-all</artifactId>
-           </exclusion>
-       </exclusions>
-    </dependency>
-    <dependency>
-        <groupId>io.seata</groupId>
-        <artifactId>seata-spring-boot-starter</artifactId>
-        <version>1.4.2</version>
-    </dependency>
-    <dependency>
-       <groupId>io.seata</groupId>
-       <artifactId>seata-all</artifactId>
-       <version>1.4.2</version>
-    </dependency>
+```xml
+<dependency>
+   <groupId>com.alibaba.cloud</groupId>
+   <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+   <!-- 排除依赖，指定版本和服务端一致 -->
+    <exclusions>
+       <exclusion>
+           <groupId>io.seata</groupId>
+           <artifactId>seata-spring-boot-starter</artifactId>
+       </exclusion>
+       <exclusion>
+           <groupId>io.seata</groupId>
+           <artifactId>seata-all</artifactId>
+       </exclusion>
+   </exclusions>
+</dependency>
+<dependency>
+    <groupId>io.seata</groupId>
+    <artifactId>seata-spring-boot-starter</artifactId>
+    <version>1.4.2</version>
+</dependency>
+<dependency>
+   <groupId>io.seata</groupId>
+   <artifactId>seata-all</artifactId>
+   <version>1.4.2</version>
+</dependency>
+```
 
 > 注意：seata客户端的依赖版本必须要和服务端一致。
 
 ### 2.2、application.yml 添加 seate 配置： ###
 
-    seata:
-      # 这里要特别注意和nacos中配置的要保持一致，建议配置成 ${spring.application.name}-tx-group
-      tx-service-group: my_test_tx_group
-      registry:
-        type: nacos
-        nacos:
-          # 配置所在命名空间ID，如未配置默认public空间
-          server-addr: 127.0.0.1:8848
-          namespace: XXXXXXXXXX
-          group: SEATA_GROUP
-          application: seata-server
-          userName: nacos
-          password: nacos
-      config:
-        type: nacos
-        nacos:
-          server-addr: 127.0.0.1:8848
-          namespace: XXXXXXXXXX
-          group: SEATA_GROUP
-          userName: nacos
-          password: nacos
+```yml
+seata:
+  # 这里要特别注意和nacos中配置的要保持一致，建议配置成 ${spring.application.name}-tx-group
+  tx-service-group: my_test_tx_group
+  registry:
+    type: nacos
+    nacos:
+      # 配置所在命名空间ID，如未配置默认public空间
+      server-addr: 127.0.0.1:8848
+      namespace: XXXXXXXXXX
+      group: SEATA_GROUP
+      application: seata-server
+      userName: nacos
+      password: nacos
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: XXXXXXXXXX
+      group: SEATA_GROUP
+      userName: nacos
+      password: nacos
+```
 
 tx-service-group 配置的值可以自定义，但是定义后需要在 nacos 配置中心新增 service.vgroupMapping.xxx=default 的配置，该属性一定一定要和 seata 服务端的配置一致，否则不生效；比如上述配置中的，就需要在 nacos 配置中心新增一个配置项 service.vgroupMapping.my\_test-tx-group=default，并且设置分组为SEATA\_GROUP，如下图：
 
@@ -388,41 +396,47 @@ tx-service-group 配置的值可以自定义，但是定义后需要在 nacos �
 
 回滚日志表：undo\_log，这是Seata要求必须有的，每个业务库都应该创建一个，SQL如下：
 
-    CREATE TABLE IF NOT EXISTS `undo_log`
-    (
-        `branch_id`     BIGINT       NOT NULL COMMENT 'branch transaction id',
-        `xid`           VARCHAR(128) NOT NULL COMMENT 'global transaction id',
-        `context`       VARCHAR(128) NOT NULL COMMENT 'undo_log context,such as serialization',
-        `rollback_info` LONGBLOB     NOT NULL COMMENT 'rollback info',
-        `log_status`    INT(11)      NOT NULL COMMENT '0:normal status,1:defense status',
-        `log_created`   DATETIME(6)  NOT NULL COMMENT 'create datetime',
-        `log_modified`  DATETIME(6)  NOT NULL COMMENT 'modify datetime',
-        UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
-    ) ENGINE = InnoDB
-      AUTO_INCREMENT = 1
-      DEFAULT CHARSET = utf8 COMMENT ='AT transaction mode undo table';
+```sql
+CREATE TABLE IF NOT EXISTS `undo_log`
+(
+    `branch_id`     BIGINT       NOT NULL COMMENT 'branch transaction id',
+    `xid`           VARCHAR(128) NOT NULL COMMENT 'global transaction id',
+    `context`       VARCHAR(128) NOT NULL COMMENT 'undo_log context,such as serialization',
+    `rollback_info` LONGBLOB     NOT NULL COMMENT 'rollback info',
+    `log_status`    INT(11)      NOT NULL COMMENT '0:normal status,1:defense status',
+    `log_created`   DATETIME(6)  NOT NULL COMMENT 'create datetime',
+    `log_modified`  DATETIME(6)  NOT NULL COMMENT 'modify datetime',
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8 COMMENT ='AT transaction mode undo table';
+```
 
 ### 2.4、使用 seata 作为全局事务控制： ###
 
 在分布式业务入口增加全局事务注解 @GlobalTransactional，其他 service 接口无需配置；假设A服务调用B服务，那么就在A服务的方法上面加入，B服务上面不用加
 
-    /**
-         * seata 的 GlobalTransactional 注解只需要加载分布式业务入口处，其他service接口无需配置，从而实现分布式事务
-         */
-        @GlobalTransactional
-        @PostMapping (value = "addOrder",produces = {"application/json;charset=utf-8"})
-        public String addOrder(@RequestParam String title, @RequestParam int price, @RequestParam int shopId, @RequestParam int userId)
-        {
-            shopOrderService.save(ShopOrderPojo.builder().price(price).title(title).shopId(shopId).userId(userId).build());
-            storageFeignService.reduceStorage(shopId, 1);
-            return "success";
-        }
+```java
+/**
+     * seata 的 GlobalTransactional 注解只需要加载分布式业务入口处，其他service接口无需配置，从而实现分布式事务
+     */
+    @GlobalTransactional
+    @PostMapping (value = "addOrder",produces = {"application/json;charset=utf-8"})
+    public String addOrder(@RequestParam String title, @RequestParam int price, @RequestParam int shopId, @RequestParam int userId)
+    {
+        shopOrderService.save(ShopOrderPojo.builder().price(price).title(title).shopId(shopId).userId(userId).build());
+        storageFeignService.reduceStorage(shopId, 1);
+        return "success";
+    }
+```
 
 备注：如果你进行异常捕捉，seata 将认为你已进行异常处理，就不会回滚数据了
 
- *  （1）比如如果你配置了@ControllerAdvice将可能导致数据不回滚
- *  （2）如果使用 Feign 调用分布式服务并配置了fallback，后面服务抛出异常会直接执行fallback导致无法回滚(rollbackFor = Exception.class)；这时可以在fallback的实现方法内手动调用seata全局回滚，如下所示：
+ * （1）比如如果你配置了@ControllerAdvice将可能导致数据不回滚
 
+ * （2）如果使用 Feign 调用分布式服务并配置了fallback，后面服务抛出异常会直接执行fallback导致无法回滚(rollbackFor = Exception.class)；这时可以在fallback的实现方法内手动调用seata全局回滚，如下所示：
+
+~~~java
     @Override
         public BizResponse insertAge(Integer age) {
             //feign调用接口fallback后需要手动调用全局事务回滚
@@ -433,7 +447,8 @@ tx-service-group 配置的值可以自定义，但是定义后需要在 nacos �
                 e.printStackTrace();
             }
             return BizResponse.fail("客户端降级处理insertAge，" + Thread.currentThread().getName());
-        }
+}
+~~~
 
 ### 2.5、undo log 表介绍： ###
 
