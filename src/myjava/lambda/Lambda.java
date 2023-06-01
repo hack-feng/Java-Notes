@@ -96,6 +96,8 @@ public class Lambda {
         System.out.println("最大id值为：" + maxId);
         Integer minId = userList.stream().map(User::getId).min(Integer::compareTo).get();
         System.out.println("最小id值为：" + minId);
+
+        List<Integer> newIds = userList.stream().map(User::getId).collect(Collectors.toList());
     }
 
     // 定义User类，用作测试使用
