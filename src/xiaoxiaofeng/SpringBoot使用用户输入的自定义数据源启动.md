@@ -642,6 +642,22 @@ public class InitConfigProperties {
 
 ![image-20230526112454084](https://image.xiaoxiaofeng.site/blog/2023/05/26/xxf-20230526112454.png?xxfjava)
 
+
+
+最后附上现有业务的两张初始化的页面吧，就不贴代码了~
+
+初始化页面：
+
+![image-20230606101627994](https://image.xiaoxiaofeng.site/blog/2023/06/06/xxf-20230606101724.png?xxfjava)
+
+初始化数据库画面：
+
+![image-20230606101437988](https://image.xiaoxiaofeng.site/blog/2023/06/06/xxf-20230606101723.png?xxfjava)
+
+初始化管理员账号信息画面：
+
+![image-20230606101518567](https://image.xiaoxiaofeng.site/blog/2023/06/06/xxf-20230606101736.png?xxfjava)
+
 ## 五、功能总结
 
 本文主要利用Mybatis Plus的动态切换数据源的功能，间接实现了无数据源启动，用户自定义数据源的功能。只是一种实现思路，肯定还会有更优的实现方案，暂时还没有找到，如找到，会继续出文介绍。

@@ -1,7 +1,3 @@
----
-typora-copy-images-to: img
----
-
 # 1. 计算机基础知识
 
 ## 1.1 计算机
