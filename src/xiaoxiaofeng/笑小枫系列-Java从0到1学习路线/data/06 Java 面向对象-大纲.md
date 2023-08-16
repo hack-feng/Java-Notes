@@ -1,3 +1,5 @@
+![06 Java 面向对象](https://image.xiaoxiaofeng.site/blog/2023/08/07/xxf-20230807103958.png?xxfjava)
+
 # 06 Java 面向对象
 
 ## 1. 面向对象思想
