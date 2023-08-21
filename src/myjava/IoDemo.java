@@ -40,7 +40,7 @@ public class IoDemo {
             byte[] bytes = new byte[1024];
             int count = 0;
             int temp;
-            while((temp = inputStream.read()) != -1){
+            while ((temp = inputStream.read()) != -1) {
                 bytes[count++] = (byte) temp;
             }
             inputStream.close();
@@ -64,7 +64,7 @@ public class IoDemo {
         }
     }
 
-    private static void writeFile(String path, String fileName){
+    private static void writeFile(String path, String fileName) {
         createPath(path);
         File file = new File(path + File.separator + fileName);
         try {
@@ -91,13 +91,13 @@ public class IoDemo {
 
     private static void listFile(String path) {
         File file = new File(path);
-        if(file.list() != null){
+        if (file.list() != null) {
             System.out.println("listFile file list：");
             // 如果只看文件名，使用file.list()即可，返回String[] fileName
             for (File f : Objects.requireNonNull(file.listFiles())) {
                 System.out.println(f);
             }
-        }else{
+        } else {
             System.out.println("listFile No files!");
         }
 
@@ -105,21 +105,21 @@ public class IoDemo {
 
     private static void deleteFile(String path, String fileName) {
         File file = new File(path + File.separator + fileName);
-        if(file.exists()){
-            System.out.println(file.getName() +  " --- deleteFile result" + file.delete());
+        if (file.exists()) {
+            System.out.println(file.getName() + " --- deleteFile result" + file.delete());
         }
     }
 
     private static void createPath(String path) {
         File pathFile = new File(path);
-        if(pathFile.mkdirs()){
+        if (pathFile.mkdirs()) {
             System.out.println(path + " --- createPath result");
         }
     }
 
-    private static void createFile(String path, String fileName){
+    private static void createFile(String path, String fileName) {
         File pathFile = new File(path);
-        if(pathFile.mkdirs()){
+        if (pathFile.mkdirs()) {
             System.out.println(path + "is not exsit, this is auto create.");
         }
         try {

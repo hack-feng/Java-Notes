@@ -1,3 +1,5 @@
+![image-20230821100017404](https://image.xiaoxiaofeng.site/blog/2023/08/21/xxf-20230821100017.png?xxfjava)
+
 ## 1. System类
 
 System类对读者来说并不陌生，因为在之前所学知识中，需要打印结果时，使用的都是“System.out.println();”语句，这句代码中就使用了System类。System类定义了一些与系统相关的属性和方法，它所提供的属性和方法都是静态的，因此，想要引用这些属性和方法，直接使用System类调用即可。System类的常用方法如下表所示。
