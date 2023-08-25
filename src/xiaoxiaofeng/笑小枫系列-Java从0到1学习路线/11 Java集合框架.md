@@ -1,3 +1,5 @@
+![image-20230824141246486](https://image.xiaoxiaofeng.site/blog/2023/08/24/xxf-20230824141246.png?xxfjava)
+
 ## 1. Collection
 
 ### 1.1 Java类中集合的关系图

@@ -1,8 +1,8 @@
+![image-20230825093455169](https://image.xiaoxiaofeng.site/blog/2023/08/25/xxf-20230825093551.png?xxfjava)
 
+## 1. ArrayList源码剖析
 
-# 1. ArrayList源码剖析
-
-## 1.1 ArrayList底层原理
+### 1.1 ArrayList底层原理
 
 1. 利用空参创建的集合，在底层创建一个默认长度为0的数组名字为elementData，且还有一个底层变量size，用来记录元素的个数。
 2. 添加第一个元素时，底层会创建一个新的长度为10的数组，默认初始化值为空。所以我们一般会认为ArrayList的底层的数组默认长度是10。
@@ -10,7 +10,7 @@
 4. 当集合原始数组存满，并且还要继续添加时，数组会自动扩容1.5倍，此时size为15。如果又满了还会继续扩容为当前长度的1.5倍。
 5. 如果一次添加多个元素，1.5倍还放不下，则新创建数组的长度以实际为准
 
-## 1.2 ArrayList源码剖析
+### 1.2 ArrayList源码剖析
 
 **当用空参构造创建ArrayList集合的时候,ArrayList在底层创建了一个长度为零的数组**
 
@@ -115,7 +115,7 @@ private void grow(int minCapacity) {//minCapacity=10
 }
 ~~~
 
-## 1.3 ArrayList扩容机制
+### 1.3 ArrayList扩容机制
 
 **扩容规则**
 
@@ -129,9 +129,9 @@ private void grow(int minCapacity) {//minCapacity=10
 
 5. `addAll(Collection c)` 没有元素时，扩容为 Math.max(10, 实际元素个数)，有元素时为 Math.max(原容量 1.5 倍, 实际元素个数)
 
-# 2. LinkedList源码剖析
+## 2. LinkedList源码剖析
 
-## 2.1 LinkedList简介
+### 2.1 LinkedList简介
 
 LinkedList是基于双向循环链表（从源码中可以很容易看出）实现的，除了可以当作链表来操作外，它还可以当作栈，队列和双端队列来使用。
 
@@ -139,7 +139,7 @@ LinkedList同样是非线程安全的，只在单线程下适合使用。
 
 LinkedList实现了Serializable接口，因此它支持序列化，能够通过序列化传输，实现了Cloneable接口，能被克隆。
 
-## 2.2 LinkedList源码剖析
+### 2.2 LinkedList源码剖析
 LinkedList的源码如下（加入了比较详细的注释）
 
 ```java
@@ -783,7 +783,7 @@ public class LinkedList<E>
    
 }   
 ```
-## 2.3 几点总结
+### 2.3 几点总结
 
 关于LinkedList的源码，给出几点比较重要的总结：
 
@@ -831,9 +831,9 @@ private static class Entry<E> {
 
 8、要注意源码中还实现了栈和队列的操作方法，因此也可以作为栈、队列和双端队列来使用。
 
-# 3. LinkedHashMap源码剖析
+## 3. LinkedHashMap源码剖析
 
-## 3.1 LinkedHashMap简介
+### 3.1 LinkedHashMap简介
 
 LinkedHashMap是HashMap的子类，与HashMap有着同样的存储结构，但它加入了一个双向链表的头结点，将所有put到LinkedHashmap的节点一一串成了一个双向循环链表，因此它保留了节点插入的顺序，可以使节点的输出顺序与输入顺序相同。
 
@@ -841,7 +841,7 @@ LinkedHashMap可以用来实现LRU算法（这会在下面的源码中进行分�
 
 LinkedHashMap同样是非线程安全的，只在单线程环境下使用。
 
-## 3.2 LinkedHashMap源码剖析
+### 3.2 LinkedHashMap源码剖析
 
 LinkedHashMap源码如下（加入了详细的注释）：
 
@@ -1103,7 +1103,7 @@ public class LinkedHashMap<K,V> extends HashMap<K,V> implements Map<K,V> {
     }  
 }  
 ```
-## 3.3 几点总结
+### 3.3 几点总结
 
 关于LinkedHashMap的源码，给出以下几点比较重要的总结：
 
@@ -1249,9 +1249,9 @@ public V get(Object key) {
 
 7、最后说说LinkedHashMap是如何实现LRU的。首先，当accessOrder为true时，才会开启按访问顺序排序的模式，才能用来实现LRU算法。我们可以看到，无论是put方法还是get方法，都会导致目标Entry成为最近访问的Entry，因此便把该Entry加入到了双向链表的末尾（get方法通过调用recordAccess方法来实现，put方法在覆盖已有key的情况下，也是通过调用recordAccess方法来实现，在插入新的Entry时，则是通过createEntry中的addBefore方法来实现），这样便把最近使用了的Entry放入到了双向链表的后面，多次操作后，双向链表前面的Entry便是最近没有使用的，这样当节点个数满的时候，删除的最前面的Entry(head后面的那个Entry)便是最近最少使用的Entry。
 
-# 4. HashMap源码剖析(JDK7)
+## 4. HashMap源码剖析(JDK7)
 
-## 4.1 HashMap概述
+### 4.1 HashMap概述
 
 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。
 
@@ -1259,7 +1259,7 @@ HashMap是非线程安全的，只是用于单线程环境下，多线程环境�
 
 HashMap实现了Serializable接口，因此它支持序列化，实现了Cloneable接口，能被克隆。
 
-## 4.2 四个关注点在HashMap上的答案
+### 4.2 四个关注点在HashMap上的答案
 
 | 关注点             | 结论                                       |
 | :-------------- | :--------------------------------------- |
@@ -1268,7 +1268,7 @@ HashMap实现了Serializable接口，因此它支持序列化，实现了Cloneab
 | HashMap是否有序     | 无序，特别说明这个无序指的是遍历HashMap的时候，得到的元素的顺序基本不可能是put的顺序 |
 | HashMap是否线程安全   | 非线程安全                                    |
 
-## 4.3 HashMap源码剖析
+### 4.3 HashMap源码剖析
 
 HashMap的源码如下（加入了比较详细的注释）：
 
@@ -2028,7 +2028,7 @@ public class HashMap<K,V>
 }   
 ```
 
-## 4.4 几点总结
+### 4.4 几点总结
 1、首先要清楚HashMap的存储结构，如下图所示：
 
 ![](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180052.png?xxfjava)
@@ -2300,9 +2300,9 @@ static int indexFor(int h, int length) {
 
 接下来，我们分析下为什么哈希表的容量一定要是2的整数次幂。首先，length为2的整数次幂的话，h&(length-1)就相当于对length取模，这样便保证了散列的均匀，同时也提升了效率；其次，length为2的整数次幂的话，为偶数，这样length-1为奇数，奇数的最后一位是1，这样便保证了h&(length-1)的最后一位可能为0，也可能为1（这取决于h的值），即与后的结果可能为偶数，也可能为奇数，这样便可以保证散列的均匀性，而如果length为奇数的话，很明显length-1为偶数，它的最后一位是0，这样h&(length-1)的最后一位肯定为0，即只能为偶数，这样任何hash值都只会被散列到数组的偶数下标位置上，这便浪费了近一半的空间，因此，length取2的整数次幂，是为了使不同hash值发生碰撞的概率较小，这样就能使元素在哈希表中均匀地散列。
 
-# 5. HashMap源码剖析(JDK8)
+## 5. HashMap源码剖析(JDK8)
 
-## 5.1 HashMap底层数据结构 
+### 5.1 HashMap底层数据结构 
 
 HashMap底层数据结构是 数组 + 链。如下图：
 
@@ -2316,7 +2316,7 @@ HashMap底层数据结构是 数组 + 链。如下图：
 
 如果数组长度小于64，链表长度等于或大于8，不会把链表转为红黑树，而是扩容。扩容也大概率能降低链表的长度。
 
-## 5.2 HashMap的一些重要成员变量
+### 5.2 HashMap的一些重要成员变量
 
 ```java
 // 底层数组，可自动扩容，但是HashMap不支持缩容，长度总是2的N次方
@@ -2343,7 +2343,7 @@ int threshold;
 static final float DEFAULT_LOAD_FACTOR = 0.75f;
 ```
 
-## 5.3 HashMap的构造函数
+### 5.3 HashMap的构造函数
 
 HashMap共有4个构造函数，我挑选 public HashMap(int initialCapacity, float loadFactor) 讲解
 
@@ -2397,7 +2397,7 @@ HashMap共有4个构造函数，我挑选 public HashMap(int initialCapacity, fl
     }
 ```
 
-## 5.4 put(K key, V value) 方法
+### 5.4 put(K key, V value) 方法
 
 HashMap的链表Node数据结构如下
 
@@ -2546,7 +2546,7 @@ public V put(K key, V value) {
     }
 ```
 
-## 5.5 resize() 扩容方法
+### 5.5 resize() 扩容方法
 
 **前置知识：HashMap扩容后，key只可能在两个位置。**
 
@@ -2745,7 +2745,7 @@ resize()源码分析
     }
 ```
 
-## 5.6  get(Object key) 方法
+### 5.6  get(Object key) 方法
 
 理解put方法后，get方法就比较简单了
 
@@ -2789,7 +2789,7 @@ public V get(Object key) {
     }
 ``````````
 
-## 5.7 remove(Object key) 方法
+### 5.7 remove(Object key) 方法
 
 remove(Object key) 方法不会对HashMap的底层数组做缩容操作，方法详细解析请看代码注释
 
@@ -2859,11 +2859,11 @@ final HashMap.Node<K,V> removeNode(int hash, Object key, Object value,
     }
 ```
 
-# 6. HashMap在JDK7与JDK8的区别
+## 6. HashMap在JDK7与JDK8的区别
 
 看过很多文章写HashMap在jdk7和8之间的区别,这里做一下深度的剖析,以及为什么会存在这些区别
 
-## 6.1 数据结构上的区别
+### 6.1 数据结构上的区别
 
 1. JDK7中的数据结构主要是：**数组＋链表**，数组和链表的节点的实现类是Entry类
 
@@ -2892,7 +2892,7 @@ final HashMap.Node<K,V> removeNode(int hash, Object key, Object value,
 		若选择7,在7和8链表之间的增删元素,必然会导致频繁进行链表和红黑树的转换
 ``````````
 
-## 6.2 Hash值的计算区别
+### 6.2 Hash值的计算区别
 
 1. JDK7：`h^ =(h>>>20)^(h>>>12) return h ^(h>>>7) ^(h>>>4)`
 
@@ -2906,7 +2906,7 @@ jdk7中因为要保持hash函数的散列性,所以进行了多次的异或和�
 从而避免很多异或和位运算操作
 ``````````
 
-## 6.2 链表数据插入的区别
+### 6.2 链表数据插入的区别
 1. JDK7：使用的是头插入法，扩容后与原位置相反(resize会导致环形链表)
 
 2. JDK8：使用的尾插法，扩容后位置与原链表相同
@@ -2919,7 +2919,7 @@ jdk8中插入元素时,要判断个数是否需要构造红黑树,这样已存�
 并且解决了jdk7中头插法导致的环状链表问题
 ``````````
 
-## 6.2 扩容机制的不同
+### 6.2 扩容机制的不同
 1. JDK7扩容条件:元素个数 > 容量(16) \* 加载因子 (0.75) && 插入的数组位置有元素存在
 2. JDK8扩容条件 :元素个数 > 容量 (16) \* 加载因子(0.75)
 
@@ -2931,13 +2931,13 @@ JDk8则不会,只要看看原hash值新增的那个bit位是1还是0就好了，
 是1的话索引变成“原索引+oldCap（旧数组大小）
 ``````````
 
-# 7. Hashtable的实现原理
+## 7. Hashtable的实现原理
 
 Hashtable类似HashMap，使用hash表来存储键值对。hash表定义:根据设定的hash函数和处理冲突的方式（开放定址、公共溢出区、链地址、重哈希...）将一组关键字映射到一个有限的连续的地址集上（即bucket数组或桶数组），并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表称为hash表。
 
 hash冲突发生时，通过“链表法”或叫"拉链法"来处理冲突，即通过一个链表存储键值对(Map.Entry)。每个Entry对象都有next指针用于指向下一个具有相同hashcode值的Entry。
 
-# 8. HashSet的实现原理
+## 8. HashSet的实现原理
 
 HashSet是通过HashMap实现的，只是使用了HashMap的键，没有使用HashMap的值。
 
