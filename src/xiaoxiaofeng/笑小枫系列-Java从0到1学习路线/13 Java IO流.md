@@ -1,6 +1,7 @@
-# 1. 流
+![13 Java IO流](https://image.xiaoxiaofeng.site/blog/2023/08/29/xxf-20230829105358.png?xxfjava)
+## 1. 流
 
-## 1.1 流的概念
+### 1.1 流的概念
 
 流(stream)的概念源于UNIX中管道(pipe)的概念。在UNIX中，管道是一条不间断的字节流，用来实现程序或进程间的通信，或读写外围设备、外部文件等。
 
@@ -12,7 +13,7 @@
 
 形象的比喻——水流 ，文件==程序 ，文件和程序之间连接一个管道，水流就在之间形成了,自然也就出现了方向：可以流进，也可以流出.便于理解，这么定义流： 流就是一个管道里面有流水，这个管道连接了文件和程序。
 
-## 1.2 IO流概述
+### 1.2 IO流概述
 
 大多数应用程序都需要实现与设备之间的数据传输，例如键盘可以输入数据，显示器可以显示程序的运行结果等。在Java中，将这种通过不同输入输出设备（键盘，内存，显示器，网络等）之间的数据传输抽象的表述为“流”，程序允许通过流的方式与输入输出设备进行数据传输。Java中的“流”都位于Java.io包中，称之为IO（输入输出）流。 IO流：即Input Output的缩写。
 
@@ -28,13 +29,13 @@ IO流的特点：
 
 PS：流只能操作数据，而不能操作文件。
 
-## 1.3 流的三种分类方式
+### 1.3 流的三种分类方式
 
 - 按流的方向分为：输入流和输出流     
 - 按流的数据单位不同分为：字节流和字符流     
 - 按流的功能不同分为:节点流和处理流
 
-## 1.4 流的层次结构
+### 1.4 流的层次结构
 
 ![](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180144.png?xxfjava)
 
@@ -49,7 +50,7 @@ PS：此四个类派生出来的子类名称都是以父类名作为子类名的
 
 其实就是：字节流读取文字字节数据后，不直接操作而是先查指定的编码表，获取对应的文字。再对这个文字进行操作。简单说：字节流+编码表。
 
-# 2. 字节流
+## 2. 字节流
 
 在计算机中，无论是文本、图片、音频还是视频，所有文件都是以二进制(字节)形式存在的，IO流中针对字节的输入输出提供了一系列的流，统称为字节流。字节流是程序中最常用的流，根据数据的传输方向可将其分为字节输入流和字节输出流。在JDK中，提供了两个抽象类InputStream和OutputStream，它们是字节流的顶级父类，所有的字节输入流都继承自InputStream，所有的字节输出流都继承自OutputStream。为了方便理解，可以把InputStream和OutputStream比作两根“水管”，如图所示。
 
@@ -61,7 +62,7 @@ InputStream和OutputStream这两个类虽然提供了一系列和读写数据有
 
 ![1500708385651](https://image.xiaoxiaofeng.site/blog/2023/08/10/xxf-20230810100639.png?xxfjava)
 
-## 2.1 字节流写数据
+### 2.1 字节流写数据
 
 字节输出流：抽象类OutputStream，实现类FileOutputStream
 
@@ -142,7 +143,7 @@ public class FileOutputStreamDemo {
 	}
 }
 ```
-## 2.2 字节流写数据的方式
+### 2.2 字节流写数据的方式
 
 ```java
 package cn.xiaoxiaofeng;
@@ -249,7 +250,7 @@ public class FileOutputStreamDemo4 {
 	}
 }
 ```
-## 2.3 字节流读取数据
+### 2.3 字节流读取数据
 
 字节输入流：抽象类InputStream，实现类FileInputStream
 
@@ -341,7 +342,7 @@ public class FileInputStreamDemo {
 }
 ```
 
-## 2.4 字节流复制数据练习
+### 2.4 字节流复制数据练习
 
 代码示例：把c:\\a.txt内容复制到d:\\b.txt中
 
@@ -377,7 +378,7 @@ public class CopyFileDemo2 {
 	}
 }
 ```
-## 2.5字节缓冲流
+### 2.5字节缓冲流
 
 一个字节一个字节的读写，需要频繁的操作文件，效率非常低。这就好比从北京运送烤鸭到上海，如果有一万只烤鸭，每次运送一只，就必须运输一万次，这样的效率显然非常低。为了减少运输次数，可以先把一批烤鸭装在车厢中，这样就可以成批的运送烤鸭，这时的车厢就相当于一个临时缓冲区。当通过流的方式拷贝文件时，为了提高效率也可以定义一个字节数组作为缓冲区。在拷贝文件时，可以一次性读取多个字节的数据，并保存在字节数组中，然后将字节数组中的数据一次性写入文件。
 
@@ -423,7 +424,7 @@ public class BufferedOutputStreamDemo {
 	}
 }
 ```
-## 2.6 字节缓冲流复制数据练习
+### 2.6 字节缓冲流复制数据练习
 
 ```java
 package cn.xiaoxiaofeng;
@@ -521,15 +522,15 @@ public class CopyMp4Demo {
 }
 ```
 
-# 3. 字符流
+## 3. 字符流
 
-## 3.1 字符流
+### 3.1 字符流
 
 InputStream类和OutputStream类在读写文件时操作的都是字节，如果希望在程序中操作字符，使用这两个类就不太方便，为此JDK提供了字符流。同字节流一样，字符流也有两个抽象的顶级父类，分别是Reader和Writer。其中Reader是字符输入流，用于从某个源设备读取字符，Writer是字符输出流，用于向某个目标设备写入字符。Reader和Writer作为字符流的顶级父类，也有许多子类，接下来通过继承关系图来列出Reader和Writer的一些常用子类，如图所示。
 
 ![字符流](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180221.png?xxfjava)
 
-### 3.1.1 转换流出现的原因及思想
+#### 3.1.1 转换流出现的原因及思想
 由于字节流操作中文不是特别方便，所以，java就提供了转换流。字符流=字节流+编码表。
 
 编码表：由字符及其对应的数值组成的一张表
@@ -590,7 +591,7 @@ public class StringDemo {
 	}
 }
 ```
-### 3.1.2 转换流概述
+#### 3.1.2 转换流概述
 
 IO流可分为字节流和字符流，有时字节流和字符流之间也需要进行转换。在JDK中提供了两个类可以将字节流转换为字符流，它们分别是InputStreamReader和OutputStreamWriter。
 
@@ -669,7 +670,7 @@ public class OutputStreamWriterDemo {
 	}
 }
 ```
-### 3.1.3 InputStreamReader读数据
+#### 3.1.3 InputStreamReader读数据
 - public int read()：一次读一个字符 
 - public int read(char[] cbuf)：一次读一个字符数组
 
@@ -707,7 +708,7 @@ public class InputStreamReaderDemo {
 	}
 }
 ```
-### 3.1.4 字符流复制文本文件
+#### 3.1.4 字符流复制文本文件
 
 ```java
 package cn.xiaoxiaofeng;
@@ -754,7 +755,7 @@ public class CopyFileDemo {
 	}
 }
 ```
-### 3.1.5 转换流的简化写法
+#### 3.1.5 转换流的简化写法
 转换流的名字比较长，而我们常见的操作都是按照本地默认编码实现的，所以，为了简化我们的书写，转换流提供了对应的子类。
 
 FileWriter
@@ -810,7 +811,7 @@ public class CopyFileDemo2 {
 	}
 }
 ```
-### 3.1.6 FileReader
+#### 3.1.6 FileReader
 
 代码示例：把c:\\a.txt内容复制到d:\\b.txt中
 
@@ -847,10 +848,10 @@ public class CopyFileDemo3 {
 	}
 }
 ```
-## 3.2 字符缓冲流
+### 3.2 字符缓冲流
 字符流为了高效读写，也提供了对应的字符缓冲流。BufferedWriter：字符缓冲输出流，BufferedReader：字符缓冲输入流。
 
-### 3.2.1 BufferedWriter基本用法
+#### 3.2.1 BufferedWriter基本用法
 将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。 可以指定缓冲区的大小，或者接受默认的大小。在大多数情况下，默认值就足够大了。
 
 代码示例：BufferedWriter基本用法
@@ -886,7 +887,7 @@ public class BufferedWriterDemo {
 	}
 }
 ```
-### 3.2.2 BufferedReader基本用法
+#### 3.2.2 BufferedReader基本用法
 从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。  可以指定缓冲区的大小，或者可使用默认的大小。大多数情况下，默认值就足够大了。 
 
 代码示例：  BufferedReader基本用法
@@ -926,7 +927,7 @@ public class BufferedReaderDemo {
 	}
 }
 ```
-### 3.2.3 特殊功能
+#### 3.2.3 特殊功能
 
 - BufferedWriter，newLine()：根据系统来决定换行符
 - BufferedReader，String readLine()：一次读取一行数据
@@ -1027,7 +1028,7 @@ public class CopyFileDemo2 {
 }
 ```
 
-## 3.3 模拟记事本
+### 3.3 模拟记事本
 
 ```java
 package cn.itcast.chapter07.task02;
@@ -1169,9 +1170,9 @@ public class Notepad {
 	}
 }
 ```
-# 4. File类
+## 4. File类
 
-## 4.1 File类概述
+### 4.1 File类概述
 
 File类用于封装一个路径，这个路径可以是从系统盘符开始的绝对路径，如：“D:\file\a.txt”，也可以是相对于当前目录而言的相对路径，如：“src\Hello.java”。File类内部封装的路径可以指向一个文件，也可以指向一个目录，在File类中提供了针对这些文件或目录的一些常规操作。
 
@@ -1181,7 +1182,7 @@ File类中提供了一系列方法，用于操作其内部封装的路径指向�
 
 ![1500708828607](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180113.png?xxfjava)
 
-## 4.2 构造方法
+### 4.2 构造方法
 
 | 方法                               | 功能描述                 |
 | :------------------------------- | :------------------- |
@@ -1222,7 +1223,7 @@ public class FileDemo {
 }
 ```
 
-## 4.3 创建功能
+### 4.3 创建功能
 
 | 返回值     | 方法               | 功能描述                     |
 | :------ | :--------------- | :----------------------- |
@@ -1278,7 +1279,7 @@ public class FileDemo {
 	}
 }
 ```
-## 4.4 删除功能
+### 4.4 删除功能
 
 | 返回值     | 方法             | 功能描述                   |
 | :------ | :------------- | :--------------------- |
@@ -1333,7 +1334,7 @@ public class FileDemo {
 }
 ```
 
-## 4.5 重命名功能
+### 4.5 重命名功能
 
 | 方法                   | 功能描述                  |
 | :------------------- | :-------------------- |
@@ -1366,7 +1367,7 @@ public class FileDemo {
 	}
 }
 ```
-## 4.6 判断功能
+### 4.6 判断功能
 
 | 方法            | 功能描述    |
 | :------------ | :------ |
@@ -1406,7 +1407,7 @@ public class FileDemo {
     }  
 }
 ```
-## 4.7 获取功能
+### 4.7 获取功能
 
 | 返回值      | 方法                | 功能描述                    |
 | :------- | :---------------- | :---------------------- |
@@ -1478,7 +1479,7 @@ if (time < cachetime){
 }
 ```
 
-## 4.8 高级获取功能
+### 4.8 高级获取功能
 
 | 返回值      | 方法                               | 功能描述         |
 | :------- | :------------------------------- | :----------- |
@@ -1514,7 +1515,7 @@ public class FileDemo {
 	}
 }
 ```
-## 4.9 文件过滤器
+### 4.9 文件过滤器
 
 - list(FilenameFilter filter)
 - listFiles(FilenameFilter filter)
@@ -1523,14 +1524,14 @@ FilenameFilter 接口
 
 - accept(File dir, String name)
 
-## 4.10 File练习
+### 4.10 File练习
 
 文件名称过滤器的实现思想及代码
 
 - public String[] list(FilenameFilter filter)
 - public File[] listFiles(FilenameFilter filter)
 
-### 4.10.1 文件名称过滤器的实现
+#### 4.10.1 文件名称过滤器的实现
 
 ```java
 package cn.xiaoxiaofeng;
@@ -1576,7 +1577,7 @@ public class FileDemo2 {
 	}
 }
 ```
-### 4.10.2 递归遍历目录下指定后缀名结尾的文件名称
+#### 4.10.2 递归遍历目录下指定后缀名结尾的文件名称
 
 ```java
 package cn.xiaoxiaofeng;
@@ -1623,7 +1624,7 @@ public class FilePathDemo {
 	}
 }
 ```
-### 4.10.3 递归删除带内容的目录
+#### 4.10.3 递归删除带内容的目录
 
 ```java
 package cn.xiaoxiaofeng;
@@ -1668,7 +1669,7 @@ public class FileDeleteDemo {
 }
 ```
 
-### 4.10.4 模拟文件管理器
+#### 4.10.4 模拟文件管理器
 
 DocumentManager
 
@@ -1892,7 +1893,7 @@ public class FileUtils {
 }
 ```
 
-# 5. NIO
+## 5. NIO
 
 Java NIO（New IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。本系列教程将有助于你学习和理解Java NIO。
 
@@ -1904,7 +1905,7 @@ Java NIO提供了与标准IO不同的IO工作方式：
 
 下面就来详细介绍Java NIO的相关知识。 
 
-## 5.1 Java NIO 概述
+### 5.1 Java NIO 概述
 
 Java NIO 由以下几个核心部分组成： 
 
@@ -1914,7 +1915,7 @@ Java NIO 由以下几个核心部分组成：
 
 虽然Java NIO 中除此之外还有很多类和组件，但在我看来，Channel，Buffer 和 Selector 构成了核心的API。其它组件，如Pipe和FileLock，只不过是与三个核心组件共同使用的工具类。因此，在概述中我将集中在这三个组件上。其它组件会在单独的章节中讲到。 
 
-### 5.1.1 Channel 和 Buffer 
+#### 5.1.1 Channel 和 Buffer 
 
 基本上，所有的 IO 在NIO 中都从一个Channel 开始。Channel 有点象流。 数据可以从Channel读到Buffer中，也可以从Buffer 写到Channel中。这里有个图示： 
 
@@ -1948,7 +1949,7 @@ Channel和Buffer有好几种类型。下面是JAVA NIO中的一些主要Channel�
 
 Java NIO 还有个 MappedByteBuffer，用于表示内存映射文件， 我也不打算在概述中说明。 
 
-### 5.1.2 Selector 
+#### 5.1.2 Selector 
 
 Selector允许单线程处理多个 Channel。如果你的应用打开了多个连接（通道），但每个连接的流量都很低，使用Selector就会很方便。例如，在一个聊天服务器中。 
 
@@ -1960,7 +1961,7 @@ Selector允许单线程处理多个 Channel。如果你的应用打开了多个�
 要使用Selector，得向Selector注册Channel，然后调用它的select()方法。这个方法会一直阻塞到某个注册的通道有事件就绪。一旦这个方法返回，线程就可以处理这些事件，事件的例子有如新连接进来，数据接收等。 
 
 
-## 5.2 Java NIO vs IO
+### 5.2 Java NIO vs IO
 
 
 当学习了Java NIO和IO的API后，一个问题马上涌入脑海： 
@@ -1968,7 +1969,7 @@ Selector允许单线程处理多个 Channel。如果你的应用打开了多个�
 > 我应该何时使用IO，何时使用NIO呢？在本文中，我会尽量清晰地解析Java NIO和IO的差异、它们的使用场景，以及它们如何影响您的代码设计。
 
 
-### 5.2.1 Java NIO和IO的主要区别 
+#### 5.2.1 Java NIO和IO的主要区别 
 
 下表总结了Java NIO和IO之间的主要差别，我会更详细地描述表中每部分的差异。 
 
@@ -1979,19 +1980,19 @@ Selector允许单线程处理多个 Channel。如果你的应用打开了多个�
 | 无                   | Selectors 选择器         |
 
 
-### 5.2.2 面向流与面向缓冲 
+#### 5.2.2 面向流与面向缓冲 
 
 Java NIO和IO之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。 Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。 
 
-### 5.2.3 阻塞与非阻塞IO 
+#### 5.2.3 阻塞与非阻塞IO 
 
 Java IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 Java NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。 
 
-### 5.2.4 选择器（Selectors） 
+#### 5.2.4 选择器（Selectors） 
 
 Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。 
 
-### 5.2.5 NIO和IO如何影响应用程序的设计 
+#### 5.2.5 NIO和IO如何影响应用程序的设计 
 
 无论您选择IO或NIO工具箱，可能会影响您应用程序设计的以下几个方面： 
 
@@ -1999,11 +2000,11 @@ Java NIO的选择器允许一个单独的线程来监视多个输入通道，你
 - 数据处理
 - 用来处理数据的线程数
 
-#### 5.2.5.1 API调用 
+##### 5.2.5.1 API调用 
 
 当然，使用NIO的API调用时看起来与使用IO时有所不同，但这并不意外，因为并不是仅从一个InputStream逐字节读取，而是数据必须先读入缓冲区再处理。 
 
-#### 5.2.5.2 数据处理 
+##### 5.2.5.2 数据处理 
 
 使用纯粹的NIO设计相较IO设计，数据处理也受到影响。 
 
@@ -2059,7 +2060,7 @@ bufferFull()方法扫描缓冲区，但必须保持在bufferFull()方法被调�
 ![从一个通道里读数据，直到所有的数据都读到缓冲区里](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180428.png?xxfjava)
 
 
-### 5.2.6 总结 
+#### 5.2.6 总结 
 
 NIO可让您只使用一个（或几个）单线程管理多个通道（网络连接或文件），但付出的代价是解析数据可能会比从一个阻塞流中读取数据更复杂。 
 
@@ -2075,7 +2076,7 @@ NIO可让您只使用一个（或几个）单线程管理多个通道（网络�
 ![一个典型的IO服务器设计：一个连接通过一个线程处理](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180432.png?xxfjava)
 
 
-## 5.3 通道（Channel）
+### 5.3 通道（Channel）
 
 
 Java NIO的通道类似流，但又有些不同： 
@@ -2089,7 +2090,7 @@ Java NIO的通道类似流，但又有些不同：
 ![](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180434.png?xxfjava)
 
 
-### 5.3.1 Channel的实现 
+#### 5.3.1 Channel的实现 
 
 这些是Java NIO中最重要的通道的实现： 
 
@@ -2100,7 +2101,7 @@ Java NIO的通道类似流，但又有些不同：
 
 获取Channel：InputStream/OutputStream.getChannel()
 
-### 5.3.2 基本的 Channel 示例 
+#### 5.3.2 基本的 Channel 示例 
 
 下面是一个使用FileChannel读取数据到Buffer中的示例： 
 
@@ -2128,14 +2129,14 @@ aFile.close();
 
 注意 buf.flip() 的调用，首先读取数据到Buffer，然后反转Buffer,接着再从Buffer中读取数据。下一节会深入讲解Buffer的更多细节。 
 
-## 5.4 缓冲区（Buffer）
+### 5.4 缓冲区（Buffer）
 
 
 Java NIO中的Buffer用于和NIO通道进行交互。如你所知，数据是从通道读入缓冲区，从缓冲区写入到通道中的。 
 
 缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存。 
 
-### 5.4.1 Buffer的基本用法 
+#### 5.4.1 Buffer的基本用法 
 
 使用Buffer读写数据一般遵循以下四个步骤： 
 
@@ -2190,7 +2191,7 @@ while (bytesRead != -1) {
 aFile.close();  
 ```
 
-### 5.4.2 Buffer的capacity、position、limit 
+#### 5.4.2 Buffer的capacity、position、limit 
 
 缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存。 
 
@@ -2208,17 +2209,17 @@ position和limit的含义取决于Buffer处在读模式还是写模式。不管B
 
 ![](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180441.png?xxfjava)
 
-#### 5.4.2.1 capacity 
+##### 5.4.2.1 capacity 
 
 作为一个内存块，Buffer有一个固定的大小值，也叫“capacity”.你只能往里写capacity个byte、long，char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清除数据）才能继续写数据往里写数据。 
 
-#### 5.4.2.2 position 
+##### 5.4.2.2 position 
 
 当你写数据到Buffer中时，position表示当前的位置。初始的position值为0.当一个byte、long等数据写到Buffer后， position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity – 1。 
 
 当读取数据时，也是从某个特定位置读。当将Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取数据时，position向前移动到下一个可读的位置。 
 
-#### 5.4.2.3 limit 
+##### 5.4.2.3 limit 
 
 在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。 
 
@@ -2240,7 +2241,7 @@ position和limit的含义取决于Buffer处在读模式还是写模式。不管B
 
 ![](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180449.png?xxfjava)
 
-### 5.4.3 Buffer的类型 
+#### 5.4.3 Buffer的类型 
 
 Java NIO 有以下Buffer类型： 
 
@@ -2257,7 +2258,7 @@ Java NIO 有以下Buffer类型：
 
 MappedByteBuffer 有些特别，在涉及它的专门章节中再讲。 
 
-### 5.4.4 Buffer的分配 
+#### 5.4.4 Buffer的分配 
 
 要想获得一个Buffer对象首先要进行分配。 每一个Buffer类都有一个allocate方法。下面是一个分配48字节capacity的ByteBuffer的例子。 
 
@@ -2271,7 +2272,7 @@ ByteBuffer buf = ByteBuffer.allocate(48);
 CharBuffer buf = CharBuffer.allocate(1024);  
 ```
 
-### 5.4.5 向Buffer中写数据 
+#### 5.4.5 向Buffer中写数据 
 
 写数据到Buffer有两种方式： 
 
@@ -2292,13 +2293,13 @@ buf.put(127);
 
 put方法有很多版本，允许你以不同的方式把数据写入到Buffer中。例如， 写到一个指定的位置，或者把一个字节数组写入到Buffer。 更多Buffer实现的细节参考JavaDoc。 
 
-#### flip()方法 
+##### flip()方法 
 
 flip方法将Buffer从写模式切换到读模式。调用flip()方法会将position设回0，并将limit设置成之前position的值。 
 
 换句话说，position现在用于标记读的位置，limit表示之前写进了多少个byte、char等 —— 现在能读取多少个byte、char等。 
 
-### 5.4.6 从Buffer中读取数据 
+#### 5.4.6 从Buffer中读取数据 
 
 从Buffer中读取数据有两种方式： 
 
@@ -2320,11 +2321,11 @@ byte aByte = buf.get();
 
 get方法有很多版本，允许你以不同的方式从Buffer中读取数据。例如，从指定position读取，或者从Buffer中读取数据到字节数组。更多Buffer实现的细节参考JavaDoc。 
 
-#### rewind()方法 
+##### rewind()方法 
 
 Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。 
 
-#### clear()与compact()方法 
+##### clear()与compact()方法 
 
 一旦读完Buffer中的数据，需要让Buffer准备好再次被写入。可以通过clear()或compact()方法来完成。 
 
@@ -2336,7 +2337,7 @@ Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数�
 
 compact()方法将所有未读的数据拷贝到Buffer起始处。然后将position设到最后一个未读元素正后面。limit属性依然像clear()方法一样，设置成capacity。现在Buffer准备好写数据了，但是不会覆盖未读的数据。 
 
-#### mark()与reset()方法 
+##### mark()与reset()方法 
 
 通过调用Buffer.mark()方法，可以标记Buffer中的一个特定position。之后可以通过调用Buffer.reset()方法恢复到这个position。例如： 
 
@@ -2348,7 +2349,7 @@ buffer.mark();
 buffer.reset();  //set position back to mark.  
 ```
 
-#### equals()与compareTo()方法
+##### equals()与compareTo()方法
 
 可以使用equals()和compareTo()方法两个Buffer。 
 
@@ -2371,7 +2372,7 @@ compareTo()方法比较两个Buffer的剩余元素(byte、char等)， 如果满�
 
 （译注：剩余元素是从 position到limit之间的元素） 
 
-## 5.5 分散Scatter和聚集Gather
+### 5.5 分散Scatter和聚集Gather
 
 Java NIO开始支持scatter/gather，scatter/gather用于描述从Channel（译者注：Channel在中文经常翻译为通道）中读取或者写入到Channel的操作。 
 
@@ -2381,7 +2382,7 @@ Java NIO开始支持scatter/gather，scatter/gather用于描述从Channel（译�
 
 scatter / gather经常用于需要将传输的数据分开处理的场合，例如传输一个由消息头和消息体组成的消息，你可能会将消息体和消息头分散到不同的buffer中，这样你可以方便的处理消息头和消息体。 
 
-### 5.5.1 Scattering Reads 
+#### 5.5.1 Scattering Reads 
 
 Scattering Reads是指数据从一个channel读取到多个buffer中。如下图描述： 
 
@@ -2403,7 +2404,7 @@ channel.read(bufferArray);
 
 Scattering Reads在移动下一个buffer前，必须填满当前的buffer，这也意味着它不适用于动态消息(译者注：消息大小不固定)。换句话说，如果存在消息头和消息体，消息头必须完成填充（例如 128byte），Scattering Reads才能正常工作。 
 
-### 5.5.2 Gathering Writes 
+#### 5.5.2 Gathering Writes 
 
 Gathering Writes是指数据从多个buffer写入到同一个channel。如下图描述： 
 
@@ -2425,11 +2426,11 @@ channel.write(bufferArray);
 
 buffers数组是write()方法的入参，write()方法会按照buffer在数组中的顺序，将数据写入到channel，注意只有position和limit之间的数据才会被写入。因此，如果一个buffer的容量为128byte，但是仅仅包含58byte的数据，那么这58byte的数据将被写入到channel中。因此与Scattering Reads相反，Gathering Writes能较好的处理动态消息。 
 
-## 5.6 通道之间的数据传输 
+### 5.6 通道之间的数据传输 
 
 在Java NIO中，如果两个通道中有一个是FileChannel，那你可以直接将数据从一个channel（译者注：channel中文常译作通道）传输到另外一个channel。 
 
-### 5.6.1 transferFrom() 
+#### 5.6.1 transferFrom() 
 
 FileChannel的transferFrom()方法可以将数据从源通道传输到FileChannel中（译者注：这个方法在JDK文档中的解释为将字节从给定的可读取字节通道传输到此通道的文件中）。下面是一个简单的例子： 
 
@@ -2450,7 +2451,7 @@ toChannel.transferFrom(position, count, fromChannel);
 
 此外要注意，在SoketChannel的实现中，SocketChannel只会传输此刻准备好的数据（可能不足count字节）。因此，SocketChannel可能不会将请求的所有数据(count个字节)全部传输到FileChannel中。 
 
-### 5.6.2 transferTo() 
+#### 5.6.2 transferTo() 
 
 transferTo()方法将数据从FileChannel传输到其他的channel中。下面是一个简单的例子： 
 
@@ -2471,12 +2472,12 @@ fromChannel.transferTo(position, count, toChannel);
 
 上面所说的关于SocketChannel的问题在transferTo()方法中同样存在。SocketChannel会一直传输数据直到目标buffer被填满。 
 
-## 5.7 选择器（Selector）
+### 5.7 选择器（Selector）
 
 
 Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能够知晓通道是否为诸如读写事件做好准备的组件。这样，一个单独的线程可以管理多个channel，从而管理多个网络连接。 
 
-### 5.7.1 为什么使用Selector? 
+#### 5.7.1 为什么使用Selector? 
 
 仅用单个线程来处理多个Channels的好处是，只需要更少的线程来处理通道。事实上，可以只用一个线程处理所有的通道。对于操作系统来说，线程之间上下文切换的开销很大，而且每个线程都要占用系统的一些资源（如内存）。因此，使用的线程越少越好。 
 
@@ -2484,7 +2485,7 @@ Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能�
 
 下面是单线程使用一个Selector处理3个channel的示例图： 
 
-### 5.7.2 Selector的创建 
+#### 5.7.2 Selector的创建 
 
 通过调用Selector.open()方法创建一个Selector，如下： 
 
@@ -2492,7 +2493,7 @@ Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能�
 Selector selector = Selector.open();  
 ```
 
-### 5.7.3 向Selector注册通道 
+#### 5.7.3 向Selector注册通道 
 
 为了将Channel和Selector配合使用，必须将channel注册到selector上。通过SelectableChannel.register()方法来实现，如下： 
 
@@ -2527,7 +2528,7 @@ int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE;
 
 在下面还会继续提到interest集合。 
 
-### 5.7.4 SelectionKey 
+#### 5.7.4 SelectionKey 
 
 在上一小节中，当向Selector注册Channel时，register()方法会返回一个SelectionKey对象。这个对象包含了一些你感兴趣的属性： 
 
@@ -2539,7 +2540,7 @@ int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE;
 
 下面我会描述这些属性。 
 
-#### interest集合 
+##### interest集合 
 
 就像向Selector注册通道一节中所描述的，interest集合是你所选择的感兴趣的事件集合。可以通过SelectionKey读写interest集合，像这样： 
 
@@ -2554,7 +2555,7 @@ boolean isInterestedInWrite   = interestSet & SelectionKey.OP_WRITE;
 
 可以看到，用“位与”操作interest 集合和给定的SelectionKey常量，可以确定某个确定的事件是否在interest 集合中。 
 
-#### ready集合 
+##### ready集合 
 
 ready 集合是通道已经准备就绪的操作的集合。在一次选择(Selection)之后，你会首先访问这个ready set。Selection将在下一小节进行解释。可以这样访问ready集合： 
 
@@ -2571,7 +2572,7 @@ selectionKey.isReadable();
 selectionKey.isWritable();  
 ```
 
-#### Channel + Selector 
+##### Channel + Selector 
 
 从SelectionKey访问Channel和Selector很简单。如下： 
 
@@ -2580,7 +2581,7 @@ Channel  channel  = selectionKey.channel();
 Selector selector = selectionKey.selector();  
 ```
 
-#### 附加的对象 
+##### 附加的对象 
 
 可以将一个对象或者更多信息附着到SelectionKey上，这样就能方便的识别某个给定的通道。例如，可以附加 与通道一起使用的Buffer，或是包含聚集数据的某个对象。使用方法如下： 
 
@@ -2595,7 +2596,7 @@ Object attachedObj = selectionKey.attachment();
 SelectionKey key = channel.register(selector, SelectionKey.OP_READ, theObject);  
 ```
 
-### 5.7.5 通过Selector选择通道 
+#### 5.7.5 通过Selector选择通道 
 
 一旦向Selector注册了一或多个通道，就可以调用几个重载的select()方法。这些方法返回你所感兴趣的事件（如连接、接受、读或写）已经准备就绪的那些通道。换句话说，如果你对“读就绪”的通道感兴趣，select()方法会返回读事件已经就绪的那些通道。 
 
@@ -2615,7 +2616,7 @@ selectNow()不会阻塞，不管什么通道就绪都立刻返回（译者注：
 
 select()方法返回的int值表示有多少通道已经就绪。亦即，自上次调用select()方法后有多少通道变成就绪状态。如果调用select()方法，因为有一个通道变成就绪状态，返回了1，若再次调用select()方法，如果另一个通道就绪了，它会再次返回1。如果对第一个就绪的channel没有做任何操作，现在就有两个就绪的通道，但在每次select()方法调用之间，只有一个通道就绪了。 
 
-#### selectedKeys() 
+##### selectedKeys() 
 
 一旦调用了select()方法，并且返回值表明有一个或更多个通道就绪了，然后可以通过调用selector的selectedKeys()方法，访问“已选择键集（selected key set）”中的就绪通道。如下所示： 
 
@@ -2651,17 +2652,17 @@ while(keyIterator.hasNext()) {
 
 SelectionKey.channel()方法返回的通道需要转型成你要处理的类型，如ServerSocketChannel或SocketChannel等。 
 
-### 5.7.6 wakeUp() 
+#### 5.7.6 wakeUp() 
 
 某个线程调用select()方法后阻塞了，即使没有通道已经就绪，也有办法让其从select()方法返回。只要让其它线程在第一个线程调用select()方法的那个对象上调用Selector.wakeup()方法即可。阻塞在select()方法上的线程会立马返回。 
 
 如果有其它线程调用了wakeup()方法，但当前没有线程阻塞在select()方法上，下个调用select()方法的线程会立即“醒来（wake up）”。 
 
-### 5.7.7 close() 
+#### 5.7.7 close() 
 
 用完Selector后调用其close()方法会关闭该Selector，且使注册到该Selector上的所有SelectionKey实例无效。通道本身并不会关闭。 
 
-### 5.7.7 完整的示例 
+#### 5.7.7 完整的示例 
 
 这里有一个完整的示例，打开一个Selector，注册一个通道注册到这个Selector上(通道的初始化过程略去),然后持续监控这个Selector的四种事件（接受，连接，读，写）是否就绪。 
 
@@ -2690,7 +2691,7 @@ while(true) {
 }  
 ```
 
-## 5.8 文件通道
+### 5.8 文件通道
 
 Java NIO中的FileChannel是一个连接到文件的通道。可以通过文件通道读写文件。 
 
@@ -2709,7 +2710,7 @@ FileChannel无法设置为非阻塞模式，它总是运行在阻塞模式下。
 | tryLock()  | 尝试获取文件锁                      |
 | close()    | 关闭通道                         |
 
-### 5.8.1 打开FileChannel 
+#### 5.8.1 打开FileChannel 
 
 在使用FileChannel之前，必须先打开它。但是，我们无法直接打开一个FileChannel，需要通过使用一个InputStream、OutputStream或RandomAccessFile来获取一个FileChannel实例。下面是通过RandomAccessFile打开FileChannel的示例： 
 
@@ -2718,7 +2719,7 @@ RandomAccessFile aFile = new RandomAccessFile("data/nio-data.txt", "rw");
 FileChannel inChannel = aFile.getChannel();  
 ```
 
-### 5.8.2 从FileChannel读取数据 
+#### 5.8.2 从FileChannel读取数据 
 
 调用多个read()方法之一从FileChannel中读取数据。如： 
 
@@ -2731,7 +2732,7 @@ int bytesRead = inChannel.read(buf);
 
 然后，调用FileChannel.read()方法。该方法将数据从FileChannel读取到Buffer中。read()方法返回的int值表示了有多少字节被读到了Buffer中。如果返回-1，表示到了文件末尾。 
 
-### 5.8.3 向FileChannel写数据 
+#### 5.8.3 向FileChannel写数据 
 
 使用FileChannel.write()方法向FileChannel写数据，该方法的参数是一个Buffer。如： 
 
@@ -2751,7 +2752,7 @@ while(buf.hasRemaining()) {
 
 注意FileChannel.write()是在while循环中调用的。因为无法保证write()方法一次能向FileChannel写入多少字节，因此需要重复调用write()方法，直到Buffer中已经没有尚未写入通道的字节。 
 
-### 5.8.4 关闭FileChannel 
+#### 5.8.4 关闭FileChannel 
 
 用完FileChannel后必须将其关闭。如： 
 
@@ -2776,7 +2777,7 @@ channel.position(pos +123);
 
 如果将位置设置在文件结束符之后，然后向通道中写数据，文件将撑大到当前位置并写入数据。这可能导致“文件空洞”，磁盘上物理文件中写入的数据间有空隙。 
 
-### 5.8.5 FileChannel的size方法 
+#### 5.8.5 FileChannel的size方法 
 
 FileChannel实例的size()方法将返回该实例所关联文件的大小。如： 
 
@@ -2784,7 +2785,7 @@ FileChannel实例的size()方法将返回该实例所关联文件的大小。如
 long fileSize = channel.size();  
 ```
 
-### 5.8.6 FileChannel的truncate方法 
+#### 5.8.6 FileChannel的truncate方法 
 
 可以使用FileChannel.truncate()方法截取一个文件。截取文件时，文件将中指定长度后面的部分将被删除。如：
 
@@ -2794,7 +2795,7 @@ channel.truncate(1024);
 
 这个例子截取文件的前1024个字节。 
 
-### 5.8.7 FileChannel的force方法 
+#### 5.8.7 FileChannel的force方法 
 
 FileChannel.force()方法将通道里尚未写入磁盘的数据强制写到磁盘上。出于性能方面的考虑，操作系统会将数据缓存在内存中，所以无法保证写入到FileChannel里的数据一定会即时写到磁盘上。要保证这一点，需要调用force()方法。 
 
@@ -2806,7 +2807,7 @@ force()方法有一个boolean类型的参数，指明是否同时将文件元数
 channel.force(true);  
 ```
 
-## 5.9 Socket 通道
+### 5.9 Socket 通道
 
 
 Java NIO中的SocketChannel是一个连接到TCP网络套接字的通道。可以通过以下2种方式创建SocketChannel： 
@@ -2814,7 +2815,7 @@ Java NIO中的SocketChannel是一个连接到TCP网络套接字的通道。可�
 - 打开一个SocketChannel并连接到互联网上的某台服务器。
 - 一个新连接到达ServerSocketChannel时，会创建一个SocketChannel。
 
-### 5.9.1 打开 SocketChannel 
+#### 5.9.1 打开 SocketChannel 
 
 下面是SocketChannel的打开方式： 
 
@@ -2823,7 +2824,7 @@ SocketChannel socketChannel = SocketChannel.open();
 socketChannel.connect(new InetSocketAddress("http://jenkov.com", 80));  
 ```
 
-### 5.9.2 关闭 SocketChannel 
+#### 5.9.2 关闭 SocketChannel 
 
 当用完SocketChannel之后调用SocketChannel.close()关闭SocketChannel： 
 
@@ -2831,7 +2832,7 @@ socketChannel.connect(new InetSocketAddress("http://jenkov.com", 80));
 socketChannel.close();  
 ```
 
-### 5.9.3 从 SocketChannel 读取数据 
+#### 5.9.3 从 SocketChannel 读取数据 
 
 要从SocketChannel中读取数据，调用一个read()的方法之一。以下是例子： 
 
@@ -2844,7 +2845,7 @@ int bytesRead = socketChannel.read(buf);
 
 然后，调用SocketChannel.read()。该方法将数据从SocketChannel 读到Buffer中。read()方法返回的int值表示读了多少字节进Buffer里。如果返回的是-1，表示已经读到了流的末尾（连接关闭了）。 
 
-### 5.9.4 写入 SocketChannel 
+#### 5.9.4 写入 SocketChannel 
 
 写数据到SocketChannel用的是SocketChannel.write()方法，该方法以一个Buffer作为参数。示例如下： 
 
@@ -2864,7 +2865,7 @@ while(buf.hasRemaining()) {
 
 注意SocketChannel.write()方法的调用是在一个while循环中的。Write()方法无法保证能写多少字节到SocketChannel。所以，我们重复调用write()直到Buffer没有要写的字节为止。 
 
-### 5.9.5 非阻塞模式 
+#### 5.9.5 非阻塞模式 
 
 可以设置 SocketChannel 为非阻塞模式（non-blocking mode）.设置之后，就可以在异步模式下调用connect(), read() 和write()了。 
 
@@ -2889,11 +2890,11 @@ while(! socketChannel.finishConnect() ){
 
 非阻塞模式下,read()方法在尚未读取到任何数据时可能就返回了。所以需要关注它的int返回值，它会告诉你读取了多少字节。 
 
-### 5.9.6 非阻塞模式与选择器 
+#### 5.9.6 非阻塞模式与选择器 
 
 非阻塞模式与选择器搭配会工作的更好，通过将一或多个SocketChannel注册到Selector，可以询问选择器哪个通道已经准备好了读取，写入等。Selector与SocketChannel的搭配使用会在后面详讲。 
 
-## 5.10 ServerSocket 通道
+### 5.10 ServerSocket 通道
 
 Java NIO中的 ServerSocketChannel 是一个可以监听新进来的TCP连接的通道，就像标准IO中的ServerSocket一样。ServerSocketChannel类在 java.nio.channels包中。 
 
@@ -2912,7 +2913,7 @@ while(true){
 }  
 ```
 
-### 5.10.1 打开 ServerSocketChannel 
+#### 5.10.1 打开 ServerSocketChannel 
 
 通过调用 ServerSocketChannel.open() 方法来打开ServerSocketChannel.如： 
 
@@ -2920,7 +2921,7 @@ while(true){
 ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();  
 ```
 
-### 5.10.2 关闭 ServerSocketChannel 
+#### 5.10.2 关闭 ServerSocketChannel 
 
 通过调用ServerSocketChannel.close() 方法来关闭ServerSocketChannel. 如： 
 
@@ -2928,7 +2929,7 @@ ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 serverSocketChannel.close();  
 ```
 
-### 5.10.3 监听新进来的连接 
+#### 5.10.3 监听新进来的连接 
 
 通过 ServerSocketChannel.accept() 方法监听新进来的连接。当 accept()方法返回的时候，它返回一个包含新进来的连接的 SocketChannel。因此，accept()方法会一直阻塞到有新连接到达。 
 
@@ -2943,7 +2944,7 @@ while(true){
 
 当然，也可以在while循环中使用除了true以外的其它退出准则。 
 
-### 5.10.4 非阻塞模式 
+#### 5.10.4 非阻塞模式 
 
 ServerSocketChannel可以设置成非阻塞模式。在非阻塞模式下，accept() 方法会立刻返回，如果还没有新进来的连接，返回的将是null。 因此，需要检查返回的SocketChannel是否是null。如： 
 
@@ -2960,12 +2961,12 @@ while(true){
 }  
 ```
 
-## 5.11 Datagram 通道
+### 5.11 Datagram 通道
 
 
 Java NIO中的DatagramChannel是一个能收发UDP包的通道。因为UDP是无连接的网络协议，所以不能像其它通道那样读取和写入。它发送和接收的是数据包。 
 
-### 5.11.1 打开 DatagramChannel 
+#### 5.11.1 打开 DatagramChannel 
 
 下面是 DatagramChannel 的打开方式： 
 
@@ -2976,7 +2977,7 @@ channel.socket().bind(new InetSocketAddress(9999));
 
 这个例子打开的 DatagramChannel可以在UDP端口9999上接收数据包。 
 
-### 5.11.2 接收数据 
+#### 5.11.2 接收数据 
 
 通过receive()方法从DatagramChannel接收数据，如： 
 
@@ -2988,7 +2989,7 @@ channel.receive(buf);
 
 receive()方法会将接收到的数据包内容复制到指定的Buffer. 如果Buffer容不下收到的数据，多出的数据将被丢弃。 
 
-### 5.11.3 发送数据 
+#### 5.11.3 发送数据 
 
 通过send()方法从DatagramChannel发送数据，如: 
 
@@ -3005,7 +3006,7 @@ int bytesSent = channel.send(buf, new InetSocketAddress("jenkov.com", 80));
 
 这个例子发送一串字符到”jenkov.com”服务器的UDP端口80。 因为服务端并没有监控这个端口，所以什么也不会发生。也不会通知你发出的数据包是否已收到，因为UDP在数据传送方面没有任何保证。 
 
-### 5.11.4 连接到特定的地址 
+#### 5.11.4 连接到特定的地址 
 
 可以将DatagramChannel“连接”到网络中的特定地址的。由于UDP是无连接的，连接到特定地址并不会像TCP通道那样创建一个真正的连接。而是锁住DatagramChannel ，让其只能从特定地址收发数据。 
 
@@ -3022,7 +3023,7 @@ int bytesRead = channel.read(buf);
 int bytesWritten = channel.write(but);  
 ```
 
-## 5.12 管道（Pipe）
+### 5.12 管道（Pipe）
 
 
 Java NIO 管道是2个线程之间的单向数据连接。Pipe有一个source通道和一个sink通道。数据会被写到sink通道，从source通道读取。 
@@ -3031,7 +3032,7 @@ Java NIO 管道是2个线程之间的单向数据连接。Pipe有一个source通
 
 ![](https://image.xiaoxiaofeng.site/blog/2023/05/18/xxf-20230518180507.png?xxfjava)
 
-### 5.12.1 创建管道 
+#### 5.12.1 创建管道 
 
 通过Pipe.open()方法打开管道。例如： 
 
@@ -3039,7 +3040,7 @@ Java NIO 管道是2个线程之间的单向数据连接。Pipe有一个source通
 Pipe pipe = Pipe.open();  
 ```
 
-### 5.12.2 向管道写数据 
+#### 5.12.2 向管道写数据 
 
 要向管道写数据，需要访问sink通道。像这样： 
 
@@ -3062,7 +3063,7 @@ while(buf.hasRemaining()) {
 }  
 ```
 
-### 5.12.3 从管道读取数据 
+#### 5.12.3 从管道读取数据 
 
 从读取管道的数据，需要访问source通道，像这样： 
 
@@ -3080,7 +3081,7 @@ int bytesRead = inChannel.read(buf);
 
 read()方法返回的int值会告诉我们多少字节被读进了缓冲区
 
-## 5.13 总结
+### 5.13 总结
 
 本文中说了最重要的3个概念
 
@@ -3098,13 +3099,13 @@ nio的Channel的加入，相当于增加了水龙头（有阀门），虽然一�
 
 这其实也是非常接近当前社会分工细化的现实，也是统分利用现有资源达到并发效果的一种很经济的手段，而不是动不动就来个并行处理，虽然那样是最简单的，但也是最浪费资源的方式。
 
-# 6. AIO
+## 6. AIO
 
-## 6.1 JDK7 AIO初体验
+### 6.1 JDK7 AIO初体验
 
 JDK7已经release一段时间了，有个重要的新特性是AIO。今天趁闲暇，简单体验了下，简单分享如下：
 
-## 6.2 关于AIO的概念理解
+### 6.2 关于AIO的概念理解
 关于AIO的概念，仅谈谈个人的一点理解。可能不到位，请大家指出。
 Io的两个重要步骤：发起IO请求，和实际的IO操作。在unix网络编程的定义里异步和非异步概念的区别就是实际的IO操作是否阻塞。如果不是就是异步，如果是就是同步。
 
@@ -3119,7 +3120,7 @@ Io的两个重要步骤：发起IO请求，和实际的IO操作。在unix网络�
       售货员可以认为是操作系统的一个服务，而小明是一个用户进程。不知道是否有误，如果有误请大家拍砖指出，谢谢。
       可以看出2,3的效率明显要比1高。但是1最简单，而2,3需要一些协作。充分证明了团队合作的力量。
 
-## 6.3 JDK7 AIO初体验
+### 6.3 JDK7 AIO初体验
 AsynchronousChannel：支持异步通道，包括服务端AsynchronousServerSocketChannel和普通AsynchronousSocketChannel等实现。
 
 CompletionHandler：用户处理器。定义了一个用户处理就绪事件的接口，由用户自己实现，异步io的数据就绪后回调该处理器消费或处理数据。
@@ -3255,7 +3256,7 @@ public class AIOClient {
 
 从以上来看AIO的代码简单了很多，至少比NIO的代码实现简单很多。
 
-## 6.4 AIO和NIO性能哪个好
+### 6.4 AIO和NIO性能哪个好
 
 Java NIO ： 同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。
 Java AIO(NIO.2) ： 异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理，
@@ -3265,19 +3266,19 @@ AIO方式使用于连接数目多且连接比较长（重操作）的架构，�
 
 I/O属于底层操作，需要操作系统支持，并发也需要操作系统的支持，所以性能方面不同操作系统差异会比较明显。另外NIO的非阻塞，需要一直轮询，也是一个比较耗资源的。所以出现AIO
 
-## 6.5 使用J2SE进行服务器架构技术选型的变迁
+### 6.5 使用J2SE进行服务器架构技术选型的变迁
 
 虽然现在对大多数程序员来讲，基本不会再有使用Java开发一个服务器这样的任务，但是，这方面的技术研究一下，对自己的技术提高还是非常有帮助的。说不定啥时候能派上用场。
 
 使用Java（J2SE）来设计服务器产品（不使用开源或其他已有产品）的架构，随着Java的不断发展，这几年也发生了很大变化。在JDK1.4之前，使用Java构建服务器应用本身就很少，所以这里也就不提了，我们从JDK1.4开始说。
 
-### 阶段1：一个连接一个线程
+#### 阶段1：一个连接一个线程
 
-### 阶段2：服务器端采用了线程池
+#### 阶段2：服务器端采用了线程池
 
 阶段1和阶段2虽然简单，但是很实用，在很多场景下仍然是第一选择。而且编程模型业内非常简单。
 
-### 阶段3：采用非阻塞IO，多路复用技术，又有两种不同的方式
+#### 阶段3：采用非阻塞IO，多路复用技术，又有两种不同的方式
 
 这种方式很重要的一点就是在IO事件发生时得到通知，由程序进行处理。
 
@@ -3285,22 +3286,22 @@ NIO给编程带来了很大的复杂度，使用NIO开发非常不容易，也�
 
 再有，给予NIO来开发SSL也很复杂。
 
-### 阶段4：使用AIO技术
+#### 阶段4：使用AIO技术
 
 AIO最大的特性就是事前先设置好事件的回调函数，事件发生时自动调用回调。而且，得到的通知是“IO操作完成”，而不是NIO的“IO操作即将开始”。
 
 使用AIO，在上层开发SSL也也很麻烦。
 
-# 7. 序列化流
+## 7. 序列化流
 
 
-## 7.1 什么是java序列化，如何实现java序列化？
+### 7.1 什么是java序列化，如何实现java序列化？
 
 我们有时候将一个java对象变成字节流的形式传出去或者从一个字节流中恢复成一个java对象，例如，要将java对象存储到硬盘或者传送给网络上的其他计算机，这个过程我们可以自己写代码去把一个java对象变成某个格式的字节流再传输，但是，JRE本身就提供了这种支持，我们可以调用OutputStream的writeObject()方法来做，如果要让java 帮我们做，要被传输的对象必须实现Serializable接口，这样，javac编译时就会进行特殊处理，编译的类才可以被writeObject()方法操作，这就是所谓的序列化。需要被序列化的类必须实现Serializable接口，该接口是一个mini接口，其中没有需要实现的方法，implements Serializable只是为了标注该对象是可被序列化的
 
 例如，在web开发中，如果对象被保存在了Session中，tomcat在重启时要把Session对象序列化到硬盘，这个对象就必须实现Serializable接口。如果对象要经过分布式系统进行网络传输或通过rmi等远程调用，这就需要在网络上传输对象，被传输的对象就必须实现Serializable接口
 
-## 7.2 Serializable
+### 7.2 Serializable
 
 Serializable是一个javase标记接口，会产生一个序列化值，该值跟bean的成员相关，所以实现Serilizable接口的时候，必须给一个uid，否则，当成员变化的时候，标记值也会变化，再次读取的时候也出现exception(要先重新write再read，但是write可能会让之前的数据丢失)
 
@@ -3312,7 +3313,7 @@ Serializable是一个javase标记接口，会产生一个序列化值，该值�
 private static final long serialVersionUID = -2071565876962058344L;
 ```
 
-## 7.3 序列化流ObjectOutputStream
+### 7.3 序列化流ObjectOutputStream
 
 ObjectOutputStream 将 Java 对象的基本数据类型和图形写入 OutputStream。可以使用 ObjectInputStream 读取（重构）对象。通过在流中使用文件可以实现对象的持久存储。如果流是网络套接字流，则可以在另一台主机上或另一个进程中重构对象。
 
@@ -3334,7 +3335,7 @@ writeObject() 方法用于将对象写入流中。所有对象（包括 String �
 
 创建写入指定 OutputStream 的 ObjectOutputStream
 
-## 7.4 反序列化流ObjectInputStream
+### 7.4 反序列化流ObjectInputStream
 
 1、ObjectInputStream 对以前使用 ObjectOutputStream 写入的基本数据和对象进行反序列化。 
 

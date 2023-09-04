@@ -1,5 +1,7 @@
 ## 1. SpringBoot集成Redis
 
+关于Redis的安装，这里就不重复介绍了，需要的朋友可以看我之前的博文[Redis多系统安装（Windows、Linux、Ubuntu）](https://www.xiaoxiaofeng.com/archives/redis)
+
 Redis原生命令大全，作者整理的很详细，大部分命令转化为java命令基本也是关键词
 
 [Redis 命令参考](http://redisdoc.com/index.html)
