@@ -120,7 +120,7 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 ~~~
 [root@k8s-n1 mysql]# docker exec -it mysql_8 /bin/sh
 
-# mysql -u root -p
+# vim /var  
 
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
 ~~~
@@ -311,8 +311,10 @@ docker build -t quote:1.0.0 .
 #### docker 启动镜像
 
 ~~~
-docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
+docker run -d --privileged=true --name maple-admin -p 6666:6666 d197d922b37c
 ~~~
+
+docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
 
 docker run -d --name trade_test -p 8997:8997 -it --network ms-network --network-alias mstrade 
 
@@ -440,3 +442,4 @@ newgrp docker
 ~~~
 
 重启docker服务，然后使用test1用户就可以操作docker了
+

@@ -103,7 +103,6 @@ public class IoDemo {
 
     }
 
-    private static void deleteFile(String path, String fileName) {
         File file = new File(path + File.separator + fileName);
         if (file.exists()) {
             System.out.println(file.getName() + " --- deleteFile result" + file.delete());

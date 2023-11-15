@@ -20,10 +20,24 @@
 
 方式二：博主提供的百度网盘版本下载：[https://pan.baidu.com/s/1liNHej2hGXJU_L8yQNRZmQ?pwd=9w3f ](https://pan.baidu.com/s/1liNHej2hGXJU_L8yQNRZmQ?pwd=9w3f)
 
+
+
+**需要变更安装目录的看这里**
+
+>  本文单纯为了演示，都是用的默认的安装路径。不想改文章了。简单补充说说我常用的安装目录吧。
+>
+> 我一般喜欢在D盘。在D盘创建目录：`D:\workpath\java8`，然后在`java8`目录下创建`jdk`和`jre`两个目录。
+>
+> 下文中步骤3，选择`jdk`目录，步骤4选择`jre`目录即可。
+>
+> 配置中步骤3的环境变量路径也要对应的选择`jdk`目录：`D:\workpath\java8\jdk`
+
+
+
 2、下载后双击即可安装，选择下一步
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293004453.jpg)  
-3、选择开发工具，更改jdk安装路径（默认安装在C盘），然后下一步
+3、选择开发工具，更改jdk安装路径（默认安装在C盘)，然后下一步
 
 ![笑小枫-www.xiaoxiaofeng.com](https://image.xiaoxiaofeng.site/spider/2022/8/12/xxf-1660293004814.jpg)  
 4、更改jre安装路径（采用默认安装位置），下一步
