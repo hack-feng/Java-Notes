@@ -27,7 +27,7 @@ spring.rabbitmq:
 
 前三步声明都可以通过Spring Boot注入:
 ```java
-#Bean
+@Bean
 public TopicExchange createExchange() {
     return new TopicExchange("exchange");
 }
