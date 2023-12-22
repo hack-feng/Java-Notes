@@ -2,6 +2,8 @@
 
 要啥项目背景，就是干！！！
 
+* SpringBoot版本：2.7.12
+
 ## 2. Rabbit MQ安装
 
 这里讲解使用docker安装RabbitMQ，如果在windows下面安装RabbitMQ，参考下文
@@ -1265,8 +1267,6 @@ public class DeadLetterReceiver {
 配置队列
 
 ~~~java
-package com.maple.rabbit.config;
-
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -1279,18 +1279,20 @@ import org.springframework.context.annotation.Configuration;
 public class DelayQueueConfig {
     @Bean
     public Queue delayDeadQueue() {
-        return QueueBuilder.durable("delayDeadQueue")
-                .withArgument("x-dead-letter-exchange", "delay-exchange")
+        return QueueBuilder
+                .durable("delayDeadQueue")
+                .deadLetterExchange("delay-exchange")
                 .build();
     }
 
     @Bean
     public Queue delayQueue() {
         // 声明该队列的死信消息发送到的 交换机 (队列添加了这个参数之后会自动与该交换机绑定,并设置路由键,不需要开发者手动设置)
-        // x-message-ttl = 5000，设置TTL，单位ms，5s 内没被消费，则进入死信队列
-        return QueueBuilder.durable("delayQueue")
-                .withArgument("x-message-ttl", 5000)
-                .withArgument("x-dead-letter-exchange", "delay-exchange")
+        // ttl = 5000，设置TTL，单位ms，5s 内没被消费，则进入死信队列
+        return QueueBuilder
+                .durable("delayQueue")
+                .ttl(5000)
+                .deadLetterExchange("delay-exchange")
                 .build();
     }
 
@@ -1412,7 +1414,7 @@ spring:
 
 本文到此就结束了，如果帮助到你了，帮忙点个赞👍
 
-本文源码：[https://github.com/hack-feng/maple-product/tree/main/maple-rabbit-mq](https://github.com/hack-feng/maple-product/tree/main/maple-rabbit-mq)
+本文源码：[https://github.com/hack-feng/maple-product/tree/main/maple-mq-rabbit](https://github.com/hack-feng/maple-product/tree/main/maple-mq-rabbit)
 
 >  🐾我是笑小枫，全网皆可搜的【笑小枫】
 
