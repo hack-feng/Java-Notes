@@ -1,24 +1,26 @@
-## 什么是Logback
+## 1. 背景
+
+## 2. 什么是Logback
 
 Logback 旨在作为流行的 log4j 项目的继承者，是SpringBoot内置的日志处理框架，spring-boot-starter其中包含了spring-boot-starter-logging，该依赖内容就是 Spring Boot 默认的日志框架 logback。具体如下图所示👇
 
-<img src="http://file.xiaoxiaofeng.site/blog/image/2022/07/17/20220717123855.png"/>
+![image-20231225165645718](https://image.xiaoxiaofeng.site/blog/2023/12/25/xxf-20231225165645.png?xxfjava)
 
-![image-20220717123956101](http://file.xiaoxiaofeng.site/blog/image/2022/07/17/20220717123956.png)
+![image-20231225165723351](https://image.xiaoxiaofeng.site/blog/2023/12/25/xxf-20231225165723.png?xxfjava)
 
 官方文档：[http://logback.qos.ch/manual/](http://logback.qos.ch/manual/)
 
-## SpringBoot使用logback介绍
+## 3. SpringBoot使用logback介绍
 
 在我们启动SpringBoot，发现我们并没有主动去配置过任何和日志打印的相关配置，但是控制台却打印了相关的启动日志；因为SpringBoot为Logback提供了默认的配置文件base.xml，base.xml文件里定义了默认的root输出级别为INFO。系统打印的日志信息如下：
 
-![image-20220716212556404](http://file.xiaoxiaofeng.site/blog/image/2022/07/16/20220716212556.png)
+![image-20231225165907265](https://image.xiaoxiaofeng.site/blog/2023/12/25/xxf-20231225165907.png?xxfjava)
 
 我们可以到SpringBoot源码里看一下base.xml具体是如何配置的，如下图所示👇
 
-![image-20220717131128173](http://file.xiaoxiaofeng.site/blog/image/2022/07/17/20220717131128.png)
+![image-20231225170145487](https://image.xiaoxiaofeng.site/blog/2023/12/25/xxf-20231225170145.png?xxfjava)
 
-## 自定义logback配置
+## 4. 自定义logback配置
 
 可以看到默认的配置是非常简单，那么我们可以自定义配置吗？答案当然是肯定的🙈
 
@@ -115,7 +117,7 @@ Logback 旨在作为流行的 log4j 项目的继承者，是SpringBoot内置的�
             <onMismatch>DENY</onMismatch>  
         </filter>
 	</appender>
-<!-- 	上线后如果要查看错误日志，可以把level=info改为level=debug -->
+<!-- 	如果要查看错误日志，可以把level=info改为level=debug -->
 	<root level="info">
 		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="debugAppender" />
@@ -127,11 +129,11 @@ Logback 旨在作为流行的 log4j 项目的继承者，是SpringBoot内置的�
 
 我们在启动一下程序，看下效果👇
 
-![image-20220716213127066](http://file.xiaoxiaofeng.site/blog/image/2022/07/16/20220716213127.png)
+![image-20231225170444479](https://image.xiaoxiaofeng.site/blog/2023/12/25/xxf-20231225170444.png?xxfjava)
 
 可见多了很多我们自定的一些配置，包括控制台前缀和打印日志的颜色等～
 
-同时我们还可以在项目目录下看到我们配置的logs日志归档目录文件。
+同时我们还可以在项目目录下看到我们配置的logs日志归档目录文件。下文图就不更新了，借用之前的图吧，影响不大😅😅😅。
 
 ![image-20220716214040740](http://file.xiaoxiaofeng.site/blog/image/2022/07/16/20220716214041.png)
 
@@ -145,7 +147,66 @@ Logback 旨在作为流行的 log4j 项目的继承者，是SpringBoot内置的�
 
 ![image-20220721173754295](https://s2.loli.net/2022/07/21/uJhkGxz8RAcdT1e.png)
 
-## logback配置属性详解
+## 5. 如何把日志同步到ES中
+
+很多大公司为了方便日志的查看和检索，都使用ES来处理日志了吧，这里简单的说一下日志如何存储在ES中。
+
+详细步骤可以查看[Spring Cloud + ELK统一日志系统搭建](https://blog.csdn.net/qq_34988304/article/details/100058049)
+
+这里使用Logstash
+
+在pom文件引用
+
+~~~xml
+<!--logback日志-->
+<dependency>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>5.2</version>
+</dependency>
+~~~
+
+在`resources`添加`logbak`的配置文件 `logback-spring.xml`：
+
+这里简化了logbak的配置文件，没有自定义系列，只是简单的同步
+
+~~~xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- 定义参数 -->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+    <!-- 控制台打印设置 -->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- logstash设置 -->
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <!-- logstash服务器ip -->
+        <remoteHost>192.168.0.146</remoteHost>
+        <!-- logstash tcp 端口-->
+        <port>4569</port>
+        <!-- <filter class="com.program.interceptor.ELKFilter"/>-->//引入过滤类
+        <!-- encoder is required -->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" >
+            <customFields>{"appname":"ceshi"}</customFields> // 索引名
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="consoleAppender" />
+        <appender-ref ref="logstash"/>
+    </root>
+</configuration>
+~~~
+
+其中`{"appname":"ceshi"}` 对应`logstash`配置文件中的`appname`，为创建的索引名。
+可以在Kibana索引管理中根据名称进行分区搜索。根据自己的需求来，这里只做演示。
+
+## 6. logback配置属性详解
 
 在上面我们已经实现了自定义配置logback的打印，接下来我们详细讲解一下对应的属性，方便大家根据自己实际业务去配置。
 
@@ -309,7 +370,7 @@ patternLayoutEncoder类既有layout将一个事件转化为字符串，又有将
 
 这里主要介绍两种filter
 
-** ThresholdFilter： **
+**ThresholdFilter：**
 
 ThresholdFilter为系统定义的拦截器，例如我们用ThresholdFilter来过滤掉ERROR级别以下的日志不输出到文件中。如果不用记得注释掉，不然你控制台会发现没日志
 
@@ -319,7 +380,7 @@ ThresholdFilter为系统定义的拦截器，例如我们用ThresholdFilter来�
 </filter>
 ```
 
-** LevelFilter **
+**LevelFilter**
 
 如果只是想要 Info 级别的日志，只是过滤 info 还是会输出 Error 日志，因为 Error 的级别高，所以我们使用下面的策略，可以避免输出 Error 的日志
 
@@ -530,7 +591,7 @@ level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERR
 
 ```
 
-## 小结
+## 7. 小结
 
 好啦，本文就到这里了，我们简单的总结一下，主要介绍了以下内容👇👇
 
@@ -538,13 +599,11 @@ level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERR
 * 自定义logback打印配置
 * 详解logback配置信息
 
-## 关于笑小枫💕
+## 8. 项目源码
 
-> 本章到这里结束了，喜欢的朋友关注一下我呦😘😘，大伙的支持，就是我坚持写下去的动力。
-> 老规矩，懂了就点赞收藏；不懂就问，日常在线，我会就会回复哈~🤪
-> 后续文章会陆续更新，文档会同步在微信公众号、个人博客、CSDN和GitHub保持同步更新。😬
-> 微信公众号：笑小枫
-> 笑小枫个人博客：[https://www.xiaoxiaofeng.com](https://www.xiaoxiaofeng.com)
-> CSDN：[https://zhangfz.blog.csdn.net](https://zhangfz.blog.csdn.net)
-> 本文源码：[https://github.com/hack-feng/maple-demo](https://github.com/hack-feng/maple-demo) 
+本文到此就结束了，如果帮助到你了，帮忙点个赞👍
+
+本文源码：[https://github.com/hack-feng/maple-product/tree/main/maple-flyway](https://github.com/hack-feng/maple-product/tree/main/maple-flyway)
+
+>  🐾我是笑小枫，全网皆可搜的【笑小枫】
 
