@@ -120,7 +120,7 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 ~~~
 [root@k8s-n1 mysql]# docker exec -it mysql_8 /bin/sh
 
-# mysql -u root -p
+# vim /var  
 
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
 ~~~
@@ -215,7 +215,7 @@ OK
 [root@k8s-n1 /]# docker pull rabbitmq:3.7.7-management
 ~~~
 如下图：<br>
-![rabbitmq镜像下载成功图片](../images/rabbitMQ-pull.jpg)
+![rabbitmq镜像下载成功图片](https://image.xiaoxiaofeng.site/blog/2023/12/15/xxf-20231215092401.jpg?xxfjava)
 
 
 #### 2、创建挂载目录
@@ -228,7 +228,7 @@ OK
 [root@k8s-n1 /]# docker images
 ~~~
 
-![查看镜像图片](../images/rabbitMQ-dockerimages.jpg)
+![查看镜像图片](https://image.xiaoxiaofeng.site/blog/2023/12/15/xxf-20231215092413.jpg?xxfjava)
 
 #### 4、启动docker里的RabbitMQ镜像
 ~~~
@@ -248,10 +248,10 @@ OK
 [root@k8s-n1 /]# docker ps
 ~~~
 * 查看docker容器：<br>
-![docker查看图片](../images/rabbitMQdockerps-a.jpg)
+![docker查看图片](https://image.xiaoxiaofeng.site/blog/2023/12/15/xxf-20231215092417.jpg?xxfjava)
 * 浏览器访问<br>
 用浏览器访问``http://192.168.2.21:15672`` 访问成功，表示RabbitMQ安装成功。
-![浏览器访问图片](../images/rabbitMQ-success.jpg)
+![rabbitMQ-success](https://image.xiaoxiaofeng.site/blog/2023/12/15/xxf-20231215093333.jpg?xxfjava)
 
 
 ### docker下安装nginx
@@ -311,8 +311,10 @@ docker build -t quote:1.0.0 .
 #### docker 启动镜像
 
 ~~~
-docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
+docker run -d --privileged=true --name maple-admin -p 6666:6666 d197d922b37c
 ~~~
+
+docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
 
 docker run -d --name trade_test -p 8997:8997 -it --network ms-network --network-alias mstrade 
 
@@ -440,3 +442,4 @@ newgrp docker
 ~~~
 
 重启docker服务，然后使用test1用户就可以操作docker了
+
