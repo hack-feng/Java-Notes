@@ -1,5 +1,6 @@
 package myjava.lambda;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -98,6 +99,15 @@ public class Lambda {
         System.out.println("最小id值为：" + minId);
 
         List<Integer> newIds = userList.stream().map(User::getId).collect(Collectors.toList());
+
+        // 整形
+        Integer intSum = userList.stream().mapToInt(User::getAge).sum();
+        // double类型
+        Double doubleSum = userList.stream().mapToDouble(User::getAge).sum();
+        // Long类型
+        Long longSum  = userList.stream().mapToLong(User::getAge).sum();
+        // BigDecimal类型
+        BigDecimal bigDecimalSum = userList.stream().map(User::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     // 定义User类，用作测试使用
@@ -105,6 +115,8 @@ public class Lambda {
         private Integer id;
         private String name;
         private Integer age;
+        private BigDecimal money;
+        
 
         User(Integer id, String name, Integer age){
             this.id = id;
@@ -117,6 +129,10 @@ public class Lambda {
 
         Integer getAge() {
             return age;
+        }
+        
+        BigDecimal getMoney() {
+            return money;
         }
 
         @Override
