@@ -4,7 +4,7 @@
 
 Swagger应该都有接触吧，knife4j是Swagger2的增强版，更加友好的操作页面，更多强大的功能，基于Swagger2和 OpenAPI，提供了一个更好的接口文档界面，本文主要演示了如何使用SpringBoot集成Knife4j。
 
->  本文拆分自[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html)，更为精简的介绍了SpringBoot如何集成中间件。如果想系统的使用SpringBoot，可以参考[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html)
+> 本文拆分自[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html) ， 更为精简的介绍了SpringBoot如何集成中间件。如果想系统的使用SpringBoot，可以参考[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html)
 
 * Spring Boot版本: 2.7.12
 * Knife4j版本: 4.4.0

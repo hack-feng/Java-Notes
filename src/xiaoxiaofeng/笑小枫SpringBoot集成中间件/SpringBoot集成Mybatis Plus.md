@@ -4,7 +4,7 @@
 
 Mybatis Plus作为我入行以来，一直接触的一个中间件，也必须集成一下。同时也为初学者带来一些帮吧。
 
->  本文拆分自[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html)，更为精简的介绍了SpringBoot如何集成中间件。如果想系统的使用SpringBoot，可以参考[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html)
+>  本文拆分自[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html) ，更为精简的介绍了SpringBoot如何集成中间件。如果想系统的使用SpringBoot，可以参考[笑小枫-SpringBoot系列](https://blog.csdn.net/qq_34988304/category_11604043.html)
 
 ## 2. Mybatis Plus简介
 
