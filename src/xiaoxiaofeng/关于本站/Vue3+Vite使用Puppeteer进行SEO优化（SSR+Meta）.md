@@ -1,8 +1,11 @@
 ## 1. 背景
 
-> 【[笑小枫](https://www.xiaoxiaofeng.com)】https://www.xiaoxiaofeng.com上线啦，资源持续整合中，Java程序员必备网站，快点前往围观吧~
->
-> ![image-20240124104235133](https://image.xiaoxiaofeng.site/blog/2024/01/24/xxf-20240124104235.png?xxfjava)
+> 【[笑小枫](https://www.xiaoxiaofeng.com)】https://www.xiaoxiaofeng.com上线啦
+>    资源持续整合中，程序员必备网站，快点前往围观吧~
+
+
+
+![image-20240124104235133](https://image.xiaoxiaofeng.site/blog/2024/01/24/xxf-20240124104235.png?xxfjava)
 
 我的个人博客【[笑小枫](https://www.xiaoxiaofeng.com)】又一次版本大升级，虽然知道没有多少访问量，但我还是整天没事瞎折腾。因为一些功能在Halo上不太好实现，所以又切回了Vue3项目，本文就是对于Vue单页面项目SEO优化的一个简单的完整方案。
 
