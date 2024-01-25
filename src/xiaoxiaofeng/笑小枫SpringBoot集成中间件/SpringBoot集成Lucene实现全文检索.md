@@ -73,6 +73,8 @@
 
 新版本的lucene和`com.janeluo:ikanalyzer:2012_u6`版本冲突，会报以下错误。
 
+建议使用`new IKAnalyzer(true)`开启只能分词。
+
 解决方案放在源码中了，这里不展开了。使用`com.janeluo:ikanalyzer:2012_u6`版本，把`com.maple.lucene.util.MyIKAnalyzer`和`MyIKTokenizer`的注释放开就行。
 
 
