@@ -1,84 +1,87 @@
-### 文件转base64字符串
+![image-20240318092538298](https://image.xiaoxiaofeng.site/blog/2024/03/18/xxf-20240318092538.png?xxfjava)
+
+## 文件转base64字符串
+
 ~~~java
-    /**
-     * 文件转base64字符串
-     * @param file
-     * @return
-     */
-    public static String fileToBase64(File file) {
-        String base64 = null;
-        InputStream in = null;
-        try {
-            in = new FileInputStream(file);
-            byte[] bytes = new byte[in.available()];
-            int length = in.read(bytes);
-            base64 = Base64.encodeToString(bytes, 0, length, Base64.DEFAULT);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+/**
+ * file转换为base64
+ * 注意：这里转换为base64后，是不包含文件head头的
+ */
+public static String fileToBase64(File file) {
+    Base64.Encoder base64 = Base64.getEncoder();
+    String base64Str = null;
+    try (FileInputStream fis = new FileInputStream(file);
+         ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+        byte[] b = new byte[1024];
+        int n;
+        while ((n = fis.read(b)) != -1) {
+            bos.write(b, 0, n);
         }
-        return base64;
+        base64Str = base64.encodeToString(bos.toByteArray());
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    return base64Str;
+}
 ~~~
 
-### base64字符串转文件
+## base64字符串转文件
 ~~~java
-    /**
-     * base64字符串转文件
-     * @param base64
-     * @return
-     */
-    public static File base64ToFile(String base64) {
-        File file = null;
-        String fileName = "/Petssions/record/testFile.amr";
-        FileOutputStream out = null;
-        try {
-            // 解码，然后将字节转换为文件
-            file = new File(Environment.getExternalStorageDirectory(), fileName);
-            if (!file.exists())
-                file.createNewFile();
-            byte[] bytes = Base64.decode(base64, Base64.DEFAULT);// 将字符串转换为byte数组
-            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-            byte[] buffer = new byte[1024];
-            out = new FileOutputStream(file);
-            int bytesum = 0;
-            int byteread = 0;
-            while ((byteread = in.read(buffer)) != -1) {
-                bytesum += byteread;
-                out.write(buffer, 0, byteread); // 文件写操作
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } finally {
-            try {
-                if (out!= null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+
+/**
+ * base64转化为file，并保存到指定路径下
+ */
+public static void base64ToFile(String base, String path) {
+    if (StringUtils.isBlank(base)) {
+        return;
+    }
+    Base64.Decoder decoder = Base64.getDecoder();
+    try (OutputStream out = new FileOutputStream(path)) {
+        byte[] bytes = decoder.decode(base);
+        for (int i = 0; i < bytes.length; ++i) {
+            if (bytes[i] < 0) {
+                bytes[i] += 256;
             }
         }
-        return file;
+        out.write(bytes);
+        out.flush();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 ~~~
 
-### base64转MultipartFile
-~~~java
-package org.cango.user.center.util;
+## base64转化为file流
 
+~~~java
+/**
+ * base64转化为file流
+ */
+public static File base64ToFile(String base64) {
+    if (base64 == null || "".equals(base64)) {
+        return null;
+    }
+    byte[] buff = Base64.getDecoder().decode(base64);
+
+    File file;
+    try {
+        file = File.createTempFile("tmp", null);
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+    try (FileOutputStream out = new FileOutputStream(file)) {
+        out.write(buff);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return file;
+}
+~~~
+
+## base64转MultipartFile
+
+~~~java
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -156,4 +159,32 @@ public class Base64DecodedMultipartFile implements MultipartFile {
         return new Base64DecodedMultipartFile(b, header, fileName);
     }
 }
+~~~
+
+## byte数组转MultiPartFile
+
+1. POM导入
+~~~pom
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpclient</artifactId>
+    <version>4.5.5</version>
+</dependency>
+<dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>RELEASE</version>
+</dependency>
+~~~
+2. 代码部分
+~~~java
+byte[] bytes = message.getPacket();
+InputStream inputStream = new ByteArrayInputStream(bytes);
+MultipartFile file = new MockMultipartFile(ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream);
+~~~
+
+## MultipartFile转化为byte数组
+
+~~~java
+byte[] bytes= file.getBytes();
 ~~~

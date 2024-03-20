@@ -42,15 +42,15 @@ https://www.rabbitmq.com/which-erlang.html#compatibility-matrix
 
 ![image-20231215100206096](https://image.xiaoxiaofeng.site/blog/2023/12/15/xxf-20231215100206.png?xxfjava)
 
-### 2.1 百度网盘下载 
+### 2.1 笑小枫下载 
 
-如果你的网络访问`GitHub`或者`erlang官网`比较卡，可以直接通过博主分享的网盘进行下载：
+如果你的网络访问`GitHub`或者`erlang官网`比较卡，可以直接通过博主分享的站点进行下载：
 
 `erlang`版本：`otp_win64_25.2.1.exe`
 
 `RabbitMQ`版本：`rabbitmq-server-windows-3.11.0.zip`
 
-网盘下载地址：[https://pan.baidu.com/s/1UEuBsfbszCYiKjVXHALKgg?pwd=40a5](https://pan.baidu.com/s/1UEuBsfbszCYiKjVXHALKgg?pwd=40a5)
+笑小枫下载地址：[https://www.xiaoxiaofeng.com/resource/11](https://www.xiaoxiaofeng.com/resource/11)
 
 如果其它版本，继续参考下文：
 

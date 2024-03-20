@@ -81,7 +81,9 @@ sudo systemctl restart docker
 [root@k8s-n1 /]# docker run  -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd
 ~~~
 
-忽略大小写：--lower_case_table_names=1，如果之前重启过，及得要把/data/mysql/data数据清除（一定要先备份，不然数据会丢失）
+docker run --privileged=true  --restart=always -p 3306:3306 --name mysql_8 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/logs:/logs -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d 7bb2586065cd --lower_case_table_names=1
+
+忽略大小写：--lower_case_table_names=1，如果之前重启过，记得要把/data/mysql/data数据清除（一定要先备份，不然数据会丢失）
 自动重启：--restart=always
 
 参数说明：<br>
@@ -120,7 +122,7 @@ mysqld: [ERROR] Fatal error in defaults handling. Program aborted!
 ~~~
 [root@k8s-n1 mysql]# docker exec -it mysql_8 /bin/sh
 
-# vim /var  
+# mysql -u root -p
 
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'test001';
 ~~~
