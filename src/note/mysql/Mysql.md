@@ -288,3 +288,11 @@ SET SESSION group_concat_max_len = 102400;
 ~~~
 
 注意：该方法缺点是重启服务后设置失效
+
+## 创建用户，并分配权限
+
+create user '用户名'@'%' identified by '密码';
+
+grant select,insert,update,delete,create,drop ON `库名`.*  TO '用户名'@'%';
+
+flush PRIVILEGES 
