@@ -286,7 +286,7 @@ docker run -d -p 8998:80 -v /data/web:/usr/share/nginx/html -v /data/nginx/conf/
 挂载html和conf配置，且同时放开80端口和443端口
 
 ~~~
-docker run -d -p 80:80 -p 443:443 -v /data/maple/web:/usr/share/nginx/html -v /data/maple/nginx.conf:/etc/nginx/nginx.conf -v /data/maple/conf.d:/etc/nginx/conf.d -v /data/maple/ssl:/etc/nginx/ssl --name nginx --restart always f0b8a9a54136
+docker run -d -p 80:80 -p 443:443 -v /data/nginx/web:/usr/share/nginx/html -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf.d:/etc/nginx/conf.d -v /data/nginx/ssl:/etc/nginx/ssl --name nginx --restart always 605c77e624dd
 ~~~
 ### SpringBoot项目打包成docker镜像
 
@@ -315,6 +315,8 @@ docker build -t quote:1.0.0 .
 ~~~
 docker run -d --privileged=true --name maple-admin -p 6666:6666 d197d922b37c
 ~~~
+
+docker run -d --privileged=true --name yhdj -p 8008:8008 8d6569243d7f
 
 docker run -d --privileged=true --name trade_test -p 9002:9001 imageId
 
