@@ -97,6 +97,8 @@ public class Lambda {
         System.out.println("最大id值为：" + maxId);
         Integer minId = userList.stream().map(User::getId).min(Integer::compareTo).get();
         System.out.println("最小id值为：" + minId);
+        //求和
+        int suma = userList.stream().map(e -> e.getAge()).reduce(Integer::sum).get();
 
         List<Integer> newIds = userList.stream().map(User::getId).collect(Collectors.toList());
 
